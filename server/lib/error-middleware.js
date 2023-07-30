@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import ClientError from './client-error.js';
+import {ClientError} from './client-error.js';
 
 export default function errorMiddleware(err, req, res, next) {
   if (err instanceof ClientError) {
