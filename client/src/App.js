@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import SignInForm from './SignIn';
+import RegistrationForm from './CreateAccount';
 
 function App() {
   const [serverData, setServerData] = useState('');
@@ -21,7 +22,7 @@ function App() {
 
   return (
     <>
-<SignInForm />
+<RegistrationForm />
     </>
   );
 }

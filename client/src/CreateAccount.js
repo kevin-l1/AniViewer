@@ -1,3 +1,4 @@
+import './CreateAccount.css'
 import { useState } from 'react';
 
 export default function RegistrationForm() {
@@ -28,45 +29,29 @@ export default function RegistrationForm() {
   }
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="column-full d-flex justify-between">
-          <h1>Register</h1>
+<div className="modal" tabindex="-1">
+  <div className="modal-dialog">
+    <div className="modal-content">
+      <form onSubmit={handleSubmit}>
+      <div className="modal-header justify-content-center">
+        <h5 className="modal-title">Account Creation</h5>
+      </div>
+      <div className="modal-body">
+        <div className="mb-3">
+          <label for="username" className="form-label">Username</label>
+          <input required name="username" type="text" className="form-control" id="username"></input>
+        </div>
+        <div className="mb-3">
+          <label for="password" className="form-label">Password</label>
+          <input required name="password" type="password" className="form-control" id="password" rows="3"></input>
         </div>
       </div>
-      <form onSubmit={handleSubmit}>
-        <div className="row margin-bottom-1">
-          <div className="column-half">
-            <label className="margin-bottom-1 d-block">
-              Username
-              <input
-                required
-                name="username"
-                type="text"
-                className="input-b-color text-padding input-b-radius purple-outline input-height margin-bottom-2 d-block width-100"
-              />
-            </label>
-            <label className="margin-bottom-1 d-block">
-              Password
-              <input
-                required
-                name="password"
-                type="password"
-                className="input-b-color text-padding input-b-radius purple-outline input-height margin-bottom-2 d-block width-100"
-              />
-            </label>
-          </div>
-        </div>
-        <div className="row">
-          <div className="column-full d-flex justify-between">
-            <button
-              disabled={isLoading}
-              className="input-b-radius text-padding purple-background white-text">
-              Register
-            </button>
-          </div>
-        </div>
+      <div className="modal-footer justify-content-center">
+        <button type="submit" className="btn btn-primary">Sign Up</button>
+      </div>
       </form>
     </div>
+  </div>
+</div>
   );
 }
