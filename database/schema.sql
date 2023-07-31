@@ -36,8 +36,8 @@ CREATE TABLE "public"."reviews" (
 
 CREATE TABLE "public"."account" (
 	"userId" serial NOT NULL,
-	"username" integer NOT NULL UNIQUE,
-	"hashedPassword" integer NOT NULL,
+	"username" text NOT NULL UNIQUE,
+	"hashedPassword" text NOT NULL,
 	"createdAt" timestamp default now(),
 	CONSTRAINT "account_pk" PRIMARY KEY ("userId")
 ) WITH (

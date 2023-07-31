@@ -1,0 +1,24 @@
+.modal {
+  display: contents
+}
+
+.btn-primary {
+  width: 8.5rem;
+  height: 3.5rem;
+  background-color: blue;
+  font-size: 1.7rem;
+  border-radius: 10px;
+}
+
+.modal-header {
+  background-color: #7575FF;
+  color: white;
+}
+
+.modal-header > h5 {
+  font-size: 2rem;
+}
+
+input:focus {
+ outline-color: red
+}
