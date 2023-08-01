@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import SignInForm from './SignIn';
 import RegistrationForm from './CreateAccount';
+import Homepage from './Homepage';
 
 function App() {
   const [serverData, setServerData] = useState('');
@@ -20,11 +21,7 @@ function App() {
     readServerData();
   }, []);
 
-  return (
-    <>
-<RegistrationForm />
-    </>
-  );
+  return <Homepage />;
 }
 
 export default App;

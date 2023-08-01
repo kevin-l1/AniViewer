@@ -1,0 +1,31 @@
+.animeCarousel {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3.5rem;
+}
+
+h2 {
+  border-bottom: solid;
+}
+
+.carousel {
+  display: flex;
+}
+
+.carousel-item.active {
+  display: flex;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  position: relative;
+  width: 100px;
+  height: 236.3px;
+  background-color: gray;
+  opacity: 0.3;
+}
+
+img {
+  width: 160px;
+  height: 236.3px;
+}
