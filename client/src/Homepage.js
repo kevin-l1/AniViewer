@@ -1,5 +1,8 @@
 import './Homepage.css';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+let requestInProcess = false;
 
 export default function Homepage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -10,77 +13,53 @@ export default function Homepage() {
   useEffect(() => {
     async function fetchResponse() {
       try {
-        const response = await fetch('https://api.jikan.moe/v4/top/anime');
-        const result = await response.json();
+        if (requestInProcess) {
+          return;
+        }
+        requestInProcess = true;
 
-        const allTopAnimes = result.data.map((e) => e);
-        const arrayOfTopAnimes = allTopAnimes.slice(0, 21);
-        setTopAnimes(arrayOfTopAnimes);
-        console.log(arrayOfTopAnimes);
-
-        const allPopularAnimes = result.data.map((e) => e);
-        const arrayOfPopularAnimes = allPopularAnimes.sort(
-          (a, b) => a.popularity - b.popularity
+        const response = await fetch(
+          'https://api.jikan.moe/v4/top/anime?limit=21'
         );
-        // arrayOfPopularAnimes.sort((a, b) => (a.popularity - b.popularity))
-        setPopularAnimes(arrayOfPopularAnimes.slice(0, 21));
-        console.log(arrayOfPopularAnimes);
+        const arrayOfTopAnimes = await response.json();
+        setTopAnimes(arrayOfTopAnimes.data);
+        console.log(arrayOfTopAnimes.data);
+
+        const response2 = await fetch(
+          'https://api.jikan.moe/v4/seasons/now?limit=21'
+        );
+        const arrayOfPopularAnimes = await response2.json();
+        setPopularAnimes(arrayOfPopularAnimes.data);
+        console.log(arrayOfPopularAnimes.data);
       } catch (error) {
         setError(error);
       } finally {
         setIsLoading(false);
+        requestInProcess = false;
       }
     }
-
-    // async function fetchResponse() {
-    //   try {
-    //     const response = await fetch(
-    //       'https://api.jikan.moe/v4/top/anime?limit=21'
-    //     );
-    //     const arrayOfTopAnimes = await response.json();
-    //     setTopAnimes(arrayOfTopAnimes.data);
-    //     console.log(arrayOfTopAnimes.data)
-
-    //   } catch (error) {
-    //     setError(error);
-    //   } finally {
-    //     setIsLoading(false);
-    //   }
-    // }
-    //     async function fetchResponse2() {
-    //   try {
-
-    //     const response2 = await fetch(
-    //       'https://api.jikan.moe/v4/top/anime?filter=bypopularity&limit=21'
-    //     );
-    //     const arrayOfPopularAnimes = await response2.json();
-    //     setPopularAnimes(arrayOfPopularAnimes.data);
-
-    //   } catch (error) {
-    //     setError(error);
-    //   } finally {
-    //     setIsLoading(false);
-    //   }
-    // }
-    // fetchResponse();
-    // fetchResponse2()
     fetchResponse();
   }, []);
 
-  if (isLoading) {
+  console.log(isLoading);
+  if (isLoading || popularAnimes === undefined || topAnimes === undefined) {
     return <p>Loading...</p>;
   }
   if (error) {
     console.error('Fetch error:', error);
     return <p>Error! {error.message}</p>;
   }
+  console.log(isLoading);
+  console.log(requestInProcess);
+  console.log('1', popularAnimes);
+  console.log('2', topAnimes);
   return (
-    <div class="container">
-      <div class="animeCarousel">
+    <div className="carouselContainer">
+      <div className="animeCarousel">
         <h2 className="seasonal">Seasonal</h2>
         <Carousel animes={topAnimes} carouselName="topAnimes" />
       </div>
-      <div class="animeCarousel">
+      <div className="animeCarousel">
         <h2 className="popular">Most Popular</h2>
         <Carousel animes={popularAnimes} carouselName="popularAnimes" />
       </div>
@@ -103,61 +82,58 @@ function Carousel({ animes, carouselName }) {
   }
 
   return (
-    <div id={carouselName} class="carousel slide" data-bs-ride="carousel">
+    <div id={carouselName} className="carousel slide" data-bs-ride="carousel">
       <button
-        class="carousel-control-prev"
+        className="carousel-control-prev"
         type="button"
         data-bs-target={'#' + carouselName}
         data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Previous</span>
       </button>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
+      <div className="carousel-inner">
+        <div className="carousel-item active">
           {firstAnimeSet.map((anime) => (
-            <div>
-              <img
-                src={anime.images.jpg.image_url}
-                class="d-block w-100"
-                alt={anime.title_english}
-              />
-              <h5>{anime.english_title}</h5>{' '}
+            <div key={anime.mal_id}>
+              <Anime anime={anime} />
             </div>
           ))}
         </div>
-        <div class="carousel-item">
+        <div className="carousel-item">
           {secondAnimeSet.map((anime) => (
-            <div>
-              <img
-                src={anime.images.jpg.image_url}
-                class="d-block w-100"
-                alt={anime.title_english}
-              />
-              <h5>{anime.english_title}</h5>{' '}
+            <div key={anime.mal_id}>
+              <Anime anime={anime} />
             </div>
           ))}
         </div>
-        <div class="carousel-item">
+        <div className="carousel-item">
           {thirdAnimeSet.map((anime) => (
-            <div>
-              <img
-                src={anime.images.jpg.image_url}
-                class="d-block w-100"
-                alt={anime.title_english}
-              />
-              <h5>{anime.english_title}</h5>
+            <div key={anime.mal_id}>
+              <Anime anime={anime} />
             </div>
           ))}
         </div>
       </div>
       <button
-        class="carousel-control-next"
+        className="carousel-control-next"
         type="button"
         data-bs-target={'#' + carouselName}
         data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Next</span>
       </button>
     </div>
+  );
+}
+
+function Anime({ anime }) {
+  const { title, images, mal_id } = anime;
+  return (
+    <Link to={`/animeDetails/${mal_id}`}>
+      <div>
+        <img src={images.jpg.image_url} className="d-block" alt={title} />
+        <h5>{title}</h5>
+      </div>
+    </Link>
   );
 }

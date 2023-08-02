@@ -8,6 +8,11 @@ h2 {
   border-bottom: solid;
 }
 
+h5 {
+  text-align: center;
+  text-wrap: wrap;
+}
+
 .carousel {
   display: flex;
 }
@@ -20,12 +25,16 @@ h2 {
 .carousel-control-next {
   position: relative;
   width: 100px;
-  height: 236.3px;
+  height: 260px;
   background-color: gray;
-  opacity: 0.3;
+  opacity: 0.8;
+}
+
+.animeIcon {
+  border: black solid 3px;
 }
 
 img {
-  width: 160px;
-  height: 236.3px;
+  margin: 0 0.8rem;
+  height: 260px;
 }
