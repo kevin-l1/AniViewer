@@ -1,27 +1,19 @@
-import { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import logo from './logo.svg';
 import SignInForm from './SignIn';
 import RegistrationForm from './CreateAccount';
 import Homepage from './Homepage';
+import NavigationBar from './NavigationBar';
 
 function App() {
-  const [serverData, setServerData] = useState('');
-
-  useEffect(() => {
-    async function readServerData() {
-      const resp = await fetch('/api/hello');
-      const data = await resp.json();
-
-      console.log('Data from server:', data);
-
-      setServerData(data.message);
-    }
-
-    readServerData();
-  }, []);
-
-  return <Homepage />;
+  return (
+    <Routes>
+      <Route path="/" element={<NavigationBar />}>
+        <Route index element={<Homepage />} />
+      </Route>
+    </Routes>
+  );
 }
 
 export default App;
