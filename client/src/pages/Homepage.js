@@ -129,10 +129,10 @@ function Carousel({ animes, carouselName }) {
 function Anime({ anime }) {
   const { title, images, mal_id } = anime;
   return (
-    <Link to={`/animeDetails/${mal_id}`}>
+    <Link to={`/details/${mal_id}`}>
       <div>
         <img src={images.jpg.image_url} className="d-block" alt={title} />
-        <h5>{title}</h5>
+        <h5 className="anime-title">{title}</h5>
       </div>
     </Link>
   );

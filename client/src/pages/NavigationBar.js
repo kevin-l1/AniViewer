@@ -8,7 +8,7 @@ export default function NavigationBar(props) {
         <div className="navbar-collapse">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item nav-link">
-              <Link to="/homepage" className="title">
+              <Link to="/" className="title">
                 AniViewer
               </Link>
             </li>
