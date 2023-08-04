@@ -1,14 +1,14 @@
 import './Homepage.css';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import Anime from './Anime';
 
 let requestInProcess = false;
 
 export default function Homepage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
-  const [topAnimes, setTopAnimes] = useState();
   const [popularAnimes, setPopularAnimes] = useState();
+  const [seasonalAnimes, setSeasonalAnimes] = useState();
 
   useEffect(() => {
     async function fetchResponse() {
@@ -21,16 +21,16 @@ export default function Homepage() {
         const response = await fetch(
           'https://api.jikan.moe/v4/top/anime?limit=21'
         );
-        const arrayOfTopAnimes = await response.json();
-        setTopAnimes(arrayOfTopAnimes.data);
-        console.log(arrayOfTopAnimes.data);
+        const arrayOfPopularAnimes = await response.json();
+        setPopularAnimes(arrayOfPopularAnimes.data);
+        console.log(arrayOfPopularAnimes.data);
 
         const response2 = await fetch(
           'https://api.jikan.moe/v4/seasons/now?limit=21'
         );
-        const arrayOfPopularAnimes = await response2.json();
-        setPopularAnimes(arrayOfPopularAnimes.data);
-        console.log(arrayOfPopularAnimes.data);
+        const arrayOfSeasonalAnimes = await response2.json();
+        setSeasonalAnimes(arrayOfSeasonalAnimes.data);
+        console.log(arrayOfSeasonalAnimes.data);
       } catch (error) {
         setError(error);
       } finally {
@@ -42,7 +42,11 @@ export default function Homepage() {
   }, []);
 
   console.log(isLoading);
-  if (isLoading || popularAnimes === undefined || topAnimes === undefined) {
+  if (
+    isLoading ||
+    popularAnimes === undefined ||
+    seasonalAnimes === undefined
+  ) {
     return <p>Loading...</p>;
   }
   if (error) {
@@ -52,16 +56,16 @@ export default function Homepage() {
   console.log(isLoading);
   console.log(requestInProcess);
   console.log('1', popularAnimes);
-  console.log('2', topAnimes);
+  console.log('2', seasonalAnimes);
   return (
     <div className="carouselContainer">
       <div className="animeCarousel">
         <h2 className="seasonal">Seasonal</h2>
-        <Carousel animes={topAnimes} carouselName="topAnimes" />
+        <Carousel animes={popularAnimes} carouselName="popularAnimes" />
       </div>
       <div className="animeCarousel">
         <h2 className="popular">Most Popular</h2>
-        <Carousel animes={popularAnimes} carouselName="popularAnimes" />
+        <Carousel animes={seasonalAnimes} carouselName="seasonalAnimes" />
       </div>
     </div>
   );
@@ -93,25 +97,31 @@ function Carousel({ animes, carouselName }) {
       </button>
       <div className="carousel-inner">
         <div className="carousel-item active">
-          {firstAnimeSet.map((anime) => (
-            <div key={anime.mal_id}>
-              <Anime anime={anime} />
-            </div>
-          ))}
+          <div className="carousel-container">
+            {firstAnimeSet.map((anime) => (
+              <div key={anime.mal_id}>
+                <Anime anime={anime} />
+              </div>
+            ))}
+          </div>
         </div>
         <div className="carousel-item">
-          {secondAnimeSet.map((anime) => (
-            <div key={anime.mal_id}>
-              <Anime anime={anime} />
-            </div>
-          ))}
+          <div className="carousel-container">
+            {secondAnimeSet.map((anime) => (
+              <div key={anime.mal_id}>
+                <Anime anime={anime} />
+              </div>
+            ))}
+          </div>
         </div>
         <div className="carousel-item">
-          {thirdAnimeSet.map((anime) => (
-            <div key={anime.mal_id}>
-              <Anime anime={anime} />
-            </div>
-          ))}
+          <div className="carousel-container">
+            {thirdAnimeSet.map((anime) => (
+              <div key={anime.mal_id}>
+                <Anime anime={anime} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <button
@@ -126,14 +136,14 @@ function Carousel({ animes, carouselName }) {
   );
 }
 
-function Anime({ anime }) {
-  const { title, images, mal_id } = anime;
-  return (
-    <Link to={`/details/${mal_id}`}>
-      <div>
-        <img src={images.jpg.image_url} className="d-block" alt={title} />
-        <h5 className="anime-title">{title}</h5>
-      </div>
-    </Link>
-  );
-}
+// function Anime({ anime }) {
+//   const { title, images, mal_id } = anime;
+//   return (
+//     <Link to={`/details/${mal_id}`}>
+//       <div className="anime-icon-container">
+//         <img src={images.jpg.image_url} className="d-block" alt={title} />
+//         <h5 className="anime-title">{title}</h5>
+//       </div>
+//     </Link>
+//   );
+// }

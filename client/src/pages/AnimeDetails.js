@@ -57,29 +57,38 @@ export default function AnimeDetails() {
 
   return (
     <div className="container">
-      <div className="col-4">
-        <div>
-          <img src={images.jpg.image_url} alt={title} />
+      <div className="col-3">
+        <div className="anime-picture-details">
+          <img
+            className="details-image"
+            src={images.jpg.image_url}
+            alt={title}
+          />
           <div className="anime-details">
-            <div>{title}</div>
-            <div>
-              Type: {type}
-              Episodes: {episodes}
-              Genres: {allGenres}
-            </div>
-          </div>
-          <div>
-            {rank}
-            {score}
-            <h5>{popularity}</h5>
-          </div>
-          <div>
-            Synopsis
-            {synopsis}
+            <h3 className="title">{title}</h3>
+            <h5 className="type">
+              <b>Type:</b> {type}
+            </h5>
+            <h5 className="episodes">
+              <b>Episodes:</b> {episodes}
+            </h5>
+            <h5 className="genres">
+              <b>Genres:</b> {allGenres}
+            </h5>
           </div>
         </div>
       </div>
-      <div className="col-8"></div>
+      <div className="col-8">
+        <div className="stats">
+          <h1 className="rank">{rank}</h1>
+          <h1 className="score">{score}</h1>
+          <h1 className="popularity">{popularity}</h1>
+        </div>
+        <div>
+          Synopsis
+          {synopsis}
+        </div>
+      </div>
     </div>
   );
 }

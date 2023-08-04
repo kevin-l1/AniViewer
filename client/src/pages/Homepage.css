@@ -8,7 +8,11 @@ h2 {
   border-bottom: solid;
 }
 
-h5 {
+.anime-icon-container {
+  width: 183px;
+}
+
+.anime-title {
   text-align: center;
   text-wrap: wrap;
   color: black;
@@ -18,7 +22,7 @@ h5 {
   display: flex;
 }
 
-.carousel-item.active {
+.carousel-container {
   display: flex;
 }
 

@@ -16,7 +16,7 @@ export default function NavigationBar(props) {
               <input type="text"></input>
             </li>
             <li className="nav-item nav-link">
-              <Link to="/anime" className="title">
+              <Link to="/animes" className="title">
                 Anime
               </Link>
             </li>
