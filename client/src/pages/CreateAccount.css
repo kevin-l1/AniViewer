@@ -1,5 +1,5 @@
 .modal {
-  display: contents
+  display: contents;
 }
 
 .btn-primary {
@@ -11,7 +11,7 @@
 }
 
 .modal-header {
-  background-color: #7575FF;
+  background-color: #7575ff;
   color: white;
 }
 
@@ -20,5 +20,5 @@
 }
 
 input:focus {
- outline-color: red
+  outline-color: red;
 }

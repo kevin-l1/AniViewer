@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 .animeCarousel {
   display: flex;
   flex-direction: column;
@@ -8,16 +12,15 @@ h2 {
   border-bottom: solid;
 }
 
-h5 {
-  text-align: center;
-  text-wrap: wrap;
+.anime-icon-container {
+  width: 183px;
 }
 
 .carousel {
   display: flex;
 }
 
-.carousel-item.active {
+.carousel-container {
   display: flex;
 }
 
