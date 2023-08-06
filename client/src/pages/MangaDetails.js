@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
-import { fetchAnime } from '../lib/api';
-import './AnimeDetails.css';
-
+import { fetchManga } from '../lib/api';
+import './MangaDetails.css';
 import { useParams } from 'react-router-dom';
 
-export default function AnimeDetails() {
+export default function MangaDetails() {
   const { mal_id } = useParams();
-  const [anime, setAnime] = useState();
+  console.log(mal_id);
+  const [manga, setAnime] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
   useEffect(() => {
-    async function loadAnime(mal_id) {
+    async function loadManga(mal_id) {
       try {
-        const anime = await fetchAnime(mal_id);
-        setAnime(anime);
+        const manga = await fetchManga(mal_id);
+        setAnime(manga);
       } catch (err) {
         setError(err);
       } finally {
@@ -21,7 +21,7 @@ export default function AnimeDetails() {
       }
     }
     setIsLoading(true);
-    loadAnime(mal_id);
+    loadManga(mal_id);
   }, [mal_id]);
 
   if (isLoading) return <div>Loading...</div>;
@@ -32,7 +32,7 @@ export default function AnimeDetails() {
       </div>
     );
   }
-  if (!anime) return null;
+  if (!manga) return null;
 
   const {
     title,
@@ -44,7 +44,7 @@ export default function AnimeDetails() {
     rank,
     score,
     popularity,
-  } = anime.data;
+  } = manga.data;
 
   let allGenres = '';
   for (let i = 0; i < genres.length; i++) {
@@ -58,13 +58,13 @@ export default function AnimeDetails() {
   return (
     <div className="container">
       <div className="col-3">
-        <div className="anime-picture-details">
+        <div className="manga-picture-details">
           <img
             className="details-image"
             src={images.jpg.image_url}
             alt={title}
           />
-          <div className="anime-details">
+          <div className="manga-details">
             <h3 className="title">{title}</h3>
             <h5 className="type">
               <b>Type:</b> {type}

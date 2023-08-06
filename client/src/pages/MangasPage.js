@@ -1,6 +1,6 @@
 import './MangasPage.css';
 import React, { useEffect, useState } from 'react';
-import Manga from './Anime';
+import Manga from './Manga';
 
 export default function MangasPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,6 +26,14 @@ export default function MangasPage() {
     fetchResponse();
   }, [page]);
 
+  function handleNext() {
+    setPage(page + 1);
+  }
+
+  function handlePrev() {
+    setPage(page - 1);
+  }
+
   console.log(isLoading);
   if (isLoading) {
     return <p>Loading...</p>;
@@ -36,12 +44,22 @@ export default function MangasPage() {
   }
 
   return (
-    <div className="container">
-      {mangas.map((manga) => (
-        <div key={manga.mal_id}>
-          <Manga manga={manga} />
+    <div className="mangas-container">
+      <div className="rowOfMangas">
+        {mangas.map((manga) => (
+          <div key={manga.mal_id}>
+            <Manga manga={manga} />
+          </div>
+        ))}
+      </div>
+      {page > 1 ? (
+        <div>
+          <button onClick={handlePrev}>Previous Page</button>
+          <button onClick={handleNext}>Next Page</button>
         </div>
-      ))}
+      ) : (
+        <button onClick={handleNext}>Next Page</button>
+      )}
     </div>
   );
 }

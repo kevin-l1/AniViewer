@@ -8,7 +8,7 @@ export default function NavigationBar(props) {
         <div className="navbar-collapse">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item nav-link">
-              <Link to="/" className="title">
+              <Link to="/" className="aniviewer-tab">
                 AniViewer
               </Link>
             </li>
@@ -16,17 +16,17 @@ export default function NavigationBar(props) {
               <input type="text"></input>
             </li>
             <li className="nav-item nav-link">
-              <Link to="/animes" className="title">
+              <Link to="/animes" className="anime-tab">
                 Anime
               </Link>
             </li>
             <li className="nav-item nav-link">
-              <Link to="/manga" className="title">
+              <Link to="/mangas" className="manga-tab">
                 Manga
               </Link>
             </li>
             <li className="nav-item nav-link">
-              <Link to="/createAccount" className="title">
+              <Link to="/createAccount" className="account-tab">
                 Icon
               </Link>
             </li>

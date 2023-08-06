@@ -26,7 +26,14 @@ export default function AnimesPage() {
     fetchResponse();
   }, [page]);
 
-  console.log(isLoading);
+  function handleNext() {
+    setPage(page + 1);
+  }
+
+  function handlePrev() {
+    setPage(page - 1);
+  }
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -36,12 +43,22 @@ export default function AnimesPage() {
   }
 
   return (
-    <div className="container">
-      {animes.map((anime) => (
-        <div key={anime.mal_id}>
-          <Anime anime={anime} />
+    <div className="animes-container">
+      <div className="rowOfAnimes">
+        {animes.map((anime) => (
+          <div key={anime.mal_id}>
+            <Anime anime={anime} />
+          </div>
+        ))}
+      </div>
+      {page > 1 ? (
+        <div>
+          <button onClick={handlePrev}>Previous Page</button>
+          <button onClick={handleNext}>Next Page</button>
         </div>
-      ))}
+      ) : (
+        <button onClick={handleNext}>Next Page</button>
+      )}
     </div>
   );
 }

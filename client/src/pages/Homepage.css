@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 .animeCarousel {
   display: flex;
   flex-direction: column;
@@ -10,12 +14,6 @@ h2 {
 
 .anime-icon-container {
   width: 183px;
-}
-
-.anime-title {
-  text-align: center;
-  text-wrap: wrap;
-  color: black;
 }
 
 .carousel {
