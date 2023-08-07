@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
-import { fetchManga } from '../lib/api';
-import './MangaDetails.css';
+import { fetchAnime } from '../../lib/api';
+import './AnimeDetails.css';
+
 import { useParams } from 'react-router-dom';
 
-export default function MangaDetails() {
+export default function AnimeDetails() {
   const { mal_id } = useParams();
-  console.log(mal_id);
-  const [manga, setAnime] = useState();
+  const [anime, setAnime] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
+
   useEffect(() => {
-    async function loadManga(mal_id) {
+    async function loadAnime(mal_id) {
       try {
-        const manga = await fetchManga(mal_id);
-        setAnime(manga);
+        const anime = await fetchAnime(mal_id);
+        setAnime(anime);
       } catch (err) {
         setError(err);
       } finally {
@@ -21,7 +22,7 @@ export default function MangaDetails() {
       }
     }
     setIsLoading(true);
-    loadManga(mal_id);
+    loadAnime(mal_id);
   }, [mal_id]);
 
   if (isLoading) return <div>Loading...</div>;
@@ -32,7 +33,7 @@ export default function MangaDetails() {
       </div>
     );
   }
-  if (!manga) return null;
+  if (!anime) return null;
 
   const {
     title,
@@ -44,7 +45,7 @@ export default function MangaDetails() {
     rank,
     score,
     popularity,
-  } = manga.data;
+  } = anime.data;
 
   let allGenres = '';
   for (let i = 0; i < genres.length; i++) {
@@ -57,14 +58,17 @@ export default function MangaDetails() {
 
   return (
     <div className="container">
+      <div>
+        <i class="fa-solid fa-bookmark"></i>
+      </div>
       <div className="col-3">
-        <div className="manga-picture-details">
+        <div className="anime-picture-details">
           <img
             className="details-image"
             src={images.jpg.image_url}
             alt={title}
           />
-          <div className="manga-details">
+          <div className="anime-details">
             <h3 className="title">{title}</h3>
             <h5 className="type">
               <b>Type:</b> {type}

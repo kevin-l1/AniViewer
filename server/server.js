@@ -3,11 +3,14 @@ import pg from 'pg';
 import argon2 from 'argon2';
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import { ClientError, errorMiddleware, authorizationMiddleware } from './lib/index.js';
+import {
+  ClientError,
+  errorMiddleware,
+  authorizationMiddleware,
+} from './lib/index.js';
 // import ClientError from './lib/client-error.js';
 // import authorizationMiddleware from './lib/authorization-middleware.js';
 // import errorMiddleware from './lib/error-middleware.js';
-
 
 // eslint-disable-next-line no-unused-vars -- Remove when used
 const db = new pg.Pool({
@@ -186,9 +189,8 @@ app.post('/api/auth/sign-in', async (req, res, next) => {
  */
 app.get('*', (req, res) => res.sendFile(`${reactStaticDir}/index.html`));
 
-
-
 app.use(errorMiddleware);
+app.use(authorizationMiddleware);
 
 app.listen(process.env.PORT, () => {
   process.stdout.write(`\n\napp listening on port ${process.env.PORT}\n\n`);

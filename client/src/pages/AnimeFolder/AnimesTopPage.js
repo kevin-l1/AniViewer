@@ -1,22 +1,20 @@
-import './MangasPage.css';
+import './AnimesPage.css';
 import React, { useEffect, useState } from 'react';
-import Manga from './Manga';
+import Anime from './Anime';
+import { fetchTopAnimes } from '../../lib/api';
 
-export default function MangasPage() {
+export default function AnimesTopPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
-  const [mangas, setMangas] = useState();
+  const [animes, setAnimes] = useState();
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     async function fetchResponse() {
       try {
-        const response = await fetch(
-          `https://api.jikan.moe/v4/top/manga?page=${page}&limit=24`
-        );
-        const arrayOfMangas = await response.json();
-        console.log(arrayOfMangas.data);
-        setMangas(arrayOfMangas.data);
+        const arrayOfAnimes = await fetchTopAnimes(page);
+        console.log(arrayOfAnimes.data);
+        setAnimes(arrayOfAnimes.data);
       } catch (error) {
         setError(error);
       } finally {
@@ -34,7 +32,6 @@ export default function MangasPage() {
     setPage(page - 1);
   }
 
-  console.log(isLoading);
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -44,11 +41,11 @@ export default function MangasPage() {
   }
 
   return (
-    <div className="mangas-container">
-      <div className="rowOfMangas">
-        {mangas.map((manga) => (
-          <div key={manga.mal_id}>
-            <Manga manga={manga} />
+    <div className="animes-container">
+      <div className="rowOfAnimes">
+        {animes.map((anime) => (
+          <div key={anime.mal_id}>
+            <Anime anime={anime} />
           </div>
         ))}
       </div>

@@ -1,8 +1,9 @@
 import './AnimesPage.css';
 import React, { useEffect, useState } from 'react';
 import Anime from './Anime';
+import { fetchSeasonalAnimes } from '../../lib/api';
 
-export default function AnimesPage() {
+export default function AnimesPopularPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
   const [animes, setAnimes] = useState();
@@ -11,10 +12,7 @@ export default function AnimesPage() {
   useEffect(() => {
     async function fetchResponse() {
       try {
-        const response = await fetch(
-          `https://api.jikan.moe/v4/top/anime?page=${page}&limit=24`
-        );
-        const arrayOfAnimes = await response.json();
+        const arrayOfAnimes = await fetchSeasonalAnimes(page);
         console.log(arrayOfAnimes.data);
         setAnimes(arrayOfAnimes.data);
       } catch (error) {

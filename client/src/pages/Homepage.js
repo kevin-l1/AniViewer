@@ -1,6 +1,7 @@
 import './Homepage.css';
 import React, { useEffect, useState } from 'react';
-import Anime from './Anime';
+import Carousel from 'react-bootstrap/Carousel';
+import Anime from './AnimeFolder/Anime';
 
 let requestInProcess = false;
 
@@ -61,17 +62,17 @@ export default function Homepage() {
     <div className="carouselContainer">
       <div className="animeCarousel">
         <h2 className="seasonal">Seasonal</h2>
-        <Carousel animes={popularAnimes} carouselName="popularAnimes" />
+        <AnimeCarousel animes={popularAnimes} carouselName="popularAnimes" />
       </div>
       <div className="animeCarousel">
         <h2 className="popular">Most Popular</h2>
-        <Carousel animes={seasonalAnimes} carouselName="seasonalAnimes" />
+        <AnimeCarousel animes={seasonalAnimes} carouselName="seasonalAnimes" />
       </div>
     </div>
   );
 }
 
-function Carousel({ animes, carouselName }) {
+function AnimeCarousel({ animes, carouselName }) {
   const firstAnimeSet = [];
   const secondAnimeSet = [];
   const thirdAnimeSet = [];
@@ -136,14 +137,55 @@ function Carousel({ animes, carouselName }) {
   );
 }
 
-// function Anime({ anime }) {
-//   const { title, images, mal_id } = anime;
+// function AnimeCarousel({ animes }) {
+//   const firstAnimeSet = [];
+//   const secondAnimeSet = [];
+//   const thirdAnimeSet = [];
+//   for (let i = 0; i < animes.length; i++) {
+//     if (i < (animes.length * 1) / 3) {
+//       firstAnimeSet.push(animes[i]);
+//     } else if (i < (animes.length * 2) / 3) {
+//       secondAnimeSet.push(animes[i]);
+//     } else {
+//       thirdAnimeSet.push(animes[i]);
+//     }
+//   }
+
+//   const [index, setIndex] = useState(0);
+
+//   const handleSelect = (selectedIndex) => {
+//     setIndex(selectedIndex);
+//   };
+
 //   return (
-//     <Link to={`/details/${mal_id}`}>
-//       <div className="anime-icon-container">
-//         <img src={images.jpg.image_url} className="d-block" alt={title} />
-//         <h5 className="anime-title">{title}</h5>
-//       </div>
-//     </Link>
+//     <Carousel activeIndex={index} onSelect={handleSelect}>
+//       <Carousel.Item>
+//         <div className="carousel-container">
+//           {firstAnimeSet.map((anime) => (
+//             <div key={anime.mal_id}>
+//               <Anime anime={anime} />
+//             </div>
+//           ))}
+//         </div>
+//       </Carousel.Item>
+//       <Carousel.Item>
+//         <div className="carousel-container">
+//           {firstAnimeSet.map((anime) => (
+//             <div key={anime.mal_id}>
+//               <Anime anime={anime} />
+//             </div>
+//           ))}
+//         </div>
+//       </Carousel.Item>
+//       <Carousel.Item>
+//         <div className="carousel-container">
+//           {firstAnimeSet.map((anime) => (
+//             <div key={anime.mal_id}>
+//               <Anime anime={anime} />
+//             </div>
+//           ))}
+//         </div>
+//       </Carousel.Item>
+//     </Carousel>
 //   );
 // }
