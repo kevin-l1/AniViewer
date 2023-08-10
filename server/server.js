@@ -3,11 +3,14 @@ import pg from 'pg';
 import argon2 from 'argon2';
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import { ClientError, errorMiddleware, authorizationMiddleware } from './lib/index.js';
+import {
+  ClientError,
+  errorMiddleware,
+  authorizationMiddleware,
+} from './lib/index.js';
 // import ClientError from './lib/client-error.js';
 // import authorizationMiddleware from './lib/authorization-middleware.js';
 // import errorMiddleware from './lib/error-middleware.js';
-
 
 // eslint-disable-next-line no-unused-vars -- Remove when used
 const db = new pg.Pool({
@@ -83,95 +86,258 @@ app.post('/api/auth/sign-in', async (req, res, next) => {
   }
 });
 
-// app.get('/api/entries', authorizationMiddleware, async (req, res, next) => {
-//   try {
-//     const sql = `
-//       select * from "entries"
-//         where "userId" = $1
-//         order by "entryId" desc;
-//     `;
-//     const result = await db.query(sql, [req.user.userId]);
-//     res.status(201).json(result.rows);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+app.get(
+  '/api/animeBookmarks',
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const sql = `
+      select * from "bookmarks"
+        where "userId" = $1 and "type" = 'TV'
+        order by "title";
+    `;
+      const result = await db.query(sql, [req.user.userId]);
+      res.status(201).json(result.rows);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
-// app.post('/api/entries', authorizationMiddleware, async (req, res, next) => {
-//   try {
-//     const { title, notes, photoUrl } = req.body;
-//     if (!title || !notes || !photoUrl) {
-//       throw new ClientError(
-//         400,
-//         'title, notes, and photoUrl are required fields'
-//       );
-//     }
-//     const sql = `
-//       insert into "entries" ("userId", "title", "notes", "photoUrl")
-//         values ($1, $2, $3, $4)
-//         returning *;
-//     `;
-//     const params = [req.user.userId, title, notes, photoUrl];
-//     const result = await db.query(sql, params);
-//     const [entry] = result.rows;
-//     res.status(201).json(entry);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+app.post(
+  '/api/animeBookmarks',
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const { title, type, images, mal_id: animeId } = req.body;
+      if (!title || !type || !images.jpg.image_url || !animeId) {
+        throw new ClientError(
+          400,
+          'title, notes, and photoUrl are required fields'
+        );
+      }
+      const sql = `
+      insert into "bookmarks" ("userId", "title", "type", "imageUrl", "itemId")
+        values ($1, $2, $3, $4, $5)
+        returning *;
+    `;
+      const params = [
+        req.user.userId,
+        title,
+        type,
+        images.jpg.image_url,
+        animeId,
+      ];
+      const result = await db.query(sql, params);
+      const [bookmark] = result.rows;
+      res.status(201).json(bookmark);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
-// app.put('/api/entries/:entryId', authorizationMiddleware, async (req, res, next) => {
-//   try {
-//     const entryId = Number(req.params.entryId);
-//     const { title, notes, photoUrl } = req.body;
-//     if (!Number.isInteger(entryId) || !title || !notes || !photoUrl) {
-//       throw new ClientError(
-//         400,
-//         'entryId, title, notes, and photoUrl are required fields'
-//       );
-//     }
-//     const sql = `
-//       update "entries"
-//         set "title" = $1,
-//             "notes" = $2,
-//             "photoUrl" = $3
-//         where "entryId" = $4 and "userId" = $5
-//         returning *;
-//     `;
-//     const params = [title, notes, photoUrl, entryId, req.user.userId];
-//     const result = await db.query(sql, params);
-//     const [entry] = result.rows;
-//     if (!entry) {
-//       throw new ClientError(404, `Entry with id ${entryId} not found`);
-//     }
-//     res.status(201).json(entry);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+app.delete(
+  '/api/animeBookmarks/:itemId',
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const itemId = Number(req.params.itemId);
+      if (!Number.isInteger(itemId)) {
+        throw new ClientError(400, 'entryId must be an integer');
+      }
+      const sql = `
+      delete from "bookmarks"
+        where "itemId" = $1 and "userId" = $2
+        returning *;
+    `;
+      const params = [itemId, req.user.userId];
+      const result = await db.query(sql, params);
+      const [deleted] = result.rows;
+      if (!deleted) {
+        throw new ClientError(404, `Anime with id ${itemId} not found`);
+      }
+      res.sendStatus(204);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
-// app.delete('/api/entries/:entryId', authorizationMiddleware, async (req, res, next) => {
-//   try {
-//     const entryId = Number(req.params.entryId);
-//     if (!Number.isInteger(entryId)) {
-//       throw new ClientError(400, 'entryId must be an integer');
-//     }
-//     const sql = `
-//       delete from "entries"
-//         where "entryId" = $1 and "userId" = $2
-//         returning *;
-//     `;
-//     const params = [entryId, req.user.userId];
-//     const result = await db.query(sql, params);
-//     const [deleted] = result.rows;
-//     if (!deleted) {
-//       throw new ClientError(404, `Entry with id ${entryId} not found`);
-//     }
-//     res.sendStatus(204);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+// Manga
+app.get(
+  '/api/mangaBookmarks',
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const sql = `
+      select * from "bookmarks"
+        where "userId" = $1 and "type" = 'Manga'
+        order by "title";
+    `;
+      const result = await db.query(sql, [req.user.userId]);
+      res.status(201).json(result.rows);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+app.post(
+  '/api/mangaBookmarks',
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const { title, type, images, mal_id: animeId } = req.body;
+      if (!title || !type || !images.jpg.image_url || !animeId) {
+        throw new ClientError(
+          400,
+          'title, notes, and photoUrl are required fields'
+        );
+      }
+      const sql = `
+      insert into "bookmarks" ("userId","title", "type", "imageUrl", "itemId")
+        values ($1, $2, $3, $4, $5)
+        returning *;
+    `;
+      const params = [
+        req.user.userId,
+        title,
+        type,
+        images.jpg.image_url,
+        animeId,
+      ];
+      const result = await db.query(sql, params);
+      const [bookmark] = result.rows;
+      res.status(201).json(bookmark);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+app.delete(
+  '/api/mangaBookmarks/:itemId',
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const itemId = Number(req.params.itemId);
+      if (!Number.isInteger(itemId)) {
+        throw new ClientError(400, 'entryId must be an integer');
+      }
+      const sql = `
+      delete from "bookmarks"
+        where "itemId" = $1 and "userId" = $2
+        returning *;
+    `;
+      const params = [itemId, req.user.userId];
+      const result = await db.query(sql, params);
+      const [deleted] = result.rows;
+      if (!deleted) {
+        throw new ClientError(404, `Manga with id ${itemId} not found`);
+      }
+      res.sendStatus(204);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+// Reviews
+
+app.get('/api/reviews', authorizationMiddleware, async (req, res, next) => {
+  try {
+    const sql = `
+      select * from "reviews"
+        where "userId" = $1
+        order by "title" desc;
+    `;
+    const result = await db.query(sql, [req.user.userId]);
+    res.status(201).json(result.rows);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.post('/api/reviews', authorizationMiddleware, async (req, res, next) => {
+  try {
+    const { title, rating, review, imageUrl, id } = req.body;
+    if (!rating || !review) {
+      throw new ClientError(400, 'Rating and review and are required fields');
+    }
+    const sql = `
+      insert into "reviews" ("userId", "title", "rating", "review", "imageUrl", "itemId")
+        values ($1, $2, $3, $4, $5, $6)
+        returning *;
+    `;
+    const params = [req.user.userId, title, rating, review, imageUrl, id];
+    const result = await db.query(sql, params);
+    const [newReview] = result.rows;
+    res.status(201).json(newReview);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.put(
+  '/api/reviews/:animeId',
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const itemId = Number(req.params.animeId);
+      const { review, rating } = req.body;
+      if (!Number.isInteger(itemId) || !review || !rating) {
+        throw new ClientError(
+          400,
+          'itemId, title, review, and rating are required fields'
+        );
+      }
+      const sql = `
+      update "reviews"
+        set "review" = $1,
+            "rating" = $2
+        where "itemId" = $3 and "userId" = $4
+        returning *;
+    `;
+      const params = [review, rating, itemId, req.user.userId];
+      const result = await db.query(sql, params);
+      const [entry] = result.rows;
+      if (!entry) {
+        throw new ClientError(404, `Review with id ${itemId} not found`);
+      }
+      res.status(201).json(entry);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+app.delete(
+  '/api/reviews/:itemId',
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const itemId = Number(req.params.itemId);
+      if (!Number.isInteger(itemId)) {
+        throw new ClientError(400, 'entryId must be an integer');
+      }
+      const sql = `
+      delete from "reviews"
+        where "itemId" = $1 and "userId" = $2
+        returning *;
+    `;
+      const params = [itemId, req.user.userId];
+      const result = await db.query(sql, params);
+      const [deleted] = result.rows;
+      if (!deleted) {
+        throw new ClientError(404, `Review with id ${itemId} not found`);
+      }
+      res.sendStatus(204);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
 /**
  * Serves React's index.html if no api route matches.
@@ -186,9 +352,8 @@ app.post('/api/auth/sign-in', async (req, res, next) => {
  */
 app.get('*', (req, res) => res.sendFile(`${reactStaticDir}/index.html`));
 
-
-
 app.use(errorMiddleware);
+app.use(authorizationMiddleware);
 
 app.listen(process.env.PORT, () => {
   process.stdout.write(`\n\napp listening on port ${process.env.PORT}\n\n`);

@@ -1,7 +1,7 @@
 import './CreateAccount.css';
 import { useState } from 'react';
 
-export default function RegistrationForm() {
+export default function CreateAccount() {
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit(event) {
@@ -29,7 +29,7 @@ export default function RegistrationForm() {
   }
 
   return (
-    <div className="modal" tabindex="-1">
+    <div id="signInModal" className="modal align-center" tabindex="-1">
       <div className="modal-dialog">
         <div className="modal-content">
           <form onSubmit={handleSubmit}>
@@ -62,7 +62,10 @@ export default function RegistrationForm() {
               </div>
             </div>
             <div className="modal-footer justify-content-center">
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                data-bs-dismiss="modal"
+                className="btn btn-primary">
                 Sign Up
               </button>
             </div>
