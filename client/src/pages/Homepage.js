@@ -2,6 +2,7 @@ import './Homepage.css';
 import React, { useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Anime from './AnimeFolder/Anime';
+import BootstrapCarousel from './Carousel';
 
 let requestInProcess = false;
 
@@ -68,6 +69,7 @@ export default function Homepage() {
         <h2 className="popular">Most Popular</h2>
         <AnimeCarousel animes={seasonalAnimes} carouselName="seasonalAnimes" />
       </div>
+      <BootstrapCarousel animes={seasonalAnimes} />
     </div>
   );
 }

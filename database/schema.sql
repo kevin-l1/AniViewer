@@ -10,6 +10,7 @@ CREATE TABLE "public"."bookmarks" (
 	"bookmarkId" serial NOT NULL,
 	"userId" integer NOT NULL,
 	"title" TEXT NOT NULL,
+  "type" TEXT NOT NULL,
 	"imageUrl" TEXT NOT NULL,
 	"itemId" integer NOT NULL,
 	CONSTRAINT "bookmarks_pk" PRIMARY KEY ("bookmarkId")

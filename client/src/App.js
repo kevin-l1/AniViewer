@@ -1,7 +1,5 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import SignInForm from './pages/SignIn';
-import RegistrationForm from './pages/CreateAccount';
 import Homepage from './pages/Homepage';
 import NavigationBar from './pages/NavigationBar';
 import AnimeDetails from './pages/AnimeFolder/AnimeDetails';
@@ -13,6 +11,9 @@ import MangasPage from './pages/MangaFolder/MangasPage';
 import MangasPopularPage from './pages/MangaFolder/MangasPopularPage';
 import MangasTopPage from './pages/MangaFolder/MangasTopPage';
 import MangaDetails from './pages/MangaFolder/MangaDetails';
+import AnimeBookmarksPage from './pages/AnimeFolder/AnimeBookmarksPage';
+import MangaBookmarksPage from './pages/MangaFolder/MangaBookmarksPage';
+import ReviewsPage from './pages/ReviewsPage';
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
         <Route path="/mangasPopular" element={<MangasPopularPage />} />
         <Route path="/mangasTop" element={<MangasTopPage />} />
         <Route path="/mangaDetails/:mal_id" element={<MangaDetails />} />
+        <Route path="/animeBookmarks" element={<AnimeBookmarksPage />} />
+        <Route path="/mangaBookmarks" element={<MangaBookmarksPage />} />
+        <Route path="/reviews" element={<ReviewsPage />} />
       </Route>
     </Routes>
   );

@@ -1,6 +1,6 @@
 import './NavigationBar.css';
 import { Link, Outlet } from 'react-router-dom';
-import SignIn from './SignIn';
+import Account from './Account';
 import CreateAccount from './CreateAccount';
 
 export default function NavigationBar(props) {
@@ -51,15 +51,21 @@ export default function NavigationBar(props) {
           </li>
           <li className="nav-item nav-link">
             <div className="dropdown">
-              <SignIn />
-              <div className="dropdown-items">
-                <Link to="/mangas" className="manga-tab">
-                  Bookmarks
-                </Link>
-                <Link to="/mangas" className="manga-tab">
-                  Reviews
-                </Link>
-              </div>
+              <Account />
+              {sessionStorage.getItem('token') ? (
+                <div className="dropdown-items">
+                  <Link to="/animeBookmarks" className="manga-tab">
+                    Anime Bookmarks
+                  </Link>
+                  <Link to="/mangaBookmarks" className="manga-tab">
+                    Manga Bookmarks
+                  </Link>
+                  <Link to="/reviews" className="manga-tab">
+                    Reviews
+                  </Link>
+                  <div>Sign Out</div>
+                </div>
+              ) : null}
             </div>
           </li>
         </ul>
