@@ -25,36 +25,53 @@
 
 .title {
   text-align: center;
-  outline: solid;
-}
-
-.stats {
-  display: flex;
 
   /* outline: solid; */
 }
 
-.rank,
-.score,
-.popularity {
-  padding: 0 5rem;
+.rank-container,
+.score-container,
+.popularity-container {
+  display: flex;
+  flex-direction: column;
+  outline: solid;
+  text-align: center;
+}
+
+.rank-title,
+.score-title,
+.popularity-title {
   margin: 0;
 }
 
-.rank {
+.stats {
+  display: flex;
+}
+
+.rank-container {
   border: solid;
 }
 
-.score {
+.score-container {
   border-top: solid;
   border-right: solid;
   border-bottom: solid;
 }
 
-.popularity {
+.popularity-container {
   border-top: solid;
   border-right: solid;
   border-bottom: solid;
+}
+
+.synopsis-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.synopsis {
+  font-size: 1.2rem;
 }
 
 .anime-details {
@@ -69,6 +86,50 @@
   line-height: 2rem;
 }
 
-/* .rate-review-row {
+.leave-review-button,
+.edit-review-button,
+.delete-review-button {
+  margin-top: 3rem;
+  height: 4rem;
+  width: 10rem;
+  font-size: 1.3rem;
+  border: solid black;
+  color: white;
+}
+
+.leave-review-button {
+  background-color: green;
+}
+
+.edit-review-button {
+  background-color: blue;
+}
+
+.delete-review-button {
+  background-color: orange;
+  margin-left: 20rem;
+}
+
+.return {
+  position: absolute;
+  left: 4rem;
+  top: 2.5rem;
+  width: 5rem;
+  height: 2.5rem;
+}
+
+.fa-bookmark {
+  position: absolute;
+  left: 110rem;
+  top: 5rem;
+  font-size: 3rem;
+}
+
+.ratings-options {
   display: flex;
-} */
+  margin-bottom: 2rem;
+}
+
+.rate {
+  margin: 0 0.7rem;
+}

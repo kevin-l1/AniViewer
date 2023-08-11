@@ -7,68 +7,63 @@ export default function NavigationBar(props) {
   return (
     <div>
       <nav className="navbar">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item nav-link">
-            <Link to="/" className="aniviewer-tab">
-              AniViewer
+        <Link to="/" className="aniviewer-tab">
+          AniViewer
+        </Link>
+
+        <Link to="/animes/:random" className="search-bar">
+          <button>Anime</button>
+          <input type="text" className="search"></input>
+        </Link>
+
+        <div className="dropdown">
+          <Link to="/animes" className="anime-tab">
+            Anime
+          </Link>
+          <div className="dropdown-items">
+            <Link to="/animesSeasonal" className="seasonal-tab">
+              Seasonal
             </Link>
-          </li>
-          <li className="nav-item nav-link">
-            <input type="text"></input>
-          </li>
-          <li className="nav-item nav-link">
-            <div className="dropdown">
-              <Link to="/animes" className="manga-tab">
-                Anime
+            <Link to="/animesPopular" className="popular-tab">
+              Popular
+            </Link>
+            <Link to="/animesTop" className="top-tab">
+              Top Rated
+            </Link>
+          </div>
+        </div>
+
+        <div className="dropdown">
+          <Link to="/mangas" className="manga-tab">
+            Manga
+          </Link>
+          <div className="dropdown-items">
+            <Link to="/mangasPopular" className="popular-tab">
+              Popular
+            </Link>
+            <Link to="/mangasTop" className="top-tab">
+              Top Rated
+            </Link>
+          </div>
+        </div>
+
+        <div className="dropdown">
+          <Account />
+          {sessionStorage.getItem('token') ? (
+            <div className="dropdown-items">
+              <Link to="/animeBookmarks" className="bookmarks-tab">
+                Anime Bookmarks
               </Link>
-              <div className="dropdown-items">
-                <Link to="/animesSeasonal" className="anime-tab">
-                  Seasonal
-                </Link>
-                <Link to="/animesPopular" className="anime-tab">
-                  Popular
-                </Link>
-                <Link to="/animesTop" className="anime-tab">
-                  Top Rated
-                </Link>
-              </div>
-            </div>
-          </li>
-          <li className="nav-item nav-link">
-            <div className="dropdown">
-              <Link to="/mangas" className="manga-tab">
-                Manga
+              <Link to="/mangaBookmarks" className="bookmarks-tab">
+                Manga Bookmarks
               </Link>
-              <div className="dropdown-items">
-                <Link to="/mangasPopular" className="manga-tab">
-                  Popular
-                </Link>
-                <Link to="/mangasTop" className="manga-tab">
-                  Top Rated
-                </Link>
-              </div>
+              <Link to="/reviews" className="reviews-tab">
+                Reviews
+              </Link>
+              <div className="sign-out-tab">Sign Out</div>
             </div>
-          </li>
-          <li className="nav-item nav-link">
-            <div className="dropdown">
-              <Account />
-              {sessionStorage.getItem('token') ? (
-                <div className="dropdown-items">
-                  <Link to="/animeBookmarks" className="manga-tab">
-                    Anime Bookmarks
-                  </Link>
-                  <Link to="/mangaBookmarks" className="manga-tab">
-                    Manga Bookmarks
-                  </Link>
-                  <Link to="/reviews" className="manga-tab">
-                    Reviews
-                  </Link>
-                  <div>Sign Out</div>
-                </div>
-              ) : null}
-            </div>
-          </li>
-        </ul>
+          ) : null}
+        </div>
       </nav>
       <Outlet />
     </div>

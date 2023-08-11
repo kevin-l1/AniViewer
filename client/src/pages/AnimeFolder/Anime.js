@@ -5,7 +5,7 @@ export default function Anime({ anime }) {
   return (
     <Link to={`/animeDetails/${mal_id}`}>
       <div className="anime-icon-container">
-        <img src={images.jpg.image_url} className="d-block" alt={title} />
+        <img src={images.jpg.image_url} className="anime-image" alt={title} />
         <h5 className="anime-title">{title}</h5>
       </div>
     </Link>

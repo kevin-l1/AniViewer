@@ -8,11 +8,12 @@ export default function AnimesPage() {
   const [error, setError] = useState();
   const [animes, setAnimes] = useState();
   const [page, setPage] = useState(1);
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     async function fetchResponse() {
       try {
-        const arrayOfAnimes = await fetchAnimes(page);
+        const arrayOfAnimes = await fetchAnimes(page, filter);
         setAnimes(arrayOfAnimes.data);
       } catch (error) {
         setError(error);
@@ -41,20 +42,29 @@ export default function AnimesPage() {
 
   return (
     <div className="animes-container">
+      <button className="filter">Filter</button>
       <div className="rowOfAnimes">
         {animes.map((anime) => (
-          <div key={anime.mal_id}>
+          <div key={anime.mal_id} className="anime-container">
             <Anime anime={anime} />
           </div>
         ))}
       </div>
       {page > 1 ? (
-        <div>
-          <button onClick={handlePrev}>Previous Page</button>
-          <button onClick={handleNext}>Next Page</button>
+        <div className="next-prev-buttons">
+          <button className="prev-button" onClick={handlePrev}>
+            Previous Page
+          </button>
+          <button className="next-button" onClick={handleNext}>
+            Next Page
+          </button>
         </div>
       ) : (
-        <button onClick={handleNext}>Next Page</button>
+        <div className="single-button-row">
+          <button className="single-button" onClick={handleNext}>
+            Next Page
+          </button>
+        </div>
       )}
     </div>
   );

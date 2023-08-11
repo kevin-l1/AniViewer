@@ -26,8 +26,6 @@
 
 .stats {
   display: flex;
-
-  /* outline: solid; */
 }
 
 .rank,
@@ -37,7 +35,7 @@
   margin: 0;
 }
 
-.rank {
+/* .rank {
   border: solid;
 }
 
@@ -51,7 +49,7 @@
   border-top: solid;
   border-right: solid;
   border-bottom: solid;
-}
+} */
 
 .manga-details {
   display: flex;

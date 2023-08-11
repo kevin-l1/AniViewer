@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getMangaBookmarks } from '../../data';
 import { Link } from 'react-router-dom';
+import './MangaBookmarksPage.css';
 
 export default function MangaBookmarksPage({ onCreate, onEdit }) {
   const [isLoading, setIsLoading] = useState();
@@ -29,9 +30,10 @@ export default function MangaBookmarksPage({ onCreate, onEdit }) {
 
   return (
     <div className="mangas-container">
+      <h1 className="manga-bookmarks-title">Manga Bookmarks</h1>
       <div className="rowOfMangas">
         {bookmarks.map((bookmark) => (
-          <div key={bookmark.mal_id}>
+          <div key={bookmark.mal_id} className="manga-container">
             <MangaBookmark manga={bookmark} />
           </div>
         ))}

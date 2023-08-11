@@ -1,5 +1,6 @@
 import Carousel from 'react-bootstrap/Carousel';
 import Anime from './AnimeFolder/Anime';
+import { Link } from 'react-router-dom';
 
 export default function BootstrapCarousel({ animes }) {
   const firstAnimeSet = [];
@@ -19,8 +20,8 @@ export default function BootstrapCarousel({ animes }) {
       <Carousel.Item>
         <div className="carousel-container">
           {firstAnimeSet.map((anime) => (
-            <div key={anime.mal_id}>
-              <Anime anime={anime} />
+            <div key={anime.mal_id} className="carousel-anime">
+              <CarouselAnime anime={anime} />
             </div>
           ))}
         </div>
@@ -28,8 +29,8 @@ export default function BootstrapCarousel({ animes }) {
       <Carousel.Item>
         <div className="carousel-container">
           {secondAnimeSet.map((anime) => (
-            <div key={anime.mal_id}>
-              <Anime anime={anime} />
+            <div key={anime.mal_id} className="carousel-anime">
+              <CarouselAnime anime={anime} />
             </div>
           ))}
         </div>
@@ -37,12 +38,24 @@ export default function BootstrapCarousel({ animes }) {
       <Carousel.Item>
         <div className="carousel-container">
           {thirdAnimeSet.map((anime) => (
-            <div key={anime.mal_id}>
-              <Anime anime={anime} />
+            <div key={anime.mal_id} className="carousel-anime">
+              <CarouselAnime anime={anime} />
             </div>
           ))}
         </div>
       </Carousel.Item>
     </Carousel>
+  );
+}
+
+function CarouselAnime({ anime }) {
+  const { title, images, mal_id } = anime;
+  return (
+    <Link to={`/animeDetails/${mal_id}`}>
+      <div className="carousel-anime-and-title">
+        <img src={images.jpg.image_url} className="anime-image" alt={title} />
+        <h5 className="anime-title">{title}</h5>
+      </div>
+    </Link>
   );
 }

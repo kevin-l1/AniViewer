@@ -32,6 +32,7 @@ function App() {
         <Route path="/animeBookmarks" element={<AnimeBookmarksPage />} />
         <Route path="/mangaBookmarks" element={<MangaBookmarksPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />
+        {/* <Route path="/searchBar" element={<ReviewsPage />} /> */}
       </Route>
     </Routes>
   );

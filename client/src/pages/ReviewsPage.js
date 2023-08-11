@@ -30,13 +30,15 @@ export default function ReviewsPage({ onCreate, onEdit }) {
 
   return (
     <div className="reviews-container">
-      <div className="rowOfReviews">
-        {reviews.map((review) => (
-          <div key={review.mal_id}>
-            <Review item={review} />
-          </div>
-        ))}
+      <div className="labels">
+        <h1>Rating</h1>
+        <h1>Review</h1>
       </div>
+      {reviews.map((review) => (
+        <div key={review.mal_id} className="review-container">
+          <Review item={review} />
+        </div>
+      ))}
     </div>
   );
 }
@@ -47,7 +49,7 @@ function Review({ item }) {
     <>
       <Link to={`/animeDetails/${itemId}`}>
         <div className="anime-icon-container">
-          <img src={imageUrl} className="d-block" alt={title} />
+          <img src={imageUrl} className="review-image" alt={title} />
           <h5 className="anime-title">{title}</h5>
         </div>
       </Link>
