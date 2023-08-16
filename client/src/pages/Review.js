@@ -5,8 +5,6 @@ export default async function Review({ id, imageUrl }) {
   const [rating, setRating] = useState();
   const [review, setReview] = useState();
 
-  const ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
   async function handleReview() {
     try {
       await addReview(rating, review, id, imageUrl);

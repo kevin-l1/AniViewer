@@ -42,6 +42,7 @@ export default function AnimesTopPage() {
 
   return (
     <div className="animes-container">
+      <button className="filter">Filter</button>
       <div className="rowOfAnimes">
         {animes.map((anime) => (
           <div key={anime.mal_id} className="anime-container">

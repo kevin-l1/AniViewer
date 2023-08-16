@@ -32,6 +32,28 @@ export async function fetchAnimes(page, filterId) {
   return await response.json();
 }
 
+export async function fetchAnimesGenres() {
+  if (Date.now() - lastRequest < 500) {
+    await delay(500);
+  }
+  lastRequest = Date.now();
+  const response = await fetch('https://api.jikan.moe/v4/genres/anime');
+  return await response.json();
+}
+
+export async function fetchAnimes2(page, order, genreId) {
+  if (Date.now() - lastRequest < 500) {
+    await delay(500);
+  }
+  lastRequest = Date.now();
+  const response = await fetch(
+    `https://api.jikan.moe/v4/anime?page=${page}&order_by=${
+      order ? order : 'popularity'
+    }&limit=25&genres=${genreId}`
+  );
+  return await response.json();
+}
+
 export async function fetchPopularAnimes(page, filterId) {
   if (Date.now() - lastRequest < 500) {
     await delay(500);

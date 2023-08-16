@@ -70,6 +70,12 @@
   right: 0;
 } */
 
+.filter {
+  margin: 0 0 1rem 1rem;
+  width: 8rem;
+  height: 3rem;
+}
+
 .next-prev-buttons {
   display: flex;
   justify-content: space-between;

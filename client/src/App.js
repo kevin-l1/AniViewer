@@ -14,13 +14,14 @@ import MangaDetails from './pages/MangaFolder/MangaDetails';
 import AnimeBookmarksPage from './pages/AnimeFolder/AnimeBookmarksPage';
 import MangaBookmarksPage from './pages/MangaFolder/MangaBookmarksPage';
 import ReviewsPage from './pages/ReviewsPage';
+import AnimesPageTest from './pages/AnimeFolder/AnimesPageTest';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<NavigationBar />}>
         <Route index element={<Homepage />} />
-        <Route path="/animes" element={<AnimesPage />} />
+        <Route path="/animes" element={<AnimesPageTest />} />
         <Route path="/animesSeasonal" element={<AnimesSeasonalPage />} />
         <Route path="/animesPopular" element={<AnimesPopularPage />} />
         <Route path="/animesTop" element={<AnimesTopPage />} />

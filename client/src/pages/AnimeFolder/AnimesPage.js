@@ -1,7 +1,7 @@
 import './AnimesPage.css';
 import React, { useEffect, useState } from 'react';
 import Anime from './Anime';
-import { fetchAnimes } from '../../lib/api';
+import { fetchAnimes, fetchAnimesGenres } from '../../lib/api';
 
 export default function AnimesPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,6 +15,37 @@ export default function AnimesPage() {
       try {
         const arrayOfAnimes = await fetchAnimes(page, filter);
         setAnimes(arrayOfAnimes.data);
+
+        const allGenres = await fetchAnimesGenres();
+        const arrayOfGenres = allGenres.data.map((e) => ({
+          name: e.name,
+          id: e.mal_id,
+        }));
+        const filtered = arrayOfGenres
+          .map((e) => e)
+          .filter(
+            (e) =>
+              e.name === 'Action' ||
+              e.name === 'Adventure' ||
+              e.name === 'Avant Garde' ||
+              e.name === 'Award Winning' ||
+              e.name === 'Boys Love' ||
+              e.name === 'Comedy' ||
+              e.name === 'Drama' ||
+              e.name === 'Fantasy' ||
+              e.name === 'Girls Love' ||
+              e.name === 'Gourmet' ||
+              e.name === 'Horror' ||
+              e.name === 'Mystery' ||
+              e.name === 'Romance' ||
+              e.name === 'Sci-Fi' ||
+              e.name === 'Slice of Life' ||
+              e.name === 'Sports' ||
+              e.name === 'Supernatural' ||
+              e.name === 'Suspense'
+          );
+        console.log(arrayOfGenres);
+        console.log(filtered);
       } catch (error) {
         setError(error);
       } finally {

@@ -4,17 +4,39 @@
 
 .review-container {
   display: flex;
-  padding: 0 1rem;
+  align-items: center;
+}
+
+.review-icon-title-container {
+  width: 260px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  margin-left: 15rem;
 }
 
 .labels {
   display: flex;
+  padding: 1rem 0;
 }
 
-.review-icon-container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
+.rating-label {
+  position: relative;
+  left: 52.5rem;
+  border-bottom: solid;
+  padding: 0.5rem 0;
+  width: 15rem;
+  text-align: center;
+}
+
+.review-label {
+  position: relative;
+  left: 70rem;
+  border-bottom: solid;
+  padding: 0.5rem 0;
+  width: 33rem;
+  text-align: center;
 }
 
 .rowOfAnimes {
@@ -27,79 +49,20 @@
   text-wrap: wrap;
   text-decoration: none;
   color: black;
-
-  /* position: relative;
-  color: white;
-  top: -50px;
-  height: 20px;
-  display: none; */
-
-  /* background-image: url('../../../public/bottom-shadow-overlay.png');
-  background-position: left bottom;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  bottom: 0; */
-
-  /* color: #fff; */
-
-  /* display: inline-block;
-  font-family: Avenir, 'lucida grande', tahoma, verdana, arial, sans-serif;
-  font-size: 11px;
-  left: 0;
-  line-height: 1.2em;
-  padding: 15px 5px 5px;
-  position: absolute;
-  text-shadow: rgba(0, 0, 0, 0.8) 1px 1px 0; */
 }
 
-/* .review-image {
-  image-rendering: optimize-contrast;
-  image-rendering: optimizequality;
-  opacity: 1;
-  transition-duration: 0.3s;
-  transition-property: opacity;
-  transition-timing-function: ease-in-out;
-} */
+.review-rating {
+  position: absolute;
+  left: 59.3rem;
+  margin-bottom: 6rem;
+}
+
+.review-review {
+  position: absolute;
+  left: 85rem;
+  margin-bottom: 19rem;
+}
 
 .review-icon-container .review-title {
   display: block;
-}
-
-/* .overlay {
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-} */
-
-.next-prev-buttons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.single-button-row {
-  display: flex;
-  justify-content: end;
-}
-
-.next-button,
-.prev-button,
-.single-button {
-  width: 10rem;
-  height: 5rem;
-  margin-bottom: 2rem;
-}
-
-.single-button {
-  margin-right: 2rem;
-}
-
-.next-button {
-  margin-right: 2rem;
-}
-
-.prev-button {
-  margin-left: 2rem;
 }

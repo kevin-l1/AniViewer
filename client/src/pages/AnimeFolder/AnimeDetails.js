@@ -297,7 +297,9 @@ export default function AnimeDetails() {
                   <div class="modal-body">
                     <div className="ratings-options">
                       {ratings.map((rating) => (
-                        <h1 onClick={() => setRating(rating)}>{rating}</h1>
+                        <h1 className="rate" onClick={() => setRating(rating)}>
+                          {rating}
+                        </h1>
                       ))}
                     </div>
                     <textarea

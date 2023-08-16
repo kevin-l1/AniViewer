@@ -133,3 +133,7 @@
 .rate {
   margin: 0 0.7rem;
 }
+
+.rate:hover {
+  cursor: pointer;
+}
