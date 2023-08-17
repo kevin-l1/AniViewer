@@ -15,6 +15,9 @@ export default function NavigationBar(props) {
           <button>Anime</button>
           <input type="text" className="search"></input>
         </Link>
+        <Link to="/search" className="search-bar">
+          <button>Search</button>
+        </Link>
 
         <div className="dropdown">
           <Link to="/animes" className="anime-tab">
@@ -46,24 +49,7 @@ export default function NavigationBar(props) {
             </Link>
           </div>
         </div>
-
-        <div className="dropdown">
-          <Account />
-          {sessionStorage.getItem('token') ? (
-            <div className="dropdown-items">
-              <Link to="/animeBookmarks" className="bookmarks-tab">
-                Anime Bookmarks
-              </Link>
-              <Link to="/mangaBookmarks" className="bookmarks-tab">
-                Manga Bookmarks
-              </Link>
-              <Link to="/reviews" className="reviews-tab">
-                Reviews
-              </Link>
-              <div className="sign-out-tab">Sign Out</div>
-            </div>
-          ) : null}
-        </div>
+        <Account />
       </nav>
       <Outlet />
     </div>

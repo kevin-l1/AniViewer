@@ -3,18 +3,17 @@ import React, { useEffect, useState } from 'react';
 import Anime from './Anime';
 import { fetchSeasonalAnimes } from '../../lib/api';
 
-export default function AnimesPopularPage() {
+export default function AnimesSeasonalPage({ page, setPage, state, setState }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
   const [animes, setAnimes] = useState();
-  const [page, setPage] = useState(1);
 
   useEffect(() => {
     async function fetchResponse() {
       try {
         const arrayOfAnimes = await fetchSeasonalAnimes(page);
-        console.log(arrayOfAnimes.data);
         setAnimes(arrayOfAnimes.data);
+        setState('seasonalAnimePage');
       } catch (error) {
         setError(error);
       } finally {
@@ -25,11 +24,11 @@ export default function AnimesPopularPage() {
   }, [page]);
 
   function handleNext() {
-    setPage(page + 1);
+    setPage(() => page + 1);
   }
 
   function handlePrev() {
-    setPage(page - 1);
+    setPage(() => page - 1);
   }
 
   if (isLoading) {

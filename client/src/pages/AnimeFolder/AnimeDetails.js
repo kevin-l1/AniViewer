@@ -15,7 +15,7 @@ import {
 } from '../../data';
 import { Link } from 'react-router-dom';
 
-export default function AnimeDetails() {
+export default function AnimeDetails({ state }) {
   const { mal_id } = useParams();
   const [anime, setAnime] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -198,11 +198,20 @@ export default function AnimeDetails() {
 
   return (
     <div className="container">
-      <Link to="/" className="return">
-        <button type="button" className="return">
-          Return
-        </button>
-      </Link>
+      {state === 'animePage' ? (
+        <Link to="/animes" className="return">
+          <button type="button" className="return">
+            Return
+          </button>
+        </Link>
+      ) : (
+        <Link to="/animesSeasonal" className="return">
+          <button type="button" className="return">
+            Return
+          </button>
+        </Link>
+      )}
+
       <i
         class={
           bookmarksList.find((anime) => anime.itemId === JSON.parse(mal_id))
