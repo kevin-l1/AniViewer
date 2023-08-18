@@ -87,11 +87,13 @@ export async function fetchTopAnimes(page, filterId) {
   return await response.json();
 }
 
-export async function fetchSearch(query) {
+export async function fetchSearch(query, state) {
   if (Date.now() - lastRequest < 500) {
     await delay(500);
   }
   lastRequest = Date.now();
-  const response = await fetch(`api.jikan.moe/v4/anime?q=${query}`);
+  const response = await fetch(
+    `https://api.jikan.moe/v4/${state.toLowerCase()}?q=${query}`
+  );
   return await response.json();
 }

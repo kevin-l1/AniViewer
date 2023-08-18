@@ -1,9 +1,27 @@
 import './NavigationBar.css';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import Account from './Account';
-import CreateAccount from './CreateAccount';
+import SearchPage from './AnimeFolder/SearchPage';
 
 export default function NavigationBar(props) {
+  const [tempQuery, setTempQuery] = useState();
+  const [state, setState] = useState('Anime');
+  const navigate = useNavigate();
+
+  async function handleSubmit(event) {
+    try {
+      event.preventDefault();
+      navigate('/search', { state: { query: tempQuery, buttonState: state } });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function handleState() {
+    state === 'Anime' ? setState('Manga') : setState('Anime');
+  }
+
   return (
     <div>
       <nav className="navbar">
@@ -11,10 +29,16 @@ export default function NavigationBar(props) {
           AniViewer
         </Link>
 
-        <Link to="/animes/:random" className="search-bar">
-          <button>Anime</button>
-          <input type="text" className="search"></input>
-        </Link>
+        <form onSubmit={handleSubmit}>
+          <button type="button" onClick={handleState}>
+            {state}
+          </button>
+          <input
+            type="text"
+            className="search-bar"
+            onChange={(e) => setTempQuery(e.target.value)}></input>
+        </form>
+
         <Link to="/search" className="search-bar">
           <button>Search</button>
         </Link>
