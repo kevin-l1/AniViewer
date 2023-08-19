@@ -13,6 +13,7 @@ export default function NavigationBar(props) {
     try {
       event.preventDefault();
       navigate('/search', { state: { query: tempQuery, buttonState: state } });
+      // setTempQuery('');
     } catch (err) {
       console.error(err);
     }

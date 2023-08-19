@@ -97,3 +97,16 @@ export async function fetchSearch(query, state) {
   );
   return await response.json();
 }
+
+export async function fetchMangas(page, order, genreId) {
+  if (Date.now() - lastRequest < 500) {
+    await delay(500);
+  }
+  lastRequest = Date.now();
+  const response = await fetch(
+    `https://api.jikan.moe/v4/manga?page=${page}&order_by=${
+      order ? order : 'popularity'
+    }&limit=25&genres=${genreId}`
+  );
+  return await response.json();
+}

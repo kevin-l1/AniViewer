@@ -196,7 +196,7 @@ export default function MangaDetails() {
 
   return (
     <div className="container">
-      <Link to="/" className="return">
+      <Link to="/mangas" className="return">
         <button type="button" className="return">
           Return
         </button>

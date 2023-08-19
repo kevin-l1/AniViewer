@@ -19,6 +19,7 @@ import SearchPage from './pages/AnimeFolder/SearchPage';
 
 function App() {
   const [animePage, setAnimePage] = useState(1);
+  const [mangaPage, setMangaPage] = useState(1);
   const [seasonalAnimePage, setSeasonalAnimePage] = useState(1);
   const [animeState, setAnimeState] = useState('');
 
@@ -54,7 +55,10 @@ function App() {
           path="/animeDetails/:mal_id"
           element={<AnimeDetails state={animeState} />}
         />
-        <Route path="/mangas" element={<MangasPage />} />
+        <Route
+          path="/mangas"
+          element={<MangasPage page={mangaPage} setPage={setMangaPage} />}
+        />
         <Route path="/mangasPopular" element={<MangasPopularPage />} />
         <Route path="/mangasTop" element={<MangasTopPage />} />
         <Route path="/mangaDetails/:mal_id" element={<MangaDetails />} />
