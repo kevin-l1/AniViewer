@@ -1,43 +1,68 @@
+body {
+  background-color: #f8f8f8;
+}
+
 a {
   text-decoration: none;
 }
 
-.animeCarousel {
-  display: flex;
-  flex-direction: column;
-  margin-top: 3.5rem;
+.seasonal,
+.popular {
+  padding-left: 1.5rem;
+  padding-bottom: 0.3rem;
+  border-bottom: solid 1.5px;
 }
 
-h2 {
-  border-bottom: solid;
-}
-
-.anime-icon-container {
-  width: 183px;
+img {
+  height: 260px;
 }
 
 .carousel {
   display: flex;
 }
 
-.carousel-container {
-  display: flex;
+.anime-carousel {
+  margin-top: 1.5rem;
+}
+
+.carousel-indicators {
+  display: none;
 }
 
 .carousel-control-prev,
 .carousel-control-next {
+  height: 350px;
+  width: 7%;
+  background: black;
+}
+
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 0.6rem;
+  border-bottom: solid 1.5px;
+}
+
+.carousel-anime {
+  flex-basis: calc(100% / 7);
+  margin: 0 1rem;
+}
+
+.carousel-anime-and-title {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.anime-image {
   position: relative;
-  width: 100px;
-  height: 260px;
-  background-color: gray;
-  opacity: 0.8;
 }
 
-.animeIcon {
-  border: black solid 3px;
+.anime-title {
+  margin: 0;
+  padding: 0;
 }
 
-img {
-  margin: 0 0.8rem;
-  height: 260px;
+.carousel-caption {
+  color: black;
 }

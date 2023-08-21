@@ -1,10 +1,16 @@
 .animes-container {
-  display: flex;
-  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.anime-container {
+  flex-basis: calc(100% / 8);
+  padding: 0 1rem;
 }
 
 .anime-icon-container {
-  width: calc(100% / 8);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }
 
 .rowOfAnimes {
@@ -17,4 +23,85 @@
   text-wrap: wrap;
   text-decoration: none;
   color: black;
+
+  /* position: relative;
+  color: white;
+  top: -50px;
+  height: 20px;
+  display: none; */
+
+  /* background-image: url('../../../public/bottom-shadow-overlay.png');
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  bottom: 0; */
+
+  /* color: #fff; */
+
+  /* display: inline-block;
+  font-family: Avenir, 'lucida grande', tahoma, verdana, arial, sans-serif;
+  font-size: 11px;
+  left: 0;
+  line-height: 1.2em;
+  padding: 15px 5px 5px;
+  position: absolute;
+  text-shadow: rgba(0, 0, 0, 0.8) 1px 1px 0; */
+}
+
+/* .anime-image {
+  image-rendering: optimize-contrast;
+  image-rendering: optimizequality;
+  opacity: 1;
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease-in-out;
+} */
+
+.anime-icon-container .anime-title {
+  display: block;
+}
+
+/* .overlay {
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+} */
+
+.filter {
+  margin: 0 0 1rem 1rem;
+  width: 8rem;
+  height: 3rem;
+}
+
+.next-prev-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.single-button-row {
+  display: flex;
+  justify-content: end;
+}
+
+.next-button,
+.prev-button,
+.single-button {
+  width: 10rem;
+  height: 5rem;
+  margin-bottom: 2rem;
+}
+
+.single-button {
+  margin-right: 2rem;
+}
+
+.next-button {
+  margin-right: 2rem;
+}
+
+.prev-button {
+  margin-left: 2rem;
 }

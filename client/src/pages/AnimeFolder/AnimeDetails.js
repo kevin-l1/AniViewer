@@ -15,7 +15,7 @@ import {
 } from '../../data';
 import { Link } from 'react-router-dom';
 
-export default function AnimeDetails() {
+export default function AnimeDetails({ state }) {
   const { mal_id } = useParams();
   const [anime, setAnime] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -198,18 +198,27 @@ export default function AnimeDetails() {
 
   return (
     <div className="container">
-      {/* <Link to="/" className="btn text-secondary">
-        &lt; Back to catalog
-      </Link> */}
-      <div>
-        <i
-          class={
-            bookmarksList.find((anime) => anime.itemId === JSON.parse(mal_id))
-              ? 'fa-solid fa-bookmark'
-              : 'fa-regular fa-bookmark'
-          }
-          onClick={() => handleBookmark(title, type, images)}></i>
-      </div>
+      {state === 'animePage' ? (
+        <Link to="/animes" className="return">
+          <button type="button" className="return">
+            Return
+          </button>
+        </Link>
+      ) : (
+        <Link to="/animesSeasonal" className="return">
+          <button type="button" className="return">
+            Return
+          </button>
+        </Link>
+      )}
+
+      <i
+        class={
+          bookmarksList.find((anime) => anime.itemId === JSON.parse(mal_id))
+            ? 'fa-solid fa-bookmark'
+            : 'fa-regular fa-bookmark'
+        }
+        onClick={() => handleBookmark(title, type, images)}></i>
       <div className="col-3">
         <div className="anime-picture-details">
           <img
@@ -233,28 +242,38 @@ export default function AnimeDetails() {
       </div>
       <div className="col-8">
         <div className="stats">
-          <h1 className="rank">{rank}</h1>
-          <h1 className="score">{score}</h1>
-          <h1 className="popularity">{popularity}</h1>
+          <div className="rank-container">
+            <h3 className="rank-title">Rank</h3>
+            <h1 className="rank">{rank}</h1>
+          </div>
+          <div className="score-container">
+            <h3 className="score-title">Score</h3>
+            <h1 className="score">{score}</h1>
+          </div>
+          <div className="popularity-container">
+            <h3 className="popularity-title">Popularity</h3>
+            <h1 className="popularity">{popularity}</h1>
+          </div>
         </div>
-        <div>
-          Synopsis
-          {synopsis}
+        <div className="synopsis-container">
+          <h3 className="synopsis-label">Synopsis</h3>
+          <p className="synopsis">{synopsis}</p>
         </div>
         <div className="rate-review-row">
           {reviewsList.find((anime) => anime.itemId === JSON.parse(mal_id)) ? (
             <div>
               <button
                 type="button"
-                className="btn btn-primary rate"
+                className="edit-review-button"
                 data-bs-toggle="modal"
                 data-bs-target="#editModal"
                 onClick={loadEdit}>
                 Edit Review
               </button>
-              <Link to="/reviews" className="btn text-secondary">
+              <Link to="/reviews">
                 <button
                   type="button"
+                  className="delete-review-button"
                   onClick={() => handleDeleteReview(mal_id)}>
                   Delete Review
                 </button>
@@ -263,10 +282,10 @@ export default function AnimeDetails() {
           ) : (
             <button
               type="button"
-              className="btn btn-primary rate"
+              className="leave-review-button"
               data-bs-toggle="modal"
               data-bs-target="#reviewModal">
-              Leave a Review
+              Leave Review
             </button>
           )}
 
@@ -287,7 +306,9 @@ export default function AnimeDetails() {
                   <div class="modal-body">
                     <div className="ratings-options">
                       {ratings.map((rating) => (
-                        <h1 onClick={() => setRating(rating)}>{rating}</h1>
+                        <h1 className="rate" onClick={() => setRating(rating)}>
+                          {rating}
+                        </h1>
                       ))}
                     </div>
                     <textarea
@@ -329,7 +350,9 @@ export default function AnimeDetails() {
                   <div class="modal-body">
                     <div className="ratings-options">
                       {ratings.map((rating) => (
-                        <h1 onClick={() => setRating(rating)}>{rating}</h1>
+                        <h1 className="rate" onClick={() => setRating(rating)}>
+                          {rating}
+                        </h1>
                       ))}
                     </div>
                     <textarea

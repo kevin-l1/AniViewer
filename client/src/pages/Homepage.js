@@ -55,139 +55,17 @@ export default function Homepage() {
     console.error('Fetch error:', error);
     return <p>Error! {error.message}</p>;
   }
-  console.log(isLoading);
-  console.log(requestInProcess);
-  console.log('1', popularAnimes);
-  console.log('2', seasonalAnimes);
+
   return (
-    <div className="carouselContainer">
-      <div className="animeCarousel">
+    <div className="homepage-carousel">
+      <div className="anime-carousel">
         <h2 className="seasonal">Seasonal</h2>
-        <AnimeCarousel animes={popularAnimes} carouselName="popularAnimes" />
+        <BootstrapCarousel animes={popularAnimes} />
       </div>
-      <div className="animeCarousel">
+      <div className="anime-carousel">
         <h2 className="popular">Most Popular</h2>
-        <AnimeCarousel animes={seasonalAnimes} carouselName="seasonalAnimes" />
+        <BootstrapCarousel animes={seasonalAnimes} />
       </div>
-      <BootstrapCarousel animes={seasonalAnimes} />
     </div>
   );
 }
-
-function AnimeCarousel({ animes, carouselName }) {
-  const firstAnimeSet = [];
-  const secondAnimeSet = [];
-  const thirdAnimeSet = [];
-  for (let i = 0; i < animes.length; i++) {
-    if (i < (animes.length * 1) / 3) {
-      firstAnimeSet.push(animes[i]);
-    } else if (i < (animes.length * 2) / 3) {
-      secondAnimeSet.push(animes[i]);
-    } else {
-      thirdAnimeSet.push(animes[i]);
-    }
-  }
-
-  return (
-    <div id={carouselName} className="carousel slide" data-bs-ride="carousel">
-      <button
-        className="carousel-control-prev"
-        type="button"
-        data-bs-target={'#' + carouselName}
-        data-bs-slide="prev">
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
-      </button>
-      <div className="carousel-inner">
-        <div className="carousel-item active">
-          <div className="carousel-container">
-            {firstAnimeSet.map((anime) => (
-              <div key={anime.mal_id}>
-                <Anime anime={anime} />
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="carousel-item">
-          <div className="carousel-container">
-            {secondAnimeSet.map((anime) => (
-              <div key={anime.mal_id}>
-                <Anime anime={anime} />
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="carousel-item">
-          <div className="carousel-container">
-            {thirdAnimeSet.map((anime) => (
-              <div key={anime.mal_id}>
-                <Anime anime={anime} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      <button
-        className="carousel-control-next"
-        type="button"
-        data-bs-target={'#' + carouselName}
-        data-bs-slide="next">
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
-      </button>
-    </div>
-  );
-}
-
-// function AnimeCarousel({ animes }) {
-//   const firstAnimeSet = [];
-//   const secondAnimeSet = [];
-//   const thirdAnimeSet = [];
-//   for (let i = 0; i < animes.length; i++) {
-//     if (i < (animes.length * 1) / 3) {
-//       firstAnimeSet.push(animes[i]);
-//     } else if (i < (animes.length * 2) / 3) {
-//       secondAnimeSet.push(animes[i]);
-//     } else {
-//       thirdAnimeSet.push(animes[i]);
-//     }
-//   }
-
-//   const [index, setIndex] = useState(0);
-
-//   const handleSelect = (selectedIndex) => {
-//     setIndex(selectedIndex);
-//   };
-
-//   return (
-//     <Carousel activeIndex={index} onSelect={handleSelect}>
-//       <Carousel.Item>
-//         <div className="carousel-container">
-//           {firstAnimeSet.map((anime) => (
-//             <div key={anime.mal_id}>
-//               <Anime anime={anime} />
-//             </div>
-//           ))}
-//         </div>
-//       </Carousel.Item>
-//       <Carousel.Item>
-//         <div className="carousel-container">
-//           {firstAnimeSet.map((anime) => (
-//             <div key={anime.mal_id}>
-//               <Anime anime={anime} />
-//             </div>
-//           ))}
-//         </div>
-//       </Carousel.Item>
-//       <Carousel.Item>
-//         <div className="carousel-container">
-//           {firstAnimeSet.map((anime) => (
-//             <div key={anime.mal_id}>
-//               <Anime anime={anime} />
-//             </div>
-//           ))}
-//         </div>
-//       </Carousel.Item>
-//     </Carousel>
-//   );
-// }

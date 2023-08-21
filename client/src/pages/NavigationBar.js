@@ -1,74 +1,79 @@
 import './NavigationBar.css';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import Account from './Account';
-import CreateAccount from './CreateAccount';
+import SearchPage from './SearchPage';
 
 export default function NavigationBar(props) {
+  const [tempQuery, setTempQuery] = useState();
+  const [state, setState] = useState('Anime');
+  const navigate = useNavigate();
+
+  async function handleSubmit(event) {
+    try {
+      event.preventDefault();
+      navigate('/search', { state: { query: tempQuery, buttonState: state } });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function handleState() {
+    state === 'Anime' ? setState('Manga') : setState('Anime');
+  }
+
   return (
     <div>
       <nav className="navbar">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item nav-link">
-            <Link to="/" className="aniviewer-tab">
-              AniViewer
+        <Link to="/" className="aniviewer-tab">
+          AniViewer
+        </Link>
+
+        <form onSubmit={handleSubmit}>
+          <button type="button" onClick={handleState}>
+            {state}
+          </button>
+          <input
+            type="text"
+            className="search-bar"
+            onChange={(e) => setTempQuery(e.target.value)}></input>
+        </form>
+
+        <Link to="/search" className="search-bar">
+          <button>Search</button>
+        </Link>
+
+        <div className="dropdown">
+          <Link to="/animes" className="anime-tab">
+            Anime
+          </Link>
+          <div className="dropdown-items">
+            <Link to="/animesSeasonal" className="seasonal-tab">
+              Seasonal
             </Link>
-          </li>
-          <li className="nav-item nav-link">
-            <input type="text"></input>
-          </li>
-          <li className="nav-item nav-link">
-            <div className="dropdown">
-              <Link to="/animes" className="manga-tab">
-                Anime
-              </Link>
-              <div className="dropdown-items">
-                <Link to="/animesSeasonal" className="anime-tab">
-                  Seasonal
-                </Link>
-                <Link to="/animesPopular" className="anime-tab">
-                  Popular
-                </Link>
-                <Link to="/animesTop" className="anime-tab">
-                  Top Rated
-                </Link>
-              </div>
-            </div>
-          </li>
-          <li className="nav-item nav-link">
-            <div className="dropdown">
-              <Link to="/mangas" className="manga-tab">
-                Manga
-              </Link>
-              <div className="dropdown-items">
-                <Link to="/mangasPopular" className="manga-tab">
-                  Popular
-                </Link>
-                <Link to="/mangasTop" className="manga-tab">
-                  Top Rated
-                </Link>
-              </div>
-            </div>
-          </li>
-          <li className="nav-item nav-link">
-            <div className="dropdown">
-              <Account />
-              {sessionStorage.getItem('token') ? (
-                <div className="dropdown-items">
-                  <Link to="/animeBookmarks" className="manga-tab">
-                    Anime Bookmarks
-                  </Link>
-                  <Link to="/mangaBookmarks" className="manga-tab">
-                    Manga Bookmarks
-                  </Link>
-                  <Link to="/reviews" className="manga-tab">
-                    Reviews
-                  </Link>
-                  <div>Sign Out</div>
-                </div>
-              ) : null}
-            </div>
-          </li>
-        </ul>
+            <Link to="/animesPopular" className="popular-tab">
+              Popular
+            </Link>
+            <Link to="/animesTop" className="top-tab">
+              Top Rated
+            </Link>
+          </div>
+        </div>
+
+        <div className="dropdown">
+          <Link to="/mangas" className="manga-tab">
+            Manga
+          </Link>
+          <div className="dropdown-items">
+            <Link to="/mangasPopular" className="popular-tab">
+              Popular
+            </Link>
+            <Link to="/mangasTop" className="top-tab">
+              Top Rated
+            </Link>
+          </div>
+        </div>
+        <Account />
       </nav>
       <Outlet />
     </div>

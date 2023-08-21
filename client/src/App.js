@@ -1,4 +1,5 @@
 import './App.css';
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import NavigationBar from './pages/NavigationBar';
@@ -14,24 +15,57 @@ import MangaDetails from './pages/MangaFolder/MangaDetails';
 import AnimeBookmarksPage from './pages/AnimeFolder/AnimeBookmarksPage';
 import MangaBookmarksPage from './pages/MangaFolder/MangaBookmarksPage';
 import ReviewsPage from './pages/ReviewsPage';
+import SearchPage from './pages/SearchPage';
 
 function App() {
+  const [animePage, setAnimePage] = useState(1);
+  const [mangaPage, setMangaPage] = useState(1);
+  const [seasonalAnimePage, setSeasonalAnimePage] = useState(1);
+  const [animeState, setAnimeState] = useState('');
+
   return (
     <Routes>
       <Route path="/" element={<NavigationBar />}>
         <Route index element={<Homepage />} />
-        <Route path="/animes" element={<AnimesPage />} />
-        <Route path="/animesSeasonal" element={<AnimesSeasonalPage />} />
+        <Route
+          path="/animes"
+          element={
+            <AnimesPage
+              page={animePage}
+              setPage={setAnimePage}
+              state={animeState}
+              setState={setAnimeState}
+            />
+          }
+        />
+        <Route
+          path="/animesSeasonal"
+          element={
+            <AnimesSeasonalPage
+              page={seasonalAnimePage}
+              setPage={setSeasonalAnimePage}
+              state={animeState}
+              setState={setAnimeState}
+            />
+          }
+        />
         <Route path="/animesPopular" element={<AnimesPopularPage />} />
         <Route path="/animesTop" element={<AnimesTopPage />} />
-        <Route path="/animeDetails/:mal_id" element={<AnimeDetails />} />
-        <Route path="/mangas" element={<MangasPage />} />
+        <Route
+          path="/animeDetails/:mal_id"
+          element={<AnimeDetails state={animeState} />}
+        />
+        <Route
+          path="/mangas"
+          element={<MangasPage page={mangaPage} setPage={setMangaPage} />}
+        />
         <Route path="/mangasPopular" element={<MangasPopularPage />} />
         <Route path="/mangasTop" element={<MangasTopPage />} />
         <Route path="/mangaDetails/:mal_id" element={<MangaDetails />} />
         <Route path="/animeBookmarks" element={<AnimeBookmarksPage />} />
         <Route path="/mangaBookmarks" element={<MangaBookmarksPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />
+        <Route path="/search" element={<SearchPage />} />
       </Route>
     </Routes>
   );

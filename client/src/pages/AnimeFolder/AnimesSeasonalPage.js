@@ -3,18 +3,17 @@ import React, { useEffect, useState } from 'react';
 import Anime from './Anime';
 import { fetchSeasonalAnimes } from '../../lib/api';
 
-export default function AnimesPopularPage() {
+export default function AnimesSeasonalPage({ page, setPage, state, setState }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
   const [animes, setAnimes] = useState();
-  const [page, setPage] = useState(1);
 
   useEffect(() => {
     async function fetchResponse() {
       try {
         const arrayOfAnimes = await fetchSeasonalAnimes(page);
-        console.log(arrayOfAnimes.data);
         setAnimes(arrayOfAnimes.data);
+        setState('seasonalAnimePage');
       } catch (error) {
         setError(error);
       } finally {
@@ -25,11 +24,11 @@ export default function AnimesPopularPage() {
   }, [page]);
 
   function handleNext() {
-    setPage(page + 1);
+    setPage(() => page + 1);
   }
 
   function handlePrev() {
-    setPage(page - 1);
+    setPage(() => page - 1);
   }
 
   if (isLoading) {
@@ -42,20 +41,29 @@ export default function AnimesPopularPage() {
 
   return (
     <div className="animes-container">
+      <button className="filter">Filter</button>
       <div className="rowOfAnimes">
         {animes.map((anime) => (
-          <div key={anime.mal_id}>
+          <div key={anime.mal_id} className="anime-container">
             <Anime anime={anime} />
           </div>
         ))}
       </div>
       {page > 1 ? (
-        <div>
-          <button onClick={handlePrev}>Previous Page</button>
-          <button onClick={handleNext}>Next Page</button>
+        <div className="next-prev-buttons">
+          <button className="prev-button" onClick={handlePrev}>
+            Previous Page
+          </button>
+          <button className="next-button" onClick={handleNext}>
+            Next Page
+          </button>
         </div>
       ) : (
-        <button onClick={handleNext}>Next Page</button>
+        <div className="single-button-row">
+          <button className="single-button" onClick={handleNext}>
+            Next Page
+          </button>
+        </div>
       )}
     </div>
   );

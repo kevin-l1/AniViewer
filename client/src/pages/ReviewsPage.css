@@ -1,3 +1,68 @@
 .rowOfReviews {
   display: flex;
 }
+
+.review-container {
+  display: flex;
+  align-items: center;
+}
+
+.review-icon-title-container {
+  width: 260px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  margin-left: 15rem;
+}
+
+.labels {
+  display: flex;
+  padding: 1rem 0;
+}
+
+.rating-label {
+  position: relative;
+  left: 52.5rem;
+  border-bottom: solid;
+  padding: 0.5rem 0;
+  width: 15rem;
+  text-align: center;
+}
+
+.review-label {
+  position: relative;
+  left: 70rem;
+  border-bottom: solid;
+  padding: 0.5rem 0;
+  width: 33rem;
+  text-align: center;
+}
+
+.rowOfAnimes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.review-title {
+  text-align: center;
+  text-wrap: wrap;
+  text-decoration: none;
+  color: black;
+}
+
+.review-rating {
+  position: absolute;
+  left: 59.3rem;
+  margin-bottom: 6rem;
+}
+
+.review-review {
+  position: absolute;
+  left: 85rem;
+  margin-bottom: 19rem;
+}
+
+.review-icon-container .review-title {
+  display: block;
+}

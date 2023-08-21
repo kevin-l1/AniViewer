@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAnimeBookmarks } from '../../data';
 import { Link } from 'react-router-dom';
+import './AnimeBookmarksPage.css';
 
 export default function AnimeBookmarksPage({ onCreate, onEdit }) {
   const [isLoading, setIsLoading] = useState();
@@ -29,9 +30,10 @@ export default function AnimeBookmarksPage({ onCreate, onEdit }) {
 
   return (
     <div className="animes-container">
+      <h1 className="anime-bookmarks-title">Anime Bookmarks</h1>
       <div className="rowOfAnimes">
         {bookmarks.map((bookmark) => (
-          <div key={bookmark.mal_id}>
+          <div key={bookmark.mal_id} className="anime-container">
             <AnimeBookmark anime={bookmark} />
           </div>
         ))}
@@ -45,7 +47,7 @@ function AnimeBookmark({ anime }) {
   return (
     <Link to={`/animeDetails/${itemId}`}>
       <div className="anime-icon-container">
-        <img src={imageUrl} className="d-block" alt={title} />
+        <img src={imageUrl} className="anime-image" alt={title} />
         <h5 className="anime-title">{title}</h5>
       </div>
     </Link>

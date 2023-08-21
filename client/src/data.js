@@ -1,4 +1,5 @@
-//Anime
+//Anime Bookmarks
+
 export async function getAnimeBookmarks() {
   const req = {
     method: 'GET',
@@ -36,7 +37,8 @@ export async function deleteAnimeBookmark(animeId) {
   if (!res.ok) throw new Error(`fetch Error ${res.status}`);
 }
 
-//Manga
+//Manga Bookmarks
+
 export async function getMangaBookmarks() {
   const req = {
     method: 'GET',

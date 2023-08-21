@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import './Account.css';
+import { Link } from 'react-router-dom';
 
 export default function Account() {
   const [isLoading, setIsLoading] = useState(false);
+  const [state, setState] = useState();
 
   async function handleSignIn(event) {
     event.preventDefault();
@@ -20,7 +23,7 @@ export default function Account() {
       }
       const { user, token } = await res.json();
       sessionStorage.setItem('token', token);
-      console.log('Signed In', user, '; received token:', token);
+      setState('signed-in');
     } catch (err) {
       alert(`Error signing in: Username or Password is incorrect`);
     } finally {
@@ -44,12 +47,17 @@ export default function Account() {
         throw new Error(`fetch Error ${res.status}`);
       }
       const user = await res.json();
-      console.log('Registered', user);
+      setState('signed-up');
     } catch (err) {
       alert(`Error registering user: Username is already taken`);
     } finally {
       setIsLoading(false);
     }
+  }
+
+  function handleSignOut() {
+    sessionStorage.removeItem('token');
+    setState('signed-out');
   }
 
   return (
@@ -118,6 +126,7 @@ export default function Account() {
               </div>
             </div>
           </div>
+
           <div
             class="modal fade"
             id="signUpModal"
@@ -176,13 +185,30 @@ export default function Account() {
           </div>
         </>
       )}
-
-      <i
-        className="fa-solid fa-user"
-        data-bs-toggle={!sessionStorage.getItem('token') ? 'modal' : null}
-        data-bs-target={
-          !sessionStorage.getItem('token') ? '#signInModal' : null
-        }></i>
+      <div className="dropdown">
+        <i
+          className="fa-solid fa-user"
+          data-bs-toggle={!sessionStorage.getItem('token') ? 'modal' : null}
+          data-bs-target={
+            !sessionStorage.getItem('token') ? '#signInModal' : null
+          }></i>
+        {sessionStorage.getItem('token') ? (
+          <div className="dropdown-items">
+            <Link to="/animeBookmarks" className="bookmarks-tab">
+              Anime Bookmarks
+            </Link>
+            <Link to="/mangaBookmarks" className="bookmarks-tab">
+              Manga Bookmarks
+            </Link>
+            <Link to="/reviews" className="reviews-tab">
+              Reviews
+            </Link>
+            <div className="sign-out-tab" onClick={handleSignOut}>
+              Sign Out
+            </div>
+          </div>
+        ) : null}
+      </div>
     </>
   );
 }
