@@ -2,7 +2,7 @@ import './NavigationBar.css';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Account from './Account';
-import SearchPage from './AnimeFolder/SearchPage';
+import SearchPage from './SearchPage';
 
 export default function NavigationBar(props) {
   const [tempQuery, setTempQuery] = useState();
@@ -13,7 +13,6 @@ export default function NavigationBar(props) {
     try {
       event.preventDefault();
       navigate('/search', { state: { query: tempQuery, buttonState: state } });
-      // setTempQuery('');
     } catch (err) {
       console.error(err);
     }

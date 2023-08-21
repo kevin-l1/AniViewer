@@ -15,7 +15,7 @@ import MangaDetails from './pages/MangaFolder/MangaDetails';
 import AnimeBookmarksPage from './pages/AnimeFolder/AnimeBookmarksPage';
 import MangaBookmarksPage from './pages/MangaFolder/MangaBookmarksPage';
 import ReviewsPage from './pages/ReviewsPage';
-import SearchPage from './pages/AnimeFolder/SearchPage';
+import SearchPage from './pages/SearchPage';
 
 function App() {
   const [animePage, setAnimePage] = useState(1);

@@ -1,7 +1,7 @@
 // import './AnimesPage.css';
 import React, { useEffect, useState } from 'react';
-import Anime from './Anime';
-import { fetchSearch } from '../../lib/api';
+import Anime from './AnimeFolder/Anime';
+import { fetchSearch } from '../lib/api';
 import { useLocation } from 'react-router-dom';
 
 export default function SearchPage() {
@@ -37,18 +37,6 @@ export default function SearchPage() {
     setPage(page - 1);
   }
 
-  // async function handleSubmit(event) {
-  //   try {
-  //     event.preventDefault();
-  //     console.log(tempQuery);
-  //     setQuery(tempQuery);
-  //     console.log(query);
-  //     navigate('/session-timed-out');
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }
-
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -59,17 +47,11 @@ export default function SearchPage() {
 
   return (
     <>
-      {/* <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          className="search-bar"
-          onChange={(e) => setTempQuery(e.target.value)}></input>
-      </form> */}
       {query ? (
         <div className="animes-container">
           <div className="rowOfAnimes">
             {animes.map((anime) => (
-              <div key={anime.mal_id}>
+              <div key={anime.mal_id} className="anime-container">
                 <Anime anime={anime} />
               </div>
             ))}
