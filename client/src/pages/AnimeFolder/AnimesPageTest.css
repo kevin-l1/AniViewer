@@ -1,9 +1,0 @@
-.order-button.active,
-.filter-button.active {
-  background-color: red;
-}
-
-.order-filter-buttons {
-  display: flex;
-  flex-direction: column;
-}

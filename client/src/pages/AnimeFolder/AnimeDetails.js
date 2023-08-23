@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { fetchAnime } from '../../lib/api';
 import './AnimeDetails.css';
 import { useParams } from 'react-router-dom';
-import Review from '../Review';
 
 import {
   getAnimeBookmarks,
@@ -27,7 +26,6 @@ export default function AnimeDetails({ state }) {
   const [reviewed, setReviewed] = useState();
   const [reviewsList, setReviewsList] = useState([]);
   const [editing, setEditing] = useState();
-  // const [openModal, setOpenModal] = useState();
 
   useEffect(() => {
     async function loadAnime(mal_id) {
@@ -76,7 +74,7 @@ export default function AnimeDetails({ state }) {
       loadReviews();
     }
   }, [mal_id, bookmarked, reviewed]);
-
+  console.log(reviewsList);
   function handleBookmark(title, type, images) {
     const bookmark = { title, type, images, mal_id };
     setBookmarked(!bookmarked);
@@ -138,9 +136,7 @@ export default function AnimeDetails({ state }) {
     );
     setEditing(pastReview.review);
     setRating(pastReview.rating);
-    // setOpenModal(!openModal);
   }
-  console.log('editing:', editing);
 
   async function handleDeleteReview(id) {
     try {
@@ -192,9 +188,6 @@ export default function AnimeDetails({ state }) {
   }
 
   const ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-  console.log('bl:', bookmarksList);
-  console.log('rl:', reviewsList);
 
   return (
     <div className="container">
@@ -294,9 +287,6 @@ export default function AnimeDetails({ state }) {
               <div class="modal-content">
                 <form onSubmit={handleSubmit}>
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Rating
-                    </h1>
                     <button
                       type="button"
                       class="btn-close"
@@ -304,22 +294,34 @@ export default function AnimeDetails({ state }) {
                       aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <div className="ratings-options">
-                      {ratings.map((rating) => (
-                        <h1 className="rate" onClick={() => setRating(rating)}>
-                          {rating}
-                        </h1>
-                      ))}
+                    <div className="rating-section">
+                      <div className="rating-text">
+                        <h3>Rating</h3>
+                      </div>
+                      <div className="ratings-options">
+                        {ratings.map((rate) => (
+                          <button
+                            type="button"
+                            className={rate === rating ? 'rate active' : 'rate'}
+                            onClick={() => setRating(rate)}>
+                            {rate}
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                    <textarea
-                      type="text"
-                      className="input-b-color text-padding input-b-radius purple-outline d-block width-100"
-                      cols="30"
-                      rows="10"
-                      onChange={(e) => setReview(e.target.value)}
-                      required
-                    />
+                    <div className="review-section">
+                      <h3>Review</h3>
+                      <textarea
+                        type="text"
+                        className="input-b-color text-padding input-b-radius purple-outline d-block width-100"
+                        cols="60"
+                        rows="10"
+                        onChange={(e) => setReview(e.target.value)}
+                        required
+                      />
+                    </div>
                   </div>
+
                   <div class="modal-footer">
                     <button
                       type="submit"
@@ -348,22 +350,31 @@ export default function AnimeDetails({ state }) {
                       aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <div className="ratings-options">
-                      {ratings.map((rating) => (
-                        <h1 className="rate" onClick={() => setRating(rating)}>
-                          {rating}
-                        </h1>
-                      ))}
+                    <div className="rating-section">
+                      <div className="rating-text"></div>
+                      <div className="ratings-options">
+                        {ratings.map((rate) => (
+                          <button
+                            type="button"
+                            className={rate === rating ? 'rate active' : 'rate'}
+                            onClick={() => setRating(rate)}>
+                            {rate}
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                    <textarea
-                      type="text"
-                      className="input-b-color text-padding input-b-radius purple-outline d-block width-100"
-                      cols="30"
-                      rows="10"
-                      onChange={(e) => setReview(e.target.value)}
-                      required>
-                      {editing}
-                    </textarea>
+                    <div className="review-section">
+                      <h3>Review</h3>
+                      <textarea
+                        type="text"
+                        className="input-b-color text-padding input-b-radius purple-outline d-block width-100"
+                        cols="60"
+                        rows="10"
+                        onChange={(e) => setReview(e.target.value)}
+                        required>
+                        {editing}
+                      </textarea>
+                    </div>
                   </div>
                   <div class="modal-footer">
                     <button

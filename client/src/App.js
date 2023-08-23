@@ -2,7 +2,7 @@ import './App.css';
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Homepage from './pages/Homepage';
-import NavigationBar from './pages/NavigationBar';
+import NavigationBar from './NavigationBar';
 import AnimeDetails from './pages/AnimeFolder/AnimeDetails';
 import AnimesPage from './pages/AnimeFolder/AnimesPage';
 import AnimesSeasonalPage from './pages/AnimeFolder/AnimesSeasonalPage';

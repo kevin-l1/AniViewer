@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './Account.css';
 import { Link } from 'react-router-dom';
 
 export default function Account() {
@@ -185,7 +184,7 @@ export default function Account() {
           </div>
         </>
       )}
-      <div className="dropdown">
+      <div className="user-dropdown">
         <i
           className="fa-solid fa-user"
           data-bs-toggle={!sessionStorage.getItem('token') ? 'modal' : null}
@@ -193,7 +192,7 @@ export default function Account() {
             !sessionStorage.getItem('token') ? '#signInModal' : null
           }></i>
         {sessionStorage.getItem('token') ? (
-          <div className="dropdown-items">
+          <div className="user-dropdown-items">
             <Link to="/animeBookmarks" className="bookmarks-tab">
               Anime Bookmarks
             </Link>

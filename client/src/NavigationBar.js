@@ -2,7 +2,6 @@ import './NavigationBar.css';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Account from './Account';
-import SearchPage from './SearchPage';
 
 export default function NavigationBar(props) {
   const [tempQuery, setTempQuery] = useState();
@@ -29,8 +28,8 @@ export default function NavigationBar(props) {
           AniViewer
         </Link>
 
-        <form onSubmit={handleSubmit}>
-          <button type="button" onClick={handleState}>
+        <form className="nav-search" onSubmit={handleSubmit}>
+          <button type="button" className="tab-switcher" onClick={handleState}>
             {state}
           </button>
           <input
@@ -39,32 +38,22 @@ export default function NavigationBar(props) {
             onChange={(e) => setTempQuery(e.target.value)}></input>
         </form>
 
-        <Link to="/search" className="search-bar">
-          <button>Search</button>
-        </Link>
-
-        <div className="dropdown">
+        <div className="anime-dropdown">
           <Link to="/animes" className="anime-tab">
             Anime
           </Link>
-          <div className="dropdown-items">
+          <div className="anime-dropdown-items">
             <Link to="/animesSeasonal" className="seasonal-tab">
               Seasonal
-            </Link>
-            <Link to="/animesPopular" className="popular-tab">
-              Popular
-            </Link>
-            <Link to="/animesTop" className="top-tab">
-              Top Rated
             </Link>
           </div>
         </div>
 
-        <div className="dropdown">
+        <div className="manga-dropdown">
           <Link to="/mangas" className="manga-tab">
             Manga
           </Link>
-          <div className="dropdown-items">
+          <div className="manga-dropdown-items">
             <Link to="/mangasPopular" className="popular-tab">
               Popular
             </Link>

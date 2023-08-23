@@ -1,8 +1,7 @@
 import './AnimesPage.css';
 import React, { useEffect, useState } from 'react';
 import Anime from './Anime';
-import { fetchAnimes2, fetchAnimesGenres } from '../../lib/api';
-import './AnimesPageTest.css';
+import { fetchAnimes2 } from '../../lib/api';
 
 export default function AnimesPageTest({ page, setPage, state, setState }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -87,13 +86,13 @@ export default function AnimesPageTest({ page, setPage, state, setState }) {
         handleGenre={handleGenre}
         handleSubmit={handleSubmit}
       />
-      <div className="rowOfAnimes">
+      <ul className="rowOfAnimes">
         {animes.map((anime) => (
           <div key={anime.mal_id} className="anime-container">
             <Anime anime={anime} />
           </div>
         ))}
-      </div>
+      </ul>
       {page > 1 ? (
         <div className="next-prev-buttons">
           <button className="prev-button" onClick={handlePrev}>
@@ -124,13 +123,11 @@ function Modal({
   handleGenre,
   handleSubmit,
 }) {
-  const orderBy = ['Score', 'Rank', 'Popularity'];
-
   return (
     <>
       <button
         type="button"
-        class="btn btn-primary"
+        class="filter"
         data-bs-toggle="modal"
         data-bs-target="#filterModal">
         Filter

@@ -86,13 +86,13 @@ export default function MangasPage({ page, setPage }) {
         handleGenre={handleGenre}
         handleSubmit={handleSubmit}
       />
-      <div className="rowOfMangas">
+      <ul className="rowOfMangas">
         {mangas.map((manga) => (
           <div key={manga.mal_id} className="manga-container">
             <Manga manga={manga} />
           </div>
         ))}
-      </div>
+      </ul>
       {page > 1 ? (
         <div className="next-prev-buttons">
           <button className="prev-button" onClick={handlePrev}>
@@ -129,7 +129,7 @@ function Modal({
     <>
       <button
         type="button"
-        class="btn btn-primary"
+        className="filter"
         data-bs-toggle="modal"
         data-bs-target="#filterModal">
         Filter

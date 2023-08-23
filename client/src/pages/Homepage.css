@@ -31,7 +31,7 @@ img {
 
 .carousel-control-prev,
 .carousel-control-next {
-  height: 350px;
+  height: 290px;
   width: 7%;
   background: black;
 }
@@ -39,7 +39,7 @@ img {
 .carousel-container {
   display: flex;
   justify-content: center;
-  padding-bottom: 0.6rem;
+  padding-bottom: 1.3rem;
   border-bottom: solid 1.5px;
 }
 

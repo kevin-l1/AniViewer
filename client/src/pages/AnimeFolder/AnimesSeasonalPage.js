@@ -41,14 +41,13 @@ export default function AnimesSeasonalPage({ page, setPage, state, setState }) {
 
   return (
     <div className="animes-container">
-      <button className="filter">Filter</button>
-      <div className="rowOfAnimes">
+      <ul className="rowOfAnimes">
         {animes.map((anime) => (
           <div key={anime.mal_id} className="anime-container">
             <Anime anime={anime} />
           </div>
         ))}
-      </div>
+      </ul>
       {page > 1 ? (
         <div className="next-prev-buttons">
           <button className="prev-button" onClick={handlePrev}>
