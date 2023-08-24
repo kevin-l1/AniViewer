@@ -98,3 +98,33 @@
 .user-dropdown:hover {
   cursor: pointer;
 }
+
+.modal-body {
+  padding-bottom: 0;
+}
+
+.modal-footer {
+  justify-content: center;
+}
+
+.sign-up {
+  text-align: end;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.sign-up-button {
+  margin-left: 0.3rem;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  background-color: #fff3eb;
+}
+
+.sign-in-button {
+  height: 4rem;
+  width: 8rem;
+  font-size: 1.8rem;
+  border-radius: 1rem;
+  background-color: #e3edfc;
+}

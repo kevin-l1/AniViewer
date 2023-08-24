@@ -106,17 +106,21 @@ export default function Account() {
                         id="password"
                         rows="3"></input>
                     </div>
-                    <button
-                      type="button"
-                      data-bs-target="#signUpModal"
-                      data-bs-toggle="modal">
-                      Sign Up
-                    </button>
+                    <p className="sign-up">
+                      Don't have an account?
+                      <button
+                        type="button"
+                        className="sign-up-button"
+                        data-bs-target="#signUpModal"
+                        data-bs-toggle="modal">
+                        Sign Up
+                      </button>
+                    </p>
                     <div class="modal-footer">
                       <button
                         type="submit"
                         data-bs-dismiss="modal"
-                        className="btn btn-primary">
+                        className="sign-in-button">
                         Sign In
                       </button>
                     </div>
@@ -137,7 +141,7 @@ export default function Account() {
                 <form onSubmit={handleSignUp}>
                   <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
-                      Modal 2
+                      Create an Account
                     </h1>
                     <button
                       type="button"

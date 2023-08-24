@@ -21,14 +21,14 @@ export default function Homepage() {
         requestInProcess = true;
 
         const response = await fetch(
-          'https://api.jikan.moe/v4/top/anime?limit=21'
+          'https://api.jikan.moe/v4/top/anime?limit=24'
         );
         const arrayOfPopularAnimes = await response.json();
         setPopularAnimes(arrayOfPopularAnimes.data);
         console.log(arrayOfPopularAnimes.data);
 
         const response2 = await fetch(
-          'https://api.jikan.moe/v4/seasons/now?limit=21'
+          'https://api.jikan.moe/v4/seasons/now?limit=24'
         );
         const arrayOfSeasonalAnimes = await response2.json();
         setSeasonalAnimes(arrayOfSeasonalAnimes.data);
@@ -59,11 +59,11 @@ export default function Homepage() {
   return (
     <div className="homepage-carousel">
       <div className="anime-carousel">
-        <h2 className="seasonal">Seasonal</h2>
+        <h2 className="popular">Most Popular</h2>
         <BootstrapCarousel animes={popularAnimes} />
       </div>
       <div className="anime-carousel">
-        <h2 className="popular">Most Popular</h2>
+        <h2 className="seasonal">Seasonal</h2>
         <BootstrapCarousel animes={seasonalAnimes} />
       </div>
     </div>

@@ -13,10 +13,6 @@ a {
   border-bottom: solid 1.5px;
 }
 
-img {
-  height: 260px;
-}
-
 .carousel {
   display: flex;
 }
@@ -44,7 +40,6 @@ img {
 }
 
 .carousel-anime {
-  flex-basis: calc(100% / 7);
   margin: 0 1rem;
 }
 

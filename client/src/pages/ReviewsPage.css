@@ -39,11 +39,6 @@
   text-align: center;
 }
 
-.rowOfAnimes {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .review-title {
   text-align: center;
   text-wrap: wrap;

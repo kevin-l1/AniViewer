@@ -25,3 +25,8 @@
   transition-property: opacity;
   transition-timing-function: ease-in-out;
 }
+
+.anime-image {
+  height: 260px;
+  width: 210px;
+}
