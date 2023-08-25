@@ -2,6 +2,7 @@ import './AnimesPage.css';
 import React, { useEffect, useState } from 'react';
 import Anime from './Anime';
 import { fetchAnimes2 } from '../../lib/api';
+import Filter from '../Components/Filter';
 
 export default function AnimesPageTest({ page, setPage, state, setState }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -75,22 +76,24 @@ export default function AnimesPageTest({ page, setPage, state, setState }) {
   }
 
   return (
-    <div className="animes-container">
-      <Modal
-        genres={genres}
-        order={order}
-        genreId={genreId}
-        tempOrder={tempOrder}
-        tempGenreId={tempGenreId}
-        handleOrder={handleOrder}
-        handleGenre={handleGenre}
-        handleSubmit={handleSubmit}
-      />
+    <div className="reviews-container">
+      <div className="filter-container">
+        <Filter
+          genres={genres}
+          order={order}
+          genreId={genreId}
+          tempOrder={tempOrder}
+          tempGenreId={tempGenreId}
+          handleOrder={handleOrder}
+          handleGenre={handleGenre}
+          handleSubmit={handleSubmit}
+        />
+      </div>
       <ul className="rowOfAnimes">
         {animes.map((anime) => (
-          <div key={anime.mal_id} className="anime-container">
+          <li key={anime.mal_id} className="anime-container">
             <Anime anime={anime} />
-          </div>
+          </li>
         ))}
       </ul>
       {page > 1 ? (
@@ -110,107 +113,5 @@ export default function AnimesPageTest({ page, setPage, state, setState }) {
         </div>
       )}
     </div>
-  );
-}
-
-function Modal({
-  genres,
-  order,
-  genreId,
-  tempOrder,
-  tempGenreId,
-  handleOrder,
-  handleGenre,
-  handleSubmit,
-}) {
-  return (
-    <>
-      <button
-        type="button"
-        class="filter"
-        data-bs-toggle="modal"
-        data-bs-target="#filterModal">
-        Filter
-      </button>
-
-      <div class="modal fade" id="filterModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
-                Modal title
-              </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div className="row-order-buttons">
-                <button
-                  type="button"
-                  className={
-                    tempOrder === 'popularity'
-                      ? 'order-button active'
-                      : 'order-button'
-                  }
-                  onClick={() => handleOrder('popularity')}>
-                  Popularity
-                </button>
-                <button
-                  type="button"
-                  className={
-                    tempOrder === 'rank'
-                      ? 'order-button active'
-                      : 'order-button'
-                  }
-                  onClick={() => handleOrder('rank')}>
-                  Ranking
-                </button>
-                <button
-                  type="button"
-                  className={
-                    tempOrder === 'score'
-                      ? 'order-button active'
-                      : 'order-button'
-                  }
-                  onClick={() => handleOrder('score')}>
-                  Score
-                </button>
-              </div>
-              <div className="row-filter-buttons"></div>
-              {genres.map((e) => (
-                <button
-                  type="button"
-                  className={
-                    tempGenreId === e.id
-                      ? 'filter-button active'
-                      : 'filter-button'
-                  }
-                  onClick={() => handleGenre(e.id)}>
-                  {e.name}
-                </button>
-              ))}
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal">
-                Close
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-dismiss="modal"
-                onClick={handleSubmit}>
-                Save changes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
   );
 }

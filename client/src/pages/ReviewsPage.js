@@ -30,15 +30,11 @@ export default function ReviewsPage({ onCreate, onEdit }) {
 
   return (
     <div className="reviews-container">
-      <div className="labels">
-        <h1 className="rating-label">Rating</h1>
-        <h1 className="review-label">Review</h1>
-      </div>
-      {reviews.map((review) => (
-        <div key={review.mal_id} className="review-container">
+      <ul className="rowOfReviews">
+        {reviews.map((review) => (
           <Review item={review} />
-        </div>
-      ))}
+        ))}
+      </ul>
     </div>
   );
 }
@@ -46,15 +42,24 @@ export default function ReviewsPage({ onCreate, onEdit }) {
 function Review({ item }) {
   const { title, rating, review, imageUrl, itemId } = item;
   return (
-    <>
-      <Link to={`/animeDetails/${itemId}`}>
+    <li class="review-container" key={itemId}>
+      <Link to={`/animeDetails/${itemId}`} className="link">
         <div className="review-icon-title-container">
           <img src={imageUrl} className="review-image" alt={title} />
-          <h5 className="review-title">{title}</h5>
+          <h5 className="review-title">
+            <span className="span-title">{title}</span>
+          </h5>
         </div>
       </Link>
-      <h1 className="review-rating">{rating}</h1>
-      <h3 className="review-review">{review}</h3>
-    </>
+
+      <div>
+        <h1 className="rating-label">Rating</h1>
+        <h1 className="review-rating">{rating}</h1>
+      </div>
+      <div>
+        <h1 className="review-label">Review</h1>
+        <h3 className="review-review">{review}</h3>
+      </div>
+    </li>
   );
 }

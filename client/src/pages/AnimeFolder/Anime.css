@@ -30,3 +30,12 @@
   height: 260px;
   width: 210px;
 }
+
+.anime-title {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  text-wrap: wrap;
+  text-decoration: none;
+  color: black;
+}

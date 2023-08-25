@@ -1,8 +1,11 @@
 .animes-container {
+  display: flex;
+  flex-direction: column;
   margin-top: 1rem;
 }
 
 .anime-container {
+  display: flex;
   margin: 0 1rem;
 }
 
@@ -19,29 +22,14 @@
   flex-wrap: wrap;
 }
 
-.anime-title {
-  text-align: center;
-  text-wrap: wrap;
-  text-decoration: none;
-  color: black;
-}
-
-.filter {
-  background-color: #e3e3e3;
-  border-radius: 50px;
-  margin: 0 0 1rem 3rem;
-  width: 8rem;
-  height: 3rem;
-}
-
 .next-prev-buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .single-button-row {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .next-button,
@@ -50,18 +38,6 @@
   width: 10rem;
   height: 5rem;
   margin-bottom: 2rem;
-}
-
-.single-button {
-  margin-right: 2rem;
-}
-
-.next-button {
-  margin-right: 2rem;
-}
-
-.prev-button {
-  margin-left: 2rem;
 }
 
 ul {

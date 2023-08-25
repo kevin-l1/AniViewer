@@ -43,9 +43,9 @@ export default function AnimesSeasonalPage({ page, setPage, state, setState }) {
     <div className="animes-container">
       <ul className="rowOfAnimes">
         {animes.map((anime) => (
-          <div key={anime.mal_id} className="anime-container">
+          <li key={anime.mal_id} className="anime-container">
             <Anime anime={anime} />
-          </div>
+          </li>
         ))}
       </ul>
       {page > 1 ? (

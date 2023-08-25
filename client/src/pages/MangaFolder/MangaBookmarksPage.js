@@ -31,13 +31,13 @@ export default function MangaBookmarksPage({ onCreate, onEdit }) {
   return (
     <div className="mangas-container">
       <h1 className="manga-bookmarks-title">Manga Bookmarks</h1>
-      <div className="rowOfMangas">
+      <ul className="rowOfMangas">
         {bookmarks.map((bookmark) => (
           <div key={bookmark.mal_id} className="manga-container">
             <MangaBookmark manga={bookmark} />
           </div>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }
@@ -45,11 +45,15 @@ export default function MangaBookmarksPage({ onCreate, onEdit }) {
 function MangaBookmark({ manga }) {
   const { title, imageUrl, itemId } = manga;
   return (
-    <Link to={`/mangaDetails/${itemId}`}>
-      <div className="manga-icon-container">
-        <img src={imageUrl} className="d-block" alt={title} />
-        <h5 className="manga-title">{title}</h5>
-      </div>
-    </Link>
+    <li class="btn-manga" key={itemId}>
+      <Link to={`/mangaDetails/${itemId}`} className="link">
+        <div className="anime-icon-container">
+          <img src={imageUrl} className="manga-image" alt={title} />
+          <h5 className="anime-title">
+            <span className="span-title">{title}</span>
+          </h5>
+        </div>
+      </Link>
+    </li>
   );
 }

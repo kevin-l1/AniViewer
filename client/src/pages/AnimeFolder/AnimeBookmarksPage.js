@@ -31,13 +31,13 @@ export default function AnimeBookmarksPage({ onCreate, onEdit }) {
   return (
     <div className="animes-container">
       <h1 className="anime-bookmarks-title">Anime Bookmarks</h1>
-      <div className="rowOfAnimes">
+      <ul className="rowOfAnimes">
         {bookmarks.map((bookmark) => (
           <div key={bookmark.mal_id} className="anime-container">
             <AnimeBookmark anime={bookmark} />
           </div>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }
@@ -45,11 +45,15 @@ export default function AnimeBookmarksPage({ onCreate, onEdit }) {
 function AnimeBookmark({ anime }) {
   const { title, imageUrl, itemId } = anime;
   return (
-    <Link to={`/animeDetails/${itemId}`}>
-      <div className="anime-icon-container">
-        <img src={imageUrl} className="anime-image" alt={title} />
-        <h5 className="anime-title">{title}</h5>
-      </div>
-    </Link>
+    <li class="btn-anime" key={itemId}>
+      <Link to={`/animeDetails/${itemId}`} className="link">
+        <div className="anime-icon-container">
+          <img src={imageUrl} className="anime-image" alt={title} />
+          <h5 className="anime-title">
+            <span className="span-title">{title}</span>
+          </h5>
+        </div>
+      </Link>
+    </li>
   );
 }
