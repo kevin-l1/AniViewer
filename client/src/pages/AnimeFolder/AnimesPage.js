@@ -76,7 +76,7 @@ export default function AnimesPageTest({ page, setPage, state, setState }) {
   }
 
   return (
-    <div className="reviews-container">
+    <div className="animes-container">
       <div className="filter-container">
         <Filter
           genres={genres}

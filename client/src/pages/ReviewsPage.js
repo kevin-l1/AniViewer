@@ -29,13 +29,21 @@ export default function ReviewsPage({ onCreate, onEdit }) {
   if (!reviews) return null;
 
   return (
-    <div className="reviews-container">
-      <ul className="rowOfReviews">
-        {reviews.map((review) => (
-          <Review item={review} />
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className="review-rating-label">
+        <h1 className="item-label"></h1>
+        <h1 className="rating-label">Rating</h1>
+        <h1 className="review-label">Review</h1>
+      </div>
+
+      <div className="reviews-container">
+        <ul className="rowOfReviews">
+          {reviews.map((review) => (
+            <Review item={review} />
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }
 
@@ -43,22 +51,24 @@ function Review({ item }) {
   const { title, rating, review, imageUrl, itemId } = item;
   return (
     <li class="review-container" key={itemId}>
-      <Link to={`/animeDetails/${itemId}`} className="link">
-        <div className="review-icon-title-container">
-          <img src={imageUrl} className="review-image" alt={title} />
-          <h5 className="review-title">
-            <span className="span-title">{title}</span>
-          </h5>
-        </div>
-      </Link>
+      <div className="r-image-container">
+        <Link to={`/animeDetails/${itemId}`} className="link">
+          <div className="review-icon-title-container">
+            <img src={imageUrl} className="review-image" alt={title} />
+            <h5 className="review-title">
+              <span className="span-title">{title}</span>
+            </h5>
+          </div>
+        </Link>
+      </div>
 
-      <div>
-        <h1 className="rating-label">Rating</h1>
+      <div className="r-rating-container">
+        {/* <h1 className="rating-label">Rating</h1> */}
         <h1 className="review-rating">{rating}</h1>
       </div>
-      <div>
-        <h1 className="review-label">Review</h1>
-        <h3 className="review-review">{review}</h3>
+      <div className="r-review-container">
+        {/* <h1 className="review-label">Review</h1> */}
+        <h3 className="r-review">{review}</h3>
       </div>
     </li>
   );
