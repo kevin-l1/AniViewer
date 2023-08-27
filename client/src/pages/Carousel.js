@@ -51,10 +51,12 @@ export default function BootstrapCarousel({ animes }) {
 function CarouselAnime({ anime }) {
   const { title, images, mal_id } = anime;
   return (
-    <Link to={`/animeDetails/${mal_id}`}>
+    <Link to={`/animeDetails/${mal_id}`} className="link">
       <div className="carousel-anime-and-title">
         <img src={images.jpg.image_url} className="anime-image" alt={title} />
-        <h5 className="anime-title">{title}</h5>
+        <h5 className="anime-title">
+          <span className="span-title">{title}</span>
+        </h5>
       </div>
     </Link>
   );

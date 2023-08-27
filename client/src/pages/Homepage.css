@@ -13,10 +13,6 @@ a {
   border-bottom: solid 1.5px;
 }
 
-img {
-  height: 260px;
-}
-
 .carousel {
   display: flex;
 }
@@ -31,7 +27,7 @@ img {
 
 .carousel-control-prev,
 .carousel-control-next {
-  height: 350px;
+  height: 290px;
   width: 7%;
   background: black;
 }
@@ -39,12 +35,11 @@ img {
 .carousel-container {
   display: flex;
   justify-content: center;
-  padding-bottom: 0.6rem;
+  padding-bottom: 1.3rem;
   border-bottom: solid 1.5px;
 }
 
 .carousel-anime {
-  flex-basis: calc(100% / 7);
   margin: 0 1rem;
 }
 
@@ -56,11 +51,6 @@ img {
 
 .anime-image {
   position: relative;
-}
-
-.anime-title {
-  margin: 0;
-  padding: 0;
 }
 
 .carousel-caption {

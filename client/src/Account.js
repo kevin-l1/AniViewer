@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './Account.css';
 import { Link } from 'react-router-dom';
 
 export default function Account() {
@@ -107,17 +106,21 @@ export default function Account() {
                         id="password"
                         rows="3"></input>
                     </div>
-                    <button
-                      type="button"
-                      data-bs-target="#signUpModal"
-                      data-bs-toggle="modal">
-                      Sign Up
-                    </button>
+                    <p className="sign-up">
+                      Don't have an account?
+                      <button
+                        type="button"
+                        className="sign-up-redirect-button"
+                        data-bs-target="#signUpModal"
+                        data-bs-toggle="modal">
+                        Sign Up
+                      </button>
+                    </p>
                     <div class="modal-footer">
                       <button
                         type="submit"
                         data-bs-dismiss="modal"
-                        className="btn btn-primary">
+                        className="sign-in-button">
                         Sign In
                       </button>
                     </div>
@@ -138,7 +141,7 @@ export default function Account() {
                 <form onSubmit={handleSignUp}>
                   <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
-                      Modal 2
+                      Create an Account
                     </h1>
                     <button
                       type="button"
@@ -175,7 +178,7 @@ export default function Account() {
                     <button
                       type="submit"
                       data-bs-dismiss="modal"
-                      className="btn btn-primary">
+                      className="sign-up-button">
                       Sign Up
                     </button>
                   </div>
@@ -185,7 +188,7 @@ export default function Account() {
           </div>
         </>
       )}
-      <div className="dropdown">
+      <div className="user-dropdown">
         <i
           className="fa-solid fa-user"
           data-bs-toggle={!sessionStorage.getItem('token') ? 'modal' : null}
@@ -193,7 +196,7 @@ export default function Account() {
             !sessionStorage.getItem('token') ? '#signInModal' : null
           }></i>
         {sessionStorage.getItem('token') ? (
-          <div className="dropdown-items">
+          <div className="user-dropdown-items">
             <Link to="/animeBookmarks" className="bookmarks-tab">
               Anime Bookmarks
             </Link>
@@ -212,56 +215,3 @@ export default function Account() {
     </>
   );
 }
-
-//  <i
-//       className="fa-solid fa-user"
-//       data-bs-toggle="modal"
-//       data-bs-target="#signInModal"></i>
-
-//     <div id="signInModal" className="modal align-center" tabindex="-1">
-//       <div className="modal-dialog">
-//         <div className="modal-content">
-//           <form onSubmit={handleSubmit}>
-//             <div className="modal-header justify-content-center">
-//               <h5 className="modal-title">Login</h5>
-//             </div>
-//             <div className="modal-body">
-//               <div className="mb-3">
-//                 <label for="username" className="form-label">
-//                   Username
-//                 </label>
-//                 <input
-//                   required
-//                   name="username"
-//                   type="text"
-//                   className="form-control"
-//                   id="username"></input>
-//               </div>
-//               <div className="mb-3">
-//                 <label for="password" className="form-label">
-//                   Password
-//                 </label>
-//                 <input
-//                   required
-//                   name="password"
-//                   type="password"
-//                   className="form-control"
-//                   id="password"
-//                   rows="3"></input>
-//               </div>
-//               <button type="button" onClick={handleSignUp}>
-//                 Sign Up
-//               </button>
-//             </div>
-//             <div className="modal-footer justify-content-center">
-//               <button
-//                 type="submit"
-//                 data-bs-dismiss="modal"
-//                 className="btn btn-primary">
-//                 Sign In
-//               </button>
-//             </div>
-//           </form>
-//         </div>
-//       </div>
-//     </div>

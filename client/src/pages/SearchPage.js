@@ -49,13 +49,13 @@ export default function SearchPage() {
     <>
       {query ? (
         <div className="animes-container">
-          <div className="rowOfAnimes">
+          <ul className="rowOfAnimes">
             {animes.map((anime) => (
               <div key={anime.mal_id} className="anime-container">
                 <Anime anime={anime} />
               </div>
             ))}
-          </div>
+          </ul>
           {page > 1 ? (
             <div>
               <button onClick={handlePrev}>Previous Page</button>
