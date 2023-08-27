@@ -110,7 +110,7 @@ export default function Account() {
                       Don't have an account?
                       <button
                         type="button"
-                        className="sign-up-button"
+                        className="sign-up-redirect-button"
                         data-bs-target="#signUpModal"
                         data-bs-toggle="modal">
                         Sign Up
@@ -178,7 +178,7 @@ export default function Account() {
                     <button
                       type="submit"
                       data-bs-dismiss="modal"
-                      className="btn btn-primary">
+                      className="sign-up-button">
                       Sign Up
                     </button>
                   </div>

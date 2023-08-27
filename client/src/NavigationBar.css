@@ -114,17 +114,21 @@
   font-size: 0.8rem;
 }
 
-.sign-up-button {
+.sign-up-redirect-button {
   margin-left: 0.3rem;
   font-size: 0.8rem;
+  border: solid 1px;
   border-radius: 8px;
-  background-color: #fff3eb;
+  background-color: #ffb429;
 }
 
+.sign-up-button,
 .sign-in-button {
   height: 4rem;
   width: 8rem;
   font-size: 1.8rem;
+  border: solid 2px black;
   border-radius: 1rem;
-  background-color: #e3edfc;
+  background-color: #7575ff;
+  color: white;
 }
