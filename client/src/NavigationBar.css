@@ -1,4 +1,6 @@
-.navbar {
+.navigation-bar {
+  display: flex;
+  align-items: center;
   background-color: #7575ff;
   height: 3.2rem;
 }
@@ -52,11 +54,11 @@
   flex-direction: column;
 }
 
-.aniviewer-tab,
+/* .aniviewer-tab,
 .anime-tab,
 .manga-tab {
   font-size: 1.5rem;
-}
+} */
 
 .fa-user {
   font-size: 2.5rem;
@@ -75,12 +77,13 @@
 }
 
 .nav-search {
+  display: flex;
   left: 50%;
   transform: translate(-50%, 0);
 }
 
 .search-bar {
-  width: 25rem;
+  max-width: 25rem;
 }
 
 .anime-dropdown {

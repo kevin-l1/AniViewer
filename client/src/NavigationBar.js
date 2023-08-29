@@ -1,43 +1,16 @@
-import './NavigationBar.css';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import './css/NavigationBar.css';
+import SearchBar from './SearchBar';
+import { Link, Outlet } from 'react-router-dom';
 import Account from './Account';
 
 export default function NavigationBar(props) {
-  const [tempQuery, setTempQuery] = useState();
-  const [state, setState] = useState('Anime');
-  const navigate = useNavigate();
-
-  async function handleSubmit(event) {
-    try {
-      event.preventDefault();
-      navigate('/search', { state: { query: tempQuery, buttonState: state } });
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  async function handleState() {
-    state === 'Anime' ? setState('Manga') : setState('Anime');
-  }
-
   return (
     <div>
-      <nav className="navbar">
+      <nav className="navigation-bar">
         <Link to="/" className="aniviewer-tab">
           AniViewer
         </Link>
-
-        <form className="nav-search" onSubmit={handleSubmit}>
-          <button type="button" className="tab-switcher" onClick={handleState}>
-            {state}
-          </button>
-          <input
-            type="text"
-            className="search-bar"
-            onChange={(e) => setTempQuery(e.target.value)}></input>
-        </form>
-
+        <SearchBar />
         <div className="anime-dropdown">
           <Link to="/animes" className="anime-tab">
             Anime
