@@ -1,8 +1,10 @@
-import './Homepage.css';
+// import './Homepage.css'
 import React, { useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Anime from './AnimeFolder/Anime';
 import BootstrapCarousel from './Carousel';
+import '../css/Homepage.css';
+import '../css/Carousel.css';
 
 let requestInProcess = false;
 

@@ -1,15 +1,36 @@
 @import '../node_modules/bootstrap/scss/bootstrap';
 // sass --watch ./client/scss/NavigationBar.scss ./client/src/css/NavigationBar.css
 
+a {
+  text-decoration: none;
+}
+
+.aniviewer-row {
+  display: flex;
+  justify-content: center;
+  background-color: #7575ff;
+  padding-top: 0.5rem;
+}
+
+.aniviewer-main-tab {
+  display: inline;
+  font-size: 1.5rem;
+  color: white;
+  font-style: italic;
+}
+
 .navigation-bar {
   display: flex;
   align-items: center;
   justify-content: space-around;
   background-color: #7575ff;
-  height: 3.2rem;
+  height: 2rem;
 }
 
-.aniviewer-tab,
+.aniviewer-tab {
+  display: none;
+}
+
 .anime-tab,
 .manga-tab,
 .seasonal-tab,
@@ -38,16 +59,20 @@
 }
 
 .anime-dropdown,
+.anime-dropdown-items {
+  min-width: 4.4rem;
+  text-align: center;
+}
+
 .manga-dropdown,
-.anime-dropdown-items,
 .manga-dropdown-items {
-  min-width: 5rem;
+  min-width: 4.7rem;
   text-align: center;
 }
 
 .user-dropdown,
 .user-dropdown-items {
-  min-width: 9rem;
+  min-width: 5rem;
   text-align: center;
 }
 
@@ -77,6 +102,11 @@
 
 .search-bar {
   max-width: 25rem;
+}
+
+.fa-search {
+  font-size: 1.5rem;
+  color: white;
 }
 
 .user-dropdown:hover {
@@ -123,6 +153,10 @@
     align-items: center;
     background-color: #7575ff;
     height: 3.2rem;
+  }
+
+  .aniviewer-tab {
+    display: block;
   }
 
   .aniviewer-tab,

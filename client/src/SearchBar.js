@@ -23,16 +23,6 @@ export default function SearchBar() {
 
   return (
     <>
-      <form className="nav-search" onSubmit={handleSubmit}>
-        <button type="button" className="tab-switcher" onClick={handleState}>
-          {state}
-        </button>
-        <input
-          type="text"
-          className="search-bar"
-          onChange={(e) => setTempQuery(e.target.value)}></input>
-      </form>
-
       <i
         className="fa fa-search"
         data-bs-toggle="modal"

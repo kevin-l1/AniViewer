@@ -1,0 +1,84 @@
+@import '../node_modules/bootstrap/scss/bootstrap';
+// sass --watch ./client/scss/Carousel.scss ./client/src/css/Carousel.css
+
+.carousel {
+  display: flex;
+}
+
+.carousel-indicators {
+  display: none;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  height: 290px;
+  width: 7%;
+  background: black;
+}
+
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1.3rem;
+  border-bottom: solid 1.5px;
+}
+
+.carousel-anime {
+  margin: 0 1rem;
+}
+
+.carousel-anime-and-title {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.anime-image {
+  position: relative;
+}
+
+.carousel-caption {
+  color: black;
+}
+
+@include media-breakpoint-up(xl) {
+  .anime-carousel {
+    margin-top: 1.5rem;
+  }
+
+  .carousel-indicators {
+    display: none;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    height: 290px;
+    width: 7%;
+    background: black;
+  }
+
+  .carousel-container {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1.3rem;
+    border-bottom: solid 1.5px;
+  }
+
+  .carousel-anime {
+    margin: 0 1rem;
+  }
+
+  .carousel-anime-and-title {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .anime-image {
+    position: relative;
+  }
+
+  .carousel-caption {
+    color: black;
+  }
+}
