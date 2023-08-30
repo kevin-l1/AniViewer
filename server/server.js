@@ -93,7 +93,7 @@ app.get(
     try {
       const sql = `
       select * from "bookmarks"
-        where "userId" = $1 and "type" = 'TV'
+        where "userId" = $1 and "type" != 'Manga'
         order by "title";
     `;
       const result = await db.query(sql, [req.user.userId]);

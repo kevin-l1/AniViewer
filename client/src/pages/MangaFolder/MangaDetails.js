@@ -25,7 +25,6 @@ export default function MangaDetails() {
   const [reviewed, setReviewed] = useState();
   const [reviewsList, setReviewsList] = useState([]);
   const [editing, setEditing] = useState();
-  // const [openModal, setOpenModal] = useState();
 
   useEffect(() => {
     async function loadAnime(mal_id) {
@@ -74,6 +73,8 @@ export default function MangaDetails() {
       loadReviews();
     }
   }, [mal_id, bookmarked, reviewed]);
+
+  console.log('blList', bookmarksList);
 
   function handleBookmark(title, type, images) {
     const bookmark = { title, type, images, mal_id };
@@ -136,9 +137,7 @@ export default function MangaDetails() {
     );
     setEditing(pastReview.review);
     setRating(pastReview.rating);
-    // setOpenModal(!openModal);
   }
-  console.log('editing:', editing);
 
   async function handleDeleteReview(id) {
     try {

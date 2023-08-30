@@ -197,6 +197,9 @@ export default function Account() {
           }></i>
         {sessionStorage.getItem('token') ? (
           <div className="user-dropdown-items">
+            <Link to="/bookmarks" className="bookmarks-tab">
+              Bookmarks
+            </Link>
             <Link to="/animeBookmarks" className="bookmarks-tab">
               Anime Bookmarks
             </Link>

@@ -38,15 +38,15 @@ export default function SearchBar() {
         data-bs-toggle="modal"
         data-bs-target="#searchModal"></i>
       <div
-        className="search modal fade"
+        className="modal fade"
         id="searchModal"
         tabindex="-1"
         role="dialog"
         aria-labelledby="searchModalLabel"
         aria-hidden="true">
         <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <form className="nav-search" onSubmit={handleSubmit}>
+          <div className="search modal-content">
+            <form className="pop-nav-search" onSubmit={handleSubmit}>
               <button
                 type="button"
                 className="tab-switcher"

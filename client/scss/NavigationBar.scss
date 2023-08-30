@@ -1,4 +1,5 @@
 @import '../node_modules/bootstrap/scss/bootstrap';
+// sass --watch ./client/scss/NavigationBar.scss ./client/src/css/NavigationBar.css
 
 .navigation-bar {
   display: flex;
@@ -58,15 +59,20 @@
 }
 
 .fa-user {
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
-.nav-search {
+.pop-nav-search {
   display: flex;
 }
 
-.search.modal {
-  --bs-modal-width: 0;
+.nav-search {
+  display: none;
+}
+
+.search.modal-content {
+  width: 50%;
+  margin: 0 auto;
 }
 
 .search-bar {
@@ -166,6 +172,10 @@
   .user-dropdown:hover .user-dropdown-items {
     display: flex;
     flex-direction: column;
+  }
+
+  .nav-search {
+    display: flex;
   }
 
   .fa-user {

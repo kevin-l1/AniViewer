@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { fetchAnime } from '../../lib/api';
 import './AnimeDetails.css';
 import { useParams } from 'react-router-dom';
-
 import {
   getAnimeBookmarks,
   addAnimeBookmark,
@@ -74,6 +73,7 @@ export default function AnimeDetails({ state }) {
       loadReviews();
     }
   }, [mal_id, bookmarked, reviewed]);
+  console.log('blList', bookmarksList);
   console.log(reviewsList);
   function handleBookmark(title, type, images) {
     const bookmark = { title, type, images, mal_id };
