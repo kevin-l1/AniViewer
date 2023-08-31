@@ -1,4 +1,5 @@
-import './css/NavigationBar.css';
+// import './css/NavigationBar.css';
+import './NavigationBar.css';
 import SearchBar from './SearchBar';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import Account from './Account';

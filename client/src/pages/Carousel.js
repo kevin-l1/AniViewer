@@ -53,7 +53,11 @@ function CarouselAnime({ anime }) {
   return (
     <Link to={`/animeDetails/${mal_id}`} className="link">
       <div className="carousel-anime-and-title">
-        <img src={images.jpg.image_url} className="anime-image" alt={title} />
+        <img
+          src={images.jpg.image_url}
+          className="carousel-image"
+          alt={title}
+        />
         <h5 className="anime-title">
           <span className="span-title">{title}</span>
         </h5>

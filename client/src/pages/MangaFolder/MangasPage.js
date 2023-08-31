@@ -77,16 +77,19 @@ export default function MangasPage({ page, setPage }) {
 
   return (
     <div className="mangas-container">
-      <Filter
-        genres={genres}
-        order={order}
-        genreId={genreId}
-        tempOrder={tempOrder}
-        tempGenreId={tempGenreId}
-        handleOrder={handleOrder}
-        handleGenre={handleGenre}
-        handleSubmit={handleSubmit}
-      />
+      <div className="filter-container">
+        <Filter
+          genres={genres}
+          order={order}
+          genreId={genreId}
+          tempOrder={tempOrder}
+          tempGenreId={tempGenreId}
+          handleOrder={handleOrder}
+          handleGenre={handleGenre}
+          handleSubmit={handleSubmit}
+        />
+      </div>
+
       <ul className="rowOfMangas">
         {mangas.map((manga) => (
           <li key={manga.mal_id} className="manga-container">

@@ -27,8 +27,8 @@
 }
 
 .anime-image {
-  height: 260px;
-  width: 210px;
+  height: 180px;
+  width: 130px;
 }
 
 .anime-title {
@@ -39,3 +39,8 @@
   text-decoration: none;
   color: black;
 }
+
+/* .anime-image {
+  height: 260px;
+  width: 210px;
+} */

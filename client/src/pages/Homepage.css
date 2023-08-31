@@ -2,10 +2,6 @@ body {
   background-color: #f8f8f8;
 }
 
-a {
-  text-decoration: none;
-}
-
 .seasonal,
 .popular {
   padding-left: 1.5rem;
@@ -49,10 +45,68 @@ a {
   margin-top: 1rem;
 }
 
-.anime-image {
-  position: relative;
+.carousel-image {
+  height: 200px;
+  width: 140px;
 }
 
 .carousel-caption {
   color: black;
+}
+
+@include media-breakpoint-up(xl) {
+  body {
+    background-color: #f8f8f8;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .seasonal,
+  .popular {
+    padding-left: 1.5rem;
+    padding-bottom: 0.3rem;
+    border-bottom: solid 1.5px;
+  }
+
+  .anime-carousel {
+    margin-top: 1.5rem;
+  }
+
+  .carousel-indicators {
+    display: none;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    height: 290px;
+    width: 7%;
+    background: black;
+  }
+
+  .carousel-container {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1.3rem;
+    border-bottom: solid 1.5px;
+  }
+
+  .carousel-anime {
+    margin: 0 1rem;
+  }
+
+  .carousel-anime-and-title {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .anime-image {
+    position: relative;
+  }
+
+  .carousel-caption {
+    color: black;
+  }
 }
