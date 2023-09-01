@@ -191,27 +191,29 @@ export default function AnimeDetails({ state }) {
 
   return (
     <div className="container">
-      {state === 'animePage' ? (
-        <Link to="/animes" className="return">
-          <button type="button" className="return">
-            Return
-          </button>
-        </Link>
-      ) : (
-        <Link to="/animesSeasonal" className="return">
-          <button type="button" className="return">
-            Return
-          </button>
-        </Link>
-      )}
+      <div className="return-bookmark-row">
+        {state === 'animePage' ? (
+          <Link to="/animes" className="return">
+            <button type="button" className="return">
+              Return
+            </button>
+          </Link>
+        ) : (
+          <Link to="/animesSeasonal" className="return">
+            <button type="button" className="return">
+              Return
+            </button>
+          </Link>
+        )}
 
-      <i
-        class={
-          bookmarksList.find((anime) => anime.itemId === JSON.parse(mal_id))
-            ? 'fa-solid fa-bookmark'
-            : 'fa-regular fa-bookmark'
-        }
-        onClick={() => handleBookmark(title, type, images)}></i>
+        <i
+          class={
+            bookmarksList.find((anime) => anime.itemId === JSON.parse(mal_id))
+              ? 'fa-solid fa-bookmark'
+              : 'fa-regular fa-bookmark'
+          }
+          onClick={() => handleBookmark(title, type, images)}></i>
+      </div>
       <div className="col-3">
         <div className="anime-picture-details">
           <img

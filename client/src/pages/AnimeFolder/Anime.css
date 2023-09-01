@@ -26,9 +26,10 @@
   transition-timing-function: ease-in-out;
 }
 
-.anime-image {
+.anime-image,
+.manga-image {
   height: 180px;
-  width: 130px;
+  width: 128px;
 }
 
 .anime-title {

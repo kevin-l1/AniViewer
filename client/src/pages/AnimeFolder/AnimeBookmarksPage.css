@@ -14,5 +14,54 @@
   width: 4.5rem;
   height: 2.5rem;
   border-radius: 8px;
-  margin: 0 10rem;
+}
+
+@media (width >= 576px) {
+  .filter-anime,
+  .filter-manga {
+    width: 4.5rem;
+    height: 2.5rem;
+    border-radius: 8px;
+    color: blue;
+  }
+}
+
+@media (width >= 768px) {
+  .filter-anime,
+  .filter-manga {
+    width: 4.5rem;
+    height: 2.5rem;
+    border-radius: 8px;
+    color: red;
+  }
+}
+
+@media (width >= 992px) {
+  .filter-anime,
+  .filter-manga {
+    width: 4.5rem;
+    height: 2.5rem;
+    border-radius: 8px;
+    color: red;
+  }
+}
+
+@media (width >= 1200px) {
+  .filter-anime,
+  .filter-manga {
+    width: 4.5rem;
+    height: 2.5rem;
+    border-radius: 8px;
+    color: red;
+  }
+}
+
+@media (width >= 1400px) {
+  .filter-anime,
+  .filter-manga {
+    width: 4.5rem;
+    height: 2.5rem;
+    border-radius: 8px;
+    color: red;
+  }
 }
