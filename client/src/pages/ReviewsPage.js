@@ -30,12 +30,13 @@ export default function ReviewsPage({ onCreate, onEdit }) {
 
   return (
     <div className="reviews-container">
-      {/* <div className="review-rating-label">
-        <h1 className="item-label"></h1>
-        <h1 className="rating-label">Rating</h1>
-        <h1 className="review-label">Review</h1>
-      </div> */}
-      <table>
+      <div className="mobile-reviews-container">
+        {reviews.map((review) => (
+          <MobileReview item={review} />
+        ))}
+      </div>
+
+      <table className="reviews-table">
         <tr>
           <th scope="col"></th>
           <th scope="col">
@@ -49,6 +50,32 @@ export default function ReviewsPage({ onCreate, onEdit }) {
           <Review item={review} />
         ))}
       </table>
+    </div>
+  );
+}
+
+function MobileReview({ item }) {
+  const { title, rating, review, imageUrl, itemId } = item;
+  return (
+    <div className="review-column">
+      <div className="r-mobile-image-container">
+        <Link to={`/animeDetails/${itemId}`} className="link">
+          <div className="review-icon-title-container">
+            <img src={imageUrl} className="review-image" alt={title} />
+            <h5 className="review-title">
+              <span className="span-title">{title}</span>
+            </h5>
+          </div>
+        </Link>
+      </div>
+      <div className="rating-row">
+        <h2>Rating</h2>
+        <h2>{rating}</h2>
+      </div>
+      <div className="review-row">
+        <h2>Review</h2>
+        <p>{review}</p>
+      </div>
     </div>
   );
 }

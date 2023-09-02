@@ -25,7 +25,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
 }
 
 .details-image {
@@ -35,6 +34,7 @@
 }
 
 .title {
+  text-align: center;
   outline: solid;
 }
 
