@@ -6,10 +6,14 @@
 .mobile-reviews-container {
   display: column;
   text-align: center;
+  margin-top: 0.5rem;
 }
 
 .review-column {
+  background-color: gray;
+  border-radius: 5px;
   display: column;
+  margin-bottom: 2rem;
   padding-top: 1rem;
   outline: solid;
 }
@@ -20,9 +24,13 @@
   outline: solid;
 }
 
-.rating-row > h2,
-.review-row > h2 {
+.rating-row {
+  border-top: solid;
   border-bottom: solid;
+}
+
+.review-row > p {
+  padding-bottom: 0.5rem;
 }
 
 .reviews-table {

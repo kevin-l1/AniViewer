@@ -178,6 +178,8 @@ export default function AnimeDetails({ state }) {
     popularity,
   } = anime.data;
 
+  console.log('r', rank);
+
   let allGenres = '';
   for (let i = 0; i < genres.length; i++) {
     if (i !== genres.length - 1) {
@@ -239,20 +241,20 @@ export default function AnimeDetails({ state }) {
         <div className="stats">
           <div className="rank-container">
             <h3 className="rank-title">Rank</h3>
-            <h1 className="rank">{rank}</h1>
+            <h2 className="rank">{rank ? rank : 'N/A'}</h2>
           </div>
           <div className="score-container">
             <h3 className="score-title">Score</h3>
-            <h1 className="score">{score}</h1>
+            <h2 className="score">{score ? score : 'N/A'}</h2>
           </div>
           <div className="popularity-container">
             <h3 className="popularity-title">Popularity</h3>
-            <h1 className="popularity">{popularity}</h1>
+            <h2 className="popularity">{popularity ? popularity : 'N/A'}</h2>
           </div>
         </div>
         <div className="synopsis-container">
           <h3 className="synopsis-label">Synopsis</h3>
-          <p className="synopsis">{synopsis}</p>
+          <p className="synopsis">{synopsis ? synopsis : 'None'}</p>
         </div>
         <div className="rate-review-row">
           {reviewsList.find((anime) => anime.itemId === JSON.parse(mal_id)) ? (
