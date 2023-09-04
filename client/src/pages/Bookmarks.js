@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAnimeBookmarks, getMangaBookmarks } from '../data';
 import { Link } from 'react-router-dom';
-import './AnimeFolder/AnimeBookmarksPage.css';
+import './Bookmarks.css';
 
 export default function BookmarksPage({ onCreate, onEdit }) {
   const [isLoading, setIsLoading] = useState();

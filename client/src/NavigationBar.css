@@ -2,6 +2,14 @@ a {
   text-decoration: none;
 }
 
+.navigation-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #7575ff;
+  height: 2.5rem;
+}
+
 .aniviewer-row {
   display: flex;
   justify-content: center;
@@ -16,20 +24,19 @@ a {
   font-style: italic;
 }
 
-.navigation-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  background-color: #7575ff;
-  height: 2.5rem;
-}
-
 .aniviewer-tab {
   display: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1.3rem;
 }
 
 .anime-tab,
-.manga-tab,
+.manga-tab {
+  color: white;
+  font-size: 1.1rem;
+}
+
 .seasonal-tab,
 .popular-tab,
 .top-tab,
@@ -42,6 +49,7 @@ a {
 
 .tab-switcher {
   background-color: white;
+  border: solid 1px;
 }
 
 .anime-dropdown-items,
@@ -52,12 +60,13 @@ a {
   position: absolute;
   background-color: #7575ff;
   padding-top: 0.3rem;
+  padding-bottom: 0.2rem;
   z-index: 3;
 }
 
 .anime-dropdown,
 .anime-dropdown-items {
-  min-width: 4.4rem;
+  width: 4.4rem;
   text-align: center;
 }
 
@@ -69,7 +78,7 @@ a {
 
 .user-dropdown,
 .user-dropdown-items {
-  min-width: 5rem;
+  width: 5rem;
   text-align: center;
 }
 
@@ -78,6 +87,7 @@ a {
 .user-dropdown:hover .user-dropdown-items {
   display: flex;
   flex-direction: column;
+  padding-top: 0.3rem;
 }
 
 .fa-user {
@@ -99,7 +109,7 @@ a {
 }
 
 .search-bar {
-  max-width: 25rem;
+  width: 12rem;
 }
 
 .fa-search {
@@ -145,58 +155,69 @@ a {
   color: white;
 }
 
-@include media-breakpoint-up(xxl) {
+@media (width >= 576px) {
+  .anime-tab,
+  .manga-tab {
+    font-size: 1.3rem;
+  }
+
+  .anime-dropdown,
+  .anime-dropdown-items {
+    width: 5rem;
+    text-align: center;
+  }
+
+  .fa-search {
+    width: 3rem;
+    text-align: center;
+  }
+
+  .user-dropdown,
+  .user-dropdown-items {
+    width: 6rem;
+    text-align: center;
+  }
+}
+
+@media (width >= 768px) {
   .navigation-bar {
-    display: flex;
-    align-items: center;
-    background-color: #7575ff;
-    height: 3.2rem;
+    height: 3.3rem;
+  }
+
+  .aniviewer-row {
+    display: none;
   }
 
   .aniviewer-tab {
     display: block;
   }
 
-  .aniviewer-tab,
+  .nav-search {
+    display: flex;
+  }
+
+  .fa-search {
+    display: none;
+  }
+
+  .anime-dropdown,
+  .anime-dropdown-items {
+    width: 5.3rem;
+    text-align: center;
+  }
+
   .anime-tab,
-  .manga-tab,
+  .manga-tab {
+    font-size: 1.35rem;
+  }
+
   .seasonal-tab,
   .popular-tab,
   .top-tab,
   .bookmarks-tab,
   .reviews-tab,
   .sign-out-tab {
-    text-decoration: none;
-    color: white;
-  }
-
-  .tab-switcher {
-    background-color: white;
-  }
-
-  .anime-dropdown-items,
-  .manga-dropdown-items,
-  .user-dropdown-items {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    background-color: #7575ff;
-    padding-top: 0.3rem;
-    z-index: 3;
-  }
-
-  .anime-dropdown,
-  .manga-dropdown,
-  .anime-dropdown-items,
-  .manga-dropdown-items {
-    min-width: 5rem;
-    text-align: center;
-  }
-
-  .user-dropdown,
-  .user-dropdown-items {
-    min-width: 9rem;
-    text-align: center;
+    font-size: 1.1rem;
   }
 
   .anime-dropdown:hover .anime-dropdown-items,
@@ -204,55 +225,96 @@ a {
   .user-dropdown:hover .user-dropdown-items {
     display: flex;
     flex-direction: column;
+    padding-top: 0.6rem;
+  }
+}
+
+@media (width >= 992px) {
+  .search-bar {
+    width: 15rem;
   }
 
-  .nav-search {
-    display: flex;
+  .tab-switcher {
+    width: 4.5rem;
+    font-size: 1.15rem;
+  }
+}
+
+@media (width >= 1200px) {
+  .navigation-bar {
+    justify-content: space-between;
+    height: 3.5rem;
   }
 
-  .fa-user {
-    font-size: 2.5rem;
+  .aniviewer-tab {
+    margin-left: 2.5rem;
+    font-size: 1.6rem;
+  }
+
+  .user-dropdown {
+    margin-right: 1.5rem;
   }
 
   .search-bar {
-    max-width: 25rem;
+    width: 20rem;
   }
 
-  .user-dropdown:hover {
-    cursor: pointer;
+  .anime-dropdown,
+  .anime-dropdown-items {
+    width: 5.6rem;
   }
 
-  .modal-body {
-    padding-bottom: 0;
+  .user-dropdown,
+  .user-dropdown-items {
+    width: 6.8rem;
   }
 
-  .modal-footer {
-    justify-content: center;
+  .anime-tab,
+  .manga-tab {
+    font-size: 1.5rem;
   }
 
-  .sign-up {
-    text-align: end;
-    margin-bottom: 0.5rem;
-    border-radius: 0.5rem;
-    font-size: 0.8rem;
+  .seasonal-tab,
+  .popular-tab,
+  .top-tab,
+  .bookmarks-tab,
+  .reviews-tab,
+  .sign-out-tab {
+    font-size: 1.2rem;
   }
+}
 
-  .sign-up-redirect-button {
-    margin-left: 0.3rem;
-    font-size: 0.8rem;
-    border: solid 1px;
-    border-radius: 8px;
-    background-color: #ffb429;
-  }
-
-  .sign-up-button,
-  .sign-in-button {
+@media (width >= 1400px) {
+  .navigation-bar {
     height: 4rem;
-    width: 8rem;
-    font-size: 1.8rem;
-    border: solid 2px black;
-    border-radius: 1rem;
-    background-color: #7575ff;
-    color: white;
+  }
+
+  .tab-switcher {
+    width: 5rem;
+    font-size: 1.25rem;
+  }
+
+  .anime-dropdown,
+  .anime-dropdown-items {
+    width: 5.8rem;
+  }
+
+  .user-dropdown,
+  .user-dropdown-items {
+    width: 7rem;
+  }
+
+  .anime-tab,
+  .manga-tab {
+    font-size: 1.6rem;
+  }
+
+  .seasonal-tab,
+  .popular-tab,
+  .top-tab,
+  .bookmarks-tab,
+  .reviews-tab,
+  .sign-out-tab {
+    font-size: 1.3rem;
   }
 }
