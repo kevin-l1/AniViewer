@@ -9,7 +9,7 @@ export default function MangasPage({ page, setPage }) {
   const [error, setError] = useState();
   const [mangas, setMangas] = useState();
   const [tempOrder, setTempOrder] = useState('popularity');
-  const [tempGenreId, setTempGenreId] = useState();
+  const [tempGenreId, setTempGenreId] = useState('');
   const [order, setOrder] = useState('');
   const [genreId, setGenreId] = useState('');
   const genres = [

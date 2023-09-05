@@ -2,11 +2,54 @@ body {
   background-color: #f8f8f8;
 }
 
-.seasonal,
-.popular {
-  padding-left: 1.5rem;
-  padding-bottom: 0.3rem;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
   border-bottom: solid 1.5px;
+}
+
+.seasonal,
+.popular,
+.more {
+  margin: 0;
+  padding: 0;
+}
+
+.more-link {
+  display: flex;
+  align-items: end;
+}
+
+.mobile-popular-container {
+  margin-top: 2rem;
+}
+
+.mobile-seasonal-container {
+  margin-top: 1.5rem;
+}
+
+.popular-animes {
+  display: flex;
+  justify-content: center;
+}
+
+.seasonal-animes {
+  display: flex;
+  justify-content: center;
+}
+
+.popular-animes > .btn-homepage,
+.seasonal-animes > .btn-homepage {
+  width: calc(100% / 3);
+}
+
+.extra {
+  display: none;
+}
+
+.mobile-homepage-image {
+  height: 165px;
 }
 
 .carousel {
@@ -14,7 +57,15 @@ body {
 }
 
 .anime-carousel {
+  display: none;
   margin-top: 1.5rem;
+}
+
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  padding: 0.7rem 0;
+  border-bottom: solid 1.5px;
 }
 
 .carousel-indicators {
@@ -23,44 +74,59 @@ body {
 
 .carousel-control-prev,
 .carousel-control-next {
-  height: 290px;
-  width: 7%;
+  width: 5%;
+  margin: 0.3rem 0;
   background: black;
 }
 
-.carousel-container {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 1.3rem;
-  border-bottom: solid 1.5px;
-}
-
 .carousel-anime {
-  margin: 0 1rem;
+  margin: 0 0.05rem;
 }
 
 .carousel-anime-and-title {
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
 }
 
 .carousel-image {
   height: 200px;
-  width: 140px;
+  width: 122px;
 }
 
 .carousel-caption {
   color: black;
 }
 
-@include media-breakpoint-up(xl) {
-  body {
-    background-color: #f8f8f8;
+@media (width >= 576px) {
+  .extra {
+    display: block;
   }
 
-  a {
-    text-decoration: none;
+  .popular-animes > .btn-homepage,
+  .seasonal-animes > .btn-homepage,
+  .extra {
+    width: calc(100% / 4);
+  }
+
+  .mobile-homepage-image {
+    height: 240px;
+  }
+}
+
+@media (width >= 768px) {
+  .mobile-homepage-image {
+    height: 260px;
+  }
+}
+
+@media (width >= 992px) {
+  .mobile-popular-container,
+  .mobile-seasonal-container {
+    display: none;
+  }
+
+  .anime-carousel {
+    display: block;
   }
 
   .seasonal,
@@ -69,44 +135,54 @@ body {
     padding-bottom: 0.3rem;
     border-bottom: solid 1.5px;
   }
+}
 
-  .anime-carousel {
-    margin-top: 1.5rem;
+@media (width >= 1050px) {
+  .carousel-image {
+    width: 129.5px;
   }
+}
 
-  .carousel-indicators {
-    display: none;
-  }
-
-  .carousel-control-prev,
-  .carousel-control-next {
-    height: 290px;
-    width: 7%;
-    background: black;
-  }
-
-  .carousel-container {
-    display: flex;
-    justify-content: center;
-    padding-bottom: 1.3rem;
-    border-bottom: solid 1.5px;
-  }
-
+@media (width >= 1200px) {
   .carousel-anime {
-    margin: 0 1rem;
+    margin: 0 0.05rem;
   }
 
   .carousel-anime-and-title {
     display: flex;
     flex-direction: column;
-    margin-top: 1rem;
   }
 
-  .anime-image {
-    position: relative;
+  .carousel-image {
+    height: 220px;
+    width: 150px;
   }
+}
 
-  .carousel-caption {
-    color: black;
+@media (width >= 1400px) {
+  .carousel-image {
+    height: 220px;
+    width: 180px;
+  }
+}
+
+@media (width >= 1500px) {
+  .carousel-image {
+    height: 230px;
+    width: 185px;
+  }
+}
+
+@media (width >= 1630px) {
+  .carousel-image {
+    height: 245px;
+    width: 200px;
+  }
+}
+
+@media (width >= 1750px) {
+  .carousel-image {
+    height: 260px;
+    width: 225px;
   }
 }

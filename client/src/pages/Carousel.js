@@ -16,35 +16,38 @@ export default function BootstrapCarousel({ animes }) {
     }
   }
   return (
-    <Carousel>
-      <Carousel.Item>
-        <div className="carousel-container">
-          {firstAnimeSet.map((anime) => (
-            <div key={anime.mal_id} className="carousel-anime">
-              <CarouselAnime anime={anime} />
-            </div>
-          ))}
-        </div>
-      </Carousel.Item>
-      <Carousel.Item>
-        <div className="carousel-container">
-          {secondAnimeSet.map((anime) => (
-            <div key={anime.mal_id} className="carousel-anime">
-              <CarouselAnime anime={anime} />
-            </div>
-          ))}
-        </div>
-      </Carousel.Item>
-      <Carousel.Item>
-        <div className="carousel-container">
-          {thirdAnimeSet.map((anime) => (
-            <div key={anime.mal_id} className="carousel-anime">
-              <CarouselAnime anime={anime} />
-            </div>
-          ))}
-        </div>
-      </Carousel.Item>
-    </Carousel>
+    <>
+      <div></div>
+      <Carousel>
+        <Carousel.Item>
+          <div className="carousel-container">
+            {firstAnimeSet.map((anime) => (
+              <div key={anime.mal_id} className="carousel-anime">
+                <CarouselAnime anime={anime} />
+              </div>
+            ))}
+          </div>
+        </Carousel.Item>
+        <Carousel.Item>
+          <div className="carousel-container">
+            {secondAnimeSet.map((anime) => (
+              <div key={anime.mal_id} className="carousel-anime">
+                <CarouselAnime anime={anime} />
+              </div>
+            ))}
+          </div>
+        </Carousel.Item>
+        <Carousel.Item>
+          <div className="carousel-container">
+            {thirdAnimeSet.map((anime) => (
+              <div key={anime.mal_id} className="carousel-anime">
+                <CarouselAnime anime={anime} />
+              </div>
+            ))}
+          </div>
+        </Carousel.Item>
+      </Carousel>
+    </>
   );
 }
 
