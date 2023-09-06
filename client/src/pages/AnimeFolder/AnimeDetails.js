@@ -11,6 +11,7 @@ import {
   editReview,
   deleteReview,
 } from '../../data';
+import AlertModal from '../Components/AlertModal';
 import { Link } from 'react-router-dom';
 
 export default function AnimeDetails({ account, state }) {
@@ -73,8 +74,7 @@ export default function AnimeDetails({ account, state }) {
       loadReviews();
     }
   }, [mal_id, bookmarked, reviewed]);
-  console.log('blList', bookmarksList);
-  console.log(reviewsList);
+
   function handleBookmark(title, type, images) {
     const bookmark = { title, type, images, mal_id };
     setBookmarked(!bookmarked);
@@ -214,7 +214,19 @@ export default function AnimeDetails({ account, state }) {
               ? 'fa-solid fa-bookmark'
               : 'fa-regular fa-bookmark'
           }
-          onClick={() => handleBookmark(title, type, images)}></i>
+          onClick={() =>
+            sessionStorage.getItem('token')
+              ? handleBookmark(title, type, images)
+              : null
+          }
+          data-bs-toggle={sessionStorage.getItem('token') ? null : 'modal'}
+          data-bs-target={
+            sessionStorage.getItem('token') ? null : '#bookmarkAlert'
+          }></i>
+        <AlertModal
+          id="bookmarkAlert"
+          text="You must be logged in to add a bookmark."
+        />
       </div>
       <div className="column-container">
         <div className="col-3">
@@ -281,9 +293,17 @@ export default function AnimeDetails({ account, state }) {
                 type="button"
                 className="leave-review-button"
                 data-bs-toggle="modal"
-                data-bs-target="#reviewModal">
+                data-bs-target={
+                  sessionStorage.getItem('token')
+                    ? '#reviewModal'
+                    : '#reviewAlert'
+                }>
                 Leave Review
               </button>
+              <AlertModal
+                id="reviewAlert"
+                text="You must be logged in to create a review."
+              />
             </div>
           )}
 

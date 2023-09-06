@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import AlertModal from './pages/Components/AlertModal';
 
 export default function Account() {
   const [isLoading, setIsLoading] = useState(false);
@@ -9,6 +10,7 @@ export default function Account() {
     event.preventDefault();
     try {
       setIsLoading(true);
+
       const formData = new FormData(event.target);
       const userData = Object.fromEntries(formData.entries());
       const req = {
@@ -23,6 +25,7 @@ export default function Account() {
       const { user, token } = await res.json();
       sessionStorage.setItem('token', token);
       setState('signed-in');
+      // alert(`You have successffuly signed in to your account.`);
     } catch (err) {
       alert(`Error signing in: Username or Password is incorrect`);
     } finally {
@@ -47,6 +50,7 @@ export default function Account() {
       }
       const user = await res.json();
       setState('signed-up');
+      // alert(`You have succesfully made an account! Please sign in.`);
     } catch (err) {
       alert(`Error registering user: Username is already taken`);
     } finally {
@@ -119,8 +123,11 @@ export default function Account() {
                     <div class="modal-footer">
                       <button
                         type="submit"
+                        className="sign-in-button"
                         data-bs-dismiss="modal"
-                        className="sign-in-button">
+                        // data-bs-toggle="modal"
+                        // data-bs-target="#loginModal"
+                      >
                         Sign In
                       </button>
                     </div>
@@ -129,6 +136,15 @@ export default function Account() {
               </div>
             </div>
           </div>
+
+          {/* <AlertModal
+            id="loginModal"
+            text={
+              state === 'signed-in'
+                ? 'You have logged in'
+                : 'Username or Password is invalid'
+            }
+          /> */}
 
           <div
             class="modal fade"
@@ -209,12 +225,17 @@ export default function Account() {
             <Link to="/reviews" className="reviews-tab">
               Reviews
             </Link>
-            <div className="sign-out-tab" onClick={handleSignOut}>
+            <div
+              className="sign-out-tab"
+              onClick={handleSignOut}
+              data-bs-toggle="modal"
+              data-bs-target="#signOutModal">
               Sign Out
             </div>
           </div>
         ) : null}
       </div>
+      <AlertModal id="signOutModal" text="Account has been signed out." />
     </>
   );
 }
