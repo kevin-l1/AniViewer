@@ -101,7 +101,7 @@ function Review({ item }) {
         <h1 className="review-rating">{rating}</h1>
       </td>
       <td className="review-test">
-        <h3 className="r-review">{review}</h3>
+        <p className="r-review">{review}</p>
       </td>
     </tr>
     // <div className="r-image-container">

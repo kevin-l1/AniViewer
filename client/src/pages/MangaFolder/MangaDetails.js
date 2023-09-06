@@ -9,7 +9,7 @@ import {
   editReview,
   deleteReview,
 } from '../../data';
-import './MangaDetails.css';
+import '../AnimeFolder/AnimeDetails.css';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -195,61 +195,65 @@ export default function MangaDetails() {
 
   return (
     <div className="container">
-      <Link to="/mangas" className="return">
-        <button type="button" className="return">
-          Return
-        </button>
-      </Link>
-      <i
-        class={
-          bookmarksList.find((manga) => manga.itemId === JSON.parse(mal_id))
-            ? 'fa-solid fa-bookmark'
-            : 'fa-regular fa-bookmark'
-        }
-        onClick={() => handleBookmark(title, type, images)}></i>
-      <div className="col-3">
-        <div className="manga-picture-details">
-          <img
-            className="details-image"
-            src={images.jpg.image_url}
-            alt={title}
-          />
-          <div className="manga-details">
-            <h3 className="title">{title}</h3>
-            <h5 className="type">
-              <b>Type:</b> {type}
-            </h5>
-            <h5 className="episodes">
-              <b>Episodes:</b> {episodes}
-            </h5>
-            <h5 className="genres">
-              <b>Genres:</b> {allGenres}
-            </h5>
-          </div>
-        </div>
+      <div className="return-bookmark-row">
+        <Link to="/mangas" className="return">
+          <button type="button" className="return">
+            Return
+          </button>
+        </Link>
+        <i
+          class={
+            bookmarksList.find((manga) => manga.itemId === JSON.parse(mal_id))
+              ? 'fa-solid fa-bookmark'
+              : 'fa-regular fa-bookmark'
+          }
+          onClick={() => handleBookmark(title, type, images)}></i>
       </div>
-      <div className="col-8">
-        <div className="stats">
-          <div className="rank-container">
-            <h3 className="rank-title">Rank</h3>
-            <h1 className="rank">{rank}</h1>
-          </div>
-          <div className="score-container">
-            <h3 className="score-title">Score</h3>
-            <h1 className="score">{score}</h1>
-          </div>
-          <div className="popularity-container">
-            <h3 className="popularity-title">Popularity</h3>
-            <h1 className="popularity">{popularity}</h1>
+
+      <div className="column-container">
+        <div className="col-3">
+          <div className="manga-picture-details">
+            <img
+              className="details-image"
+              src={images.jpg.image_url}
+              alt={title}
+            />
+            <div className="manga-details">
+              <h3 className="title">{title}</h3>
+              <h5 className="type">
+                <b>Type:</b> {type}
+              </h5>
+              <h5 className="episodes">
+                <b>Episodes:</b> {episodes}
+              </h5>
+              <h5 className="genres">
+                <b>Genres:</b> {allGenres}
+              </h5>
+            </div>
           </div>
         </div>
-        <div className="synopsis-container">
-          <h3 className="synopsis-label">Synopsis</h3>
-          <p className="synopsis">{synopsis}</p>
-        </div>
-        <div className="rate-review-row">
+        <div className="col-8">
+          <div className="stats">
+            <div className="rank-container">
+              <h3 className="rank-title">Rank</h3>
+              <h1 className="rank">{rank}</h1>
+            </div>
+            <div className="score-container">
+              <h3 className="score-title">Score</h3>
+              <h1 className="score">{score}</h1>
+            </div>
+            <div className="popularity-container">
+              <h3 className="popularity-title">Popularity</h3>
+              <h1 className="popularity">{popularity}</h1>
+            </div>
+          </div>
+          <div className="synopsis-container">
+            <h3 className="synopsis-label">Synopsis</h3>
+            <p className="synopsis">{synopsis}</p>
+          </div>
+
           {reviewsList.find((manga) => manga.itemId === JSON.parse(mal_id)) ? (
-            <div>
+            <div className="rate-review-row">
               <button
                 type="button"
                 className="edit-review-button"
@@ -268,13 +272,15 @@ export default function MangaDetails() {
               </Link>
             </div>
           ) : (
-            <button
-              type="button"
-              className="leave-review-button"
-              data-bs-toggle="modal"
-              data-bs-target="#reviewModal">
-              Leave Review
-            </button>
+            <div className="rate-review-row">
+              <button
+                type="button"
+                className="leave-review-button"
+                data-bs-toggle="modal"
+                data-bs-target="#reviewModal">
+                Leave Review
+              </button>
+            </div>
           )}
 
           <div class="modal fade" id="reviewModal" tabindex="-1">
@@ -317,47 +323,47 @@ export default function MangaDetails() {
                 </form>
               </div>
             </div>
-          </div>
 
-          <div class="modal fade" id="editModal" tabindex="-1">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <form onSubmit={handleEditSubmit}>
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Rating
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <div className="ratings-options">
-                      {ratings.map((rating) => (
-                        <h1 onClick={() => setRating(rating)}>{rating}</h1>
-                      ))}
+            <div class="modal fade" id="editModal" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <form onSubmit={handleEditSubmit}>
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Rating
+                      </h1>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                     </div>
-                    <textarea
-                      type="text"
-                      className="input-b-color text-padding input-b-radius purple-outline d-block width-100"
-                      cols="30"
-                      rows="10"
-                      onChange={(e) => setReview(e.target.value)}
-                      required>
-                      {editing}
-                    </textarea>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="submit"
-                      class="btn btn-primary"
-                      data-bs-dismiss={rating && review ? 'modal' : null}>
-                      Submit
-                    </button>
-                  </div>
-                </form>
+                    <div class="modal-body">
+                      <div className="ratings-options">
+                        {ratings.map((rating) => (
+                          <h1 onClick={() => setRating(rating)}>{rating}</h1>
+                        ))}
+                      </div>
+                      <textarea
+                        type="text"
+                        className="input-b-color text-padding input-b-radius purple-outline d-block width-100"
+                        cols="30"
+                        rows="10"
+                        onChange={(e) => setReview(e.target.value)}
+                        required>
+                        {editing}
+                      </textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="submit"
+                        class="btn btn-primary"
+                        data-bs-dismiss={rating && review ? 'modal' : null}>
+                        Submit
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>

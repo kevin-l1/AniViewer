@@ -37,7 +37,8 @@
   font-size: 2rem;
 }
 
-.anime-picture-details {
+.anime-picture-details,
+.manga-picture-details {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -114,7 +115,8 @@
   font-size: 1.2rem;
 }
 
-.anime-details {
+.anime-details,
+.manga-details {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -219,7 +221,8 @@
     width: calc(100% * 2 / 3);
   }
 
-  .anime-picture-details {
+  .anime-picture-details,
+  .manga-picture-details {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -231,7 +234,8 @@
     margin: 0;
   }
 
-  .anime-details {
+  .anime-details,
+  .manga-details {
     display: flex;
     flex-direction: column;
   }

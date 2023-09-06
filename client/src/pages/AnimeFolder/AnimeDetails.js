@@ -13,7 +13,7 @@ import {
 } from '../../data';
 import { Link } from 'react-router-dom';
 
-export default function AnimeDetails({ state }) {
+export default function AnimeDetails({ account, state }) {
   const { mal_id } = useParams();
   const [anime, setAnime] = useState();
   const [isLoading, setIsLoading] = useState(true);
