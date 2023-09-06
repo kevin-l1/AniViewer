@@ -6,7 +6,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: end;
-  border-bottom: solid 1.5px;
 }
 
 .seasonal,
@@ -32,11 +31,17 @@ body {
 .popular-animes {
   display: flex;
   justify-content: center;
+  padding: 0.1rem 0;
+  border-top: solid 2px;
+  border-bottom: solid 2px;
 }
 
 .seasonal-animes {
   display: flex;
   justify-content: center;
+  padding: 0.1rem 0;
+  border-top: solid 2px;
+  border-bottom: solid 2px;
 }
 
 .popular-animes > .btn-homepage,
@@ -50,6 +55,11 @@ body {
 
 .mobile-homepage-image {
   height: 165px;
+}
+
+.homepage-icon-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .carousel {

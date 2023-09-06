@@ -108,7 +108,7 @@ function MobileAnime({ anime }) {
   return (
     <div class="btn-homepage" key={mal_id}>
       <Link to={`/animeDetails/${mal_id}`} className="link">
-        <div className="anime-icon-container">
+        <div className="homepage-icon-container">
           <img
             src={images.jpg.image_url}
             className="mobile-homepage-image"

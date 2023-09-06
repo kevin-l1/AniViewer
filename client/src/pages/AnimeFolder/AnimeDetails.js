@@ -216,49 +216,50 @@ export default function AnimeDetails({ state }) {
           }
           onClick={() => handleBookmark(title, type, images)}></i>
       </div>
-      <div className="col-3">
-        <div className="anime-picture-details">
-          <img
-            className="details-image"
-            src={images.jpg.image_url}
-            alt={title}
-          />
-          <div className="anime-details">
-            <h3 className="title">{title}</h3>
-            <h5 className="type">
-              <b>Type:</b> {type}
-            </h5>
-            <h5 className="episodes">
-              <b>Episodes:</b> {episodes}
-            </h5>
-            <h5 className="genres">
-              <b>Genres:</b> {allGenres}
-            </h5>
+      <div className="column-container">
+        <div className="col-3">
+          <div className="anime-picture-details">
+            <img
+              className="details-image"
+              src={images.jpg.image_url}
+              alt={title}
+            />
+            <div className="anime-details">
+              <h3 className="title">{title}</h3>
+              <h5 className="type">
+                <b>Type:</b> {type}
+              </h5>
+              <h5 className="episodes">
+                <b>Episodes:</b> {episodes}
+              </h5>
+              <h5 className="genres">
+                <b>Genres:</b> {allGenres}
+              </h5>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="col-8">
-        <div className="stats">
-          <div className="rank-container">
-            <h3 className="rank-title">Rank</h3>
-            <h2 className="rank">{rank ? rank : 'N/A'}</h2>
+        <div className="col-8">
+          <div className="stats">
+            <div className="rank-container">
+              <h3 className="rank-title">Rank</h3>
+              <h2 className="rank">{rank ? rank : 'N/A'}</h2>
+            </div>
+            <div className="score-container">
+              <h3 className="score-title">Score</h3>
+              <h2 className="score">{score ? score : 'N/A'}</h2>
+            </div>
+            <div className="popularity-container">
+              <h3 className="popularity-title">Popularity</h3>
+              <h2 className="popularity">{popularity ? popularity : 'N/A'}</h2>
+            </div>
           </div>
-          <div className="score-container">
-            <h3 className="score-title">Score</h3>
-            <h2 className="score">{score ? score : 'N/A'}</h2>
+          <div className="synopsis-container">
+            <h3 className="synopsis-label">Synopsis</h3>
+            <p className="synopsis">{synopsis ? synopsis : 'None'}</p>
           </div>
-          <div className="popularity-container">
-            <h3 className="popularity-title">Popularity</h3>
-            <h2 className="popularity">{popularity ? popularity : 'N/A'}</h2>
-          </div>
-        </div>
-        <div className="synopsis-container">
-          <h3 className="synopsis-label">Synopsis</h3>
-          <p className="synopsis">{synopsis ? synopsis : 'None'}</p>
-        </div>
-        <div className="rate-review-row">
+
           {reviewsList.find((anime) => anime.itemId === JSON.parse(mal_id)) ? (
-            <div>
+            <div className="rate-review-row">
               <button
                 type="button"
                 className="edit-review-button"
@@ -267,23 +268,23 @@ export default function AnimeDetails({ state }) {
                 onClick={loadEdit}>
                 Edit Review
               </button>
-              <Link to="/reviews">
-                <button
-                  type="button"
-                  className="delete-review-button"
-                  onClick={() => handleDeleteReview(mal_id)}>
-                  Delete Review
-                </button>
-              </Link>
+              <button
+                type="button"
+                className="delete-review-button"
+                onClick={() => handleDeleteReview(mal_id)}>
+                Delete Review
+              </button>
             </div>
           ) : (
-            <button
-              type="button"
-              className="leave-review-button"
-              data-bs-toggle="modal"
-              data-bs-target="#reviewModal">
-              Leave Review
-            </button>
+            <div className="rate-review-row">
+              <button
+                type="button"
+                className="leave-review-button"
+                data-bs-toggle="modal"
+                data-bs-target="#reviewModal">
+                Leave Review
+              </button>
+            </div>
           )}
 
           <div class="modal fade" id="reviewModal" tabindex="-1">

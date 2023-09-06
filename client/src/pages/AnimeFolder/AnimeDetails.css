@@ -5,8 +5,8 @@
 }
 
 .col-3 {
-  margin-top: 1.3rem;
   width: 100%;
+  margin-top: 0.2rem;
   outline: solid;
 }
 
@@ -15,9 +15,26 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  margin-top: 1rem;
   width: 100%;
+  text-align: center;
+}
+
+.return-bookmark-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.return {
+  background-color: #f1f2f2;
+  height: 3rem;
+  width: 6rem;
+}
+
+.fa-bookmark {
+  font-size: 2rem;
 }
 
 .anime-picture-details {
@@ -36,6 +53,14 @@
 .title {
   text-align: center;
   outline: solid;
+  padding: 0.2rem 0;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1rem;
 }
 
 .rank-container,
@@ -55,12 +80,6 @@
   margin-bottom: 0.3rem;
 }
 
-.stats {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
 .rank-container {
   border: solid;
 }
@@ -82,7 +101,7 @@
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
-  outline: solid;
+  border: solid;
 }
 
 .synopsis-label {
@@ -91,6 +110,7 @@
 }
 
 .synopsis {
+  padding: 0 0.5rem;
   font-size: 1.2rem;
 }
 
@@ -108,6 +128,9 @@
 }
 
 .rate-review-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
   margin: 1.5rem 0;
 }
 
@@ -115,8 +138,8 @@
 .edit-review-button,
 .delete-review-button {
   height: 4rem;
-  width: 10rem;
-  font-size: 1.3rem;
+  width: 8rem;
+  font-size: 1.1rem;
   border: solid black;
   color: white;
 }
@@ -131,25 +154,6 @@
 
 .delete-review-button {
   background-color: orange;
-  margin-left: 20rem;
-}
-
-.return-bookmark-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-top: 1rem;
-}
-
-.return {
-  background-color: #f1f2f2;
-  height: 3rem;
-  width: 6rem;
-}
-
-.fa-bookmark {
-  font-size: 2rem;
 }
 
 .rating-section {
@@ -187,162 +191,99 @@
   align-items: center;
 }
 
-/* .container {
-  display: flex;
+@media (width >= 768px) {
+  .column-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .return {
+    height: 3.5rem;
+    width: 7rem;
+    font-size: 1.3rem;
+  }
+
+  .fa-bookmark {
+    font-size: 2.5rem;
+  }
+
+  .col-3 {
+    display: block;
+    height: fit-content;
+    width: 30%;
+    outline: solid;
+  }
+
+  .col-8 {
+    display: block;
+    width: calc(100% * 2 / 3);
+  }
+
+  .anime-picture-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .details-image {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+
+  .anime-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stats {
+    margin: 0;
+  }
+
+  .synopsis {
+    font-size: 1.2rem;
+  }
+
+  .leave-review-button,
+  .edit-review-button,
+  .delete-review-button {
+    height: 4rem;
+    width: 10rem;
+    font-size: 1.3rem;
+  }
 }
 
-.col-3 {
-  margin: 6rem 10rem 0 0;
-  outline: solid;
+@media (width >= 1200px) {
+  .return {
+    height: 3.5rem;
+    width: 8rem;
+    font-size: 1.5rem;
+  }
+
+  .fa-bookmark {
+    font-size: 3rem;
+  }
+
+  .leave-review-button,
+  .edit-review-button,
+  .delete-review-button {
+    height: 5rem;
+    width: 11rem;
+    font-size: 1.5rem;
+  }
 }
 
-.col-8 {
-  margin: 6rem 10rem 0 0;
-}
+@media (width >= 1200px) {
+  .col-3 {
+    width: 25%;
+  }
 
-.anime-picture-details {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  .rank-container,
+  .score-container,
+  .popularity-container {
+    width: calc(100% / 3);
+    margin: 0;
+    border-bottom: solid;
+    margin-bottom: 0.3rem;
+  }
 }
-
-.details-image {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
-
-.title {
-  text-align: center;
-}
-
-.rank-container,
-.score-container,
-.popularity-container {
-  display: flex;
-  flex-direction: column;
-  outline: solid;
-  text-align: center;
-}
-
-.rank-title,
-.score-title,
-.popularity-title {
-  margin: 0;
-}
-
-.stats {
-  display: flex;
-}
-
-.rank-container {
-  border: solid;
-}
-
-.score-container {
-  border-top: solid;
-  border-right: solid;
-  border-bottom: solid;
-}
-
-.popularity-container {
-  border-top: solid;
-  border-right: solid;
-  border-bottom: solid;
-}
-
-.synopsis-container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 1rem;
-}
-
-.synopsis {
-  font-size: 1.2rem;
-}
-
-.anime-details {
-  display: flex;
-  flex-direction: column;
-}
-
-.type,
-.episodes,
-.genres {
-  margin-left: 0.3rem;
-  line-height: 2rem;
-}
-
-.leave-review-button,
-.edit-review-button,
-.delete-review-button {
-  margin-top: 3rem;
-  height: 4rem;
-  width: 10rem;
-  font-size: 1.3rem;
-  border: solid black;
-  color: white;
-}
-
-.leave-review-button {
-  background-color: green;
-}
-
-.edit-review-button {
-  background-color: blue;
-}
-
-.delete-review-button {
-  background-color: orange;
-  margin-left: 20rem;
-}
-
-.return {
-  position: absolute;
-  left: 4rem;
-  top: 2.5rem;
-  width: 5rem;
-  height: 2.5rem;
-}
-
-.fa-bookmark {
-  position: absolute;
-  left: 110rem;
-  top: 5rem;
-  font-size: 3rem;
-}
-
-.rating-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.ratings-options {
-  display: flex;
-  justify-content: center;
-  margin: 0.5rem 0 2rem;
-}
-
-.rate {
-  background-color: white;
-  margin: 0 0.3rem;
-  height: 2.2rem;
-  width: 2.2rem;
-  border-radius: 50%;
-}
-
-.rate:hover {
-  cursor: pointer;
-}
-
-.rate.active {
-  background-color: lightgreen;
-  font-weight: bold;
-}
-
-.review-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
