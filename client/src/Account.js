@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import AlertModal from './pages/Components/AlertModal';
-import { AlertModalBS } from './pages/Components/AlertModal';
 
 export default function Account() {
   const [isLoading, setIsLoading] = useState(false);
@@ -227,22 +226,22 @@ export default function Account() {
           </div>
         ) : null}
       </div>
-      <AlertModalBS
+      <AlertModal
         text="You have successfully made an account! Please sign in."
         show={showSignUpAlert}
         handleClose={handleCloseSignUpAlert}
       />
-      <AlertModalBS
+      <AlertModal
         text="Account has been signed out."
         show={showSignOutAlert}
         handleClose={handleCloseSignOutAlert}
       />
-      <AlertModalBS
+      <AlertModal
         text="Username or Password is incorrect."
         show={showInvalidAccountAlert}
         handleClose={handleCloseInvalidAccountAlert}
       />
-      <AlertModalBS
+      <AlertModal
         text="Username is already taken."
         show={showUsernameTakenAlert}
         handleClose={handleCloseUsernameTakenAlert}
