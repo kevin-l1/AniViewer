@@ -1,0 +1,49 @@
+.anime-bookmarks-title {
+  text-align: center;
+  margin-bottom: 0.7rem;
+}
+
+.filter-states {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.filter-anime,
+.filter-manga {
+  width: 4.5rem;
+  height: 2.5rem;
+  border-radius: 8px;
+}
+
+@media (width >= 576px) {
+  .filter-anime,
+  .filter-manga {
+    width: 5rem;
+    height: 3rem;
+  }
+}
+
+@media (width >= 992px) {
+  .filter-anime,
+  .filter-manga {
+    width: 5.5rem;
+    height: 3.5rem;
+  }
+}
+
+@media (width >= 1200px) {
+  .filter-anime,
+  .filter-manga {
+    width: 6rem;
+    height: 3.5rem;
+  }
+}
+
+@media (width >= 1400px) {
+  .filter-anime,
+  .filter-manga {
+    width: 6.5rem;
+    height: 3.5rem;
+  }
+}

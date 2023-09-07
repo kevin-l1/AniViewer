@@ -1,7 +1,9 @@
+// import './css/NavigationBar.css';
 import './NavigationBar.css';
+import SearchBar from './SearchBar';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import Account from './Account';
+import { useState } from 'react';
 
 export default function NavigationBar(props) {
   const [tempQuery, setTempQuery] = useState();
@@ -11,7 +13,9 @@ export default function NavigationBar(props) {
   async function handleSubmit(event) {
     try {
       event.preventDefault();
-      navigate('/search', { state: { query: tempQuery, buttonState: state } });
+      navigate('/search', {
+        state: { query: tempQuery, buttonState: state },
+      });
     } catch (err) {
       console.error(err);
     }
@@ -23,48 +27,57 @@ export default function NavigationBar(props) {
 
   return (
     <div>
-      <nav className="navbar">
-        <Link to="/" className="aniviewer-tab">
-          AniViewer
+      <div className="aniviewer-row">
+        <Link to="/">
+          <h1 className="aniviewer-main-tab">AniViewer</h1>
         </Link>
-
-        <form className="nav-search" onSubmit={handleSubmit}>
-          <button type="button" className="tab-switcher" onClick={handleState}>
-            {state}
-          </button>
-          <input
-            type="text"
-            className="search-bar"
-            onChange={(e) => setTempQuery(e.target.value)}></input>
-        </form>
-
-        <div className="anime-dropdown">
-          <Link to="/animes" className="anime-tab">
-            Anime
+      </div>
+      <div>
+        <nav className="navigation-bar">
+          <Link to="/" className="aniviewer-tab">
+            AniViewer
           </Link>
-          <div className="anime-dropdown-items">
-            <Link to="/animesSeasonal" className="seasonal-tab">
-              Seasonal
+          <form className="nav-search" onSubmit={handleSubmit}>
+            <button
+              type="button"
+              className="tab-switcher"
+              onClick={handleState}>
+              {state}
+            </button>
+            <input
+              type="text"
+              className="search-bar"
+              onChange={(e) => setTempQuery(e.target.value)}></input>
+          </form>
+          <div className="anime-dropdown">
+            <Link to="/animes" className="anime-tab">
+              Anime
             </Link>
+            <div className="anime-dropdown-items">
+              <Link to="/animesSeasonal" className="seasonal-tab">
+                Seasonal
+              </Link>
+            </div>
           </div>
-        </div>
 
-        <div className="manga-dropdown">
-          <Link to="/mangas" className="manga-tab">
-            Manga
-          </Link>
-          <div className="manga-dropdown-items">
-            <Link to="/mangasPopular" className="popular-tab">
-              Popular
+          <div className="manga-dropdown">
+            <Link to="/mangas" className="manga-tab">
+              Manga
             </Link>
-            <Link to="/mangasTop" className="top-tab">
-              Top Rated
-            </Link>
+            <div className="manga-dropdown-items">
+              <Link to="/mangasPopular" className="popular-tab">
+                Popular
+              </Link>
+              <Link to="/mangasTop" className="top-tab">
+                Top Rated
+              </Link>
+            </div>
           </div>
-        </div>
-        <Account />
-      </nav>
-      <Outlet />
+          <SearchBar />
+          <Account />
+        </nav>
+        <Outlet />
+      </div>
     </div>
   );
 }

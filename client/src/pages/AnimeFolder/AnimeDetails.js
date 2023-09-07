@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { fetchAnime } from '../../lib/api';
 import './AnimeDetails.css';
 import { useParams } from 'react-router-dom';
-
 import {
   getAnimeBookmarks,
   addAnimeBookmark,
@@ -12,9 +11,12 @@ import {
   editReview,
   deleteReview,
 } from '../../data';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import AlertModal from '../Components/AlertModal';
 import { Link } from 'react-router-dom';
 
-export default function AnimeDetails({ state }) {
+export default function AnimeDetails({ account, state }) {
   const { mal_id } = useParams();
   const [anime, setAnime] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -26,6 +28,12 @@ export default function AnimeDetails({ state }) {
   const [reviewed, setReviewed] = useState();
   const [reviewsList, setReviewsList] = useState([]);
   const [editing, setEditing] = useState();
+  const [showReview, setShowReview] = useState(false);
+  const [showEditReview, setShowEditReview] = useState(false);
+  const [showInfoAlert, setShowInfoAlert] = useState(false);
+  const [showReviewAlert, setShowReviewAlert] = useState(false);
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+  const [showBookmarkAlert, setShowBookmarkAlert] = useState(false);
 
   useEffect(() => {
     async function loadAnime(mal_id) {
@@ -74,7 +82,7 @@ export default function AnimeDetails({ state }) {
       loadReviews();
     }
   }, [mal_id, bookmarked, reviewed]);
-  console.log(reviewsList);
+
   function handleBookmark(title, type, images) {
     const bookmark = { title, type, images, mal_id };
     setBookmarked(!bookmarked);
@@ -88,13 +96,12 @@ export default function AnimeDetails({ state }) {
         addAnimeBookmark(bookmark);
       }
     } catch (err) {
-      alert(`User must be logged in`);
+      alert(`Error adding bookmark: ${err}`);
     }
   }
 
   async function handleDeleteBookmark(id) {
     try {
-      setIsLoading(true);
       await deleteAnimeBookmark(id);
     } catch (err) {
       alert(`Error deleting bookmark: ${err}`);
@@ -108,16 +115,15 @@ export default function AnimeDetails({ state }) {
       if (!sessionStorage.getItem('token')) {
         throw new Error('User must be logged in');
       }
-
       if (reviewsList.find((anime) => anime.itemId === Number(mal_id))) {
         handleEditReview(mal_id);
       }
-      if (!rating) {
-        throw new Error('Rating is required');
+      if (!rating || !review) {
+        setShowInfoAlert(true);
       }
       await addReview(reviewItem);
     } catch (err) {
-      alert(`${err}`);
+      setShowInfoAlert(true);
     }
   }
 
@@ -156,6 +162,35 @@ export default function AnimeDetails({ state }) {
     await handleEditReview(mal_id);
   }
 
+  function handleShowReview() {
+    setShowReview(true);
+  }
+
+  function handleCloseReview() {
+    setShowReview(false);
+  }
+
+  function handleShowEditReview() {
+    setShowEditReview(true);
+  }
+
+  function handleCloseEditReview() {
+    setShowEditReview(false);
+  }
+
+  function handleCloseBookmarkAlert() {
+    setShowBookmarkAlert(false);
+  }
+  function handleCloseReviewAlert() {
+    setShowReviewAlert(false);
+  }
+  function handleCloseInfoAlert() {
+    setShowInfoAlert(false);
+  }
+  function handleCloseDeleteAlert() {
+    setShowDeleteAlert(false);
+  }
+
   if (isLoading) return <div>Loading...</div>;
   if (error) {
     return (
@@ -178,6 +213,8 @@ export default function AnimeDetails({ state }) {
     popularity,
   } = anime.data;
 
+  console.log('r', rank);
+
   let allGenres = '';
   for (let i = 0; i < genres.length; i++) {
     if (i !== genres.length - 1) {
@@ -191,203 +228,212 @@ export default function AnimeDetails({ state }) {
 
   return (
     <div className="container">
-      {state === 'animePage' ? (
-        <Link to="/animes" className="return">
-          <button type="button" className="return">
-            Return
-          </button>
-        </Link>
-      ) : (
-        <Link to="/animesSeasonal" className="return">
-          <button type="button" className="return">
-            Return
-          </button>
-        </Link>
-      )}
+      <div className="return-bookmark-row">
+        {state === 'animePage' ? (
+          <Link to="/animes" className="return">
+            <button type="button" className="return">
+              Return
+            </button>
+          </Link>
+        ) : (
+          <Link to="/animesSeasonal" className="return">
+            <button type="button" className="return">
+              Return
+            </button>
+          </Link>
+        )}
 
-      <i
-        class={
-          bookmarksList.find((anime) => anime.itemId === JSON.parse(mal_id))
-            ? 'fa-solid fa-bookmark'
-            : 'fa-regular fa-bookmark'
-        }
-        onClick={() => handleBookmark(title, type, images)}></i>
-      <div className="col-3">
-        <div className="anime-picture-details">
-          <img
-            className="details-image"
-            src={images.jpg.image_url}
-            alt={title}
-          />
-          <div className="anime-details">
-            <h3 className="title">{title}</h3>
-            <h5 className="type">
-              <b>Type:</b> {type}
-            </h5>
-            <h5 className="episodes">
-              <b>Episodes:</b> {episodes}
-            </h5>
-            <h5 className="genres">
-              <b>Genres:</b> {allGenres}
-            </h5>
-          </div>
-        </div>
+        <i
+          class={
+            bookmarksList.find((anime) => anime.itemId === JSON.parse(mal_id))
+              ? 'fa-solid fa-bookmark'
+              : 'fa-regular fa-bookmark'
+          }
+          onClick={() =>
+            sessionStorage.getItem('token')
+              ? handleBookmark(title, type, images)
+              : setShowBookmarkAlert(true)
+          }></i>
       </div>
-      <div className="col-8">
-        <div className="stats">
-          <div className="rank-container">
-            <h3 className="rank-title">Rank</h3>
-            <h1 className="rank">{rank}</h1>
-          </div>
-          <div className="score-container">
-            <h3 className="score-title">Score</h3>
-            <h1 className="score">{score}</h1>
-          </div>
-          <div className="popularity-container">
-            <h3 className="popularity-title">Popularity</h3>
-            <h1 className="popularity">{popularity}</h1>
+      <div className="column-container">
+        <div className="col-3">
+          <div className="anime-picture-details">
+            <img
+              className="details-image"
+              src={images.jpg.image_url}
+              alt={title}
+            />
+            <div className="anime-details">
+              <h3 className="title">{title}</h3>
+              <h5 className="type">
+                <b>Type:</b> {type}
+              </h5>
+              <h5 className="episodes">
+                <b>Episodes:</b> {episodes}
+              </h5>
+              <h5 className="genres">
+                <b>Genres:</b> {allGenres}
+              </h5>
+            </div>
           </div>
         </div>
-        <div className="synopsis-container">
-          <h3 className="synopsis-label">Synopsis</h3>
-          <p className="synopsis">{synopsis}</p>
-        </div>
-        <div className="rate-review-row">
+        <div className="col-8">
+          <div className="stats">
+            <div className="rank-container">
+              <h3 className="rank-title">Rank</h3>
+              <h2 className="rank">{rank ? rank : 'N/A'}</h2>
+            </div>
+            <div className="score-container">
+              <h3 className="score-title">Score</h3>
+              <h2 className="score">{score ? score : 'N/A'}</h2>
+            </div>
+            <div className="popularity-container">
+              <h3 className="popularity-title">Popularity</h3>
+              <h2 className="popularity">{popularity ? popularity : 'N/A'}</h2>
+            </div>
+          </div>
+          <div className="synopsis-container">
+            <h3 className="synopsis-label">Synopsis</h3>
+            <p className="synopsis">{synopsis ? synopsis : 'None'}</p>
+          </div>
+
           {reviewsList.find((anime) => anime.itemId === JSON.parse(mal_id)) ? (
-            <div>
+            <div className="rate-review-row">
               <button
                 type="button"
                 className="edit-review-button"
-                data-bs-toggle="modal"
-                data-bs-target="#editModal"
-                onClick={loadEdit}>
+                onClick={() => {
+                  loadEdit();
+                  setShowEditReview(true);
+                }}>
                 Edit Review
               </button>
-              <Link to="/reviews">
-                <button
-                  type="button"
-                  className="delete-review-button"
-                  onClick={() => handleDeleteReview(mal_id)}>
-                  Delete Review
-                </button>
-              </Link>
+              <button
+                type="button"
+                className="delete-review-button"
+                onClick={() => {
+                  handleDeleteReview(mal_id);
+                  setShowDeleteAlert(true);
+                }}>
+                Delete Review
+              </button>
             </div>
           ) : (
-            <button
-              type="button"
-              className="leave-review-button"
-              data-bs-toggle="modal"
-              data-bs-target="#reviewModal">
-              Leave Review
-            </button>
+            <div className="rate-review-row">
+              <button
+                type="button"
+                className="leave-review-button"
+                onClick={
+                  sessionStorage.getItem('token')
+                    ? () => setShowReview(true)
+                    : () => setShowReviewAlert(true)
+                }>
+                Leave Review
+              </button>
+            </div>
           )}
 
-          <div class="modal fade" id="reviewModal" tabindex="-1">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <form onSubmit={handleSubmit}>
-                  <div class="modal-header">
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"></button>
+          <Modal show={showReview} onHide={handleCloseReview}>
+            <form onSubmit={handleSubmit}>
+              <Modal.Header closeButton></Modal.Header>
+              <Modal.Body>
+                <div className="rating-section">
+                  <div className="rating-text">
+                    <h3>Rating</h3>
                   </div>
-                  <div class="modal-body">
-                    <div className="rating-section">
-                      <div className="rating-text">
-                        <h3>Rating</h3>
-                      </div>
-                      <div className="ratings-options">
-                        {ratings.map((rate) => (
-                          <button
-                            type="button"
-                            className={rate === rating ? 'rate active' : 'rate'}
-                            onClick={() => setRating(rate)}>
-                            {rate}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="review-section">
-                      <h3>Review</h3>
-                      <textarea
-                        type="text"
-                        className="input-b-color text-padding input-b-radius purple-outline d-block width-100"
-                        cols="60"
-                        rows="10"
-                        onChange={(e) => setReview(e.target.value)}
-                        required
-                      />
-                    </div>
+                  <div className="ratings-options">
+                    {ratings.map((rate) => (
+                      <button
+                        type="button"
+                        className={rate === rating ? 'rate active' : 'rate'}
+                        onClick={() => setRating(rate)}>
+                        {rate}
+                      </button>
+                    ))}
                   </div>
+                </div>
+                <div className="review-section">
+                  <h3>Review</h3>
+                  <textarea
+                    type="text"
+                    className="review-textarea"
+                    onChange={(e) => setReview(e.target.value)}
+                    required>
+                    {review}
+                  </textarea>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  type="submit"
+                  onClick={review ? handleCloseReview : null}>
+                  Submit
+                </Button>
+              </Modal.Footer>
+            </form>
+          </Modal>
 
-                  <div class="modal-footer">
-                    <button
-                      type="submit"
-                      class="btn btn-primary"
-                      data-bs-dismiss={rating && review ? 'modal' : null}>
-                      Submit
-                    </button>
+          <Modal show={showEditReview} onHide={handleCloseEditReview}>
+            <form onSubmit={handleEditSubmit}>
+              <Modal.Header closeButton></Modal.Header>
+              <Modal.Body>
+                <div className="rating-section">
+                  <div className="rating-text">
+                    <h3>Rating</h3>
                   </div>
-                </form>
-              </div>
-            </div>
-          </div>
+                  <div className="ratings-options">
+                    {ratings.map((rate) => (
+                      <button
+                        type="button"
+                        className={rate === rating ? 'rate active' : 'rate'}
+                        onClick={() => setRating(rate)}>
+                        {rate}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="review-section">
+                  <h3>Review</h3>
+                  <textarea
+                    type="text"
+                    className="review-textarea"
+                    onChange={(e) => setReview(e.target.value)}
+                    required>
+                    {editing}
+                  </textarea>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button type="submit" onClick={handleCloseEditReview}>
+                  Submit
+                </Button>
+              </Modal.Footer>
+            </form>
+          </Modal>
 
-          <div class="modal fade" id="editModal" tabindex="-1">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <form onSubmit={handleEditSubmit}>
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Rating
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <div className="rating-section">
-                      <div className="rating-text"></div>
-                      <div className="ratings-options">
-                        {ratings.map((rate) => (
-                          <button
-                            type="button"
-                            className={rate === rating ? 'rate active' : 'rate'}
-                            onClick={() => setRating(rate)}>
-                            {rate}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="review-section">
-                      <h3>Review</h3>
-                      <textarea
-                        type="text"
-                        className="input-b-color text-padding input-b-radius purple-outline d-block width-100"
-                        cols="60"
-                        rows="10"
-                        onChange={(e) => setReview(e.target.value)}
-                        required>
-                        {editing}
-                      </textarea>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="submit"
-                      class="btn btn-primary"
-                      data-bs-dismiss={rating && review ? 'modal' : null}>
-                      Submit
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+          <AlertModal
+            show={showBookmarkAlert}
+            text="You must be logged in to add a bookmark."
+            handleClose={handleCloseBookmarkAlert}
+          />
+
+          <AlertModal
+            show={showReviewAlert}
+            text="You must be logged in to create a review."
+            handleClose={handleCloseReviewAlert}
+          />
+
+          <AlertModal
+            show={showDeleteAlert}
+            text="Review has been successfully deleted."
+            handleClose={handleCloseDeleteAlert}
+          />
+
+          <AlertModal
+            show={showInfoAlert}
+            text="Rating and review are required."
+            handleClose={handleCloseInfoAlert}
+          />
         </div>
       </div>
     </div>

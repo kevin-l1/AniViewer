@@ -16,6 +16,7 @@ import AnimeBookmarksPage from './pages/AnimeFolder/AnimeBookmarksPage';
 import MangaBookmarksPage from './pages/MangaFolder/MangaBookmarksPage';
 import ReviewsPage from './pages/ReviewsPage';
 import SearchPage from './pages/SearchPage';
+import BookmarksPage from './pages/Bookmarks';
 
 function App() {
   const [animePage, setAnimePage] = useState(1);
@@ -62,6 +63,7 @@ function App() {
         <Route path="/mangasPopular" element={<MangasPopularPage />} />
         <Route path="/mangasTop" element={<MangasTopPage />} />
         <Route path="/mangaDetails/:mal_id" element={<MangaDetails />} />
+        <Route path="/bookmarks" element={<BookmarksPage />} />
         <Route path="/animeBookmarks" element={<AnimeBookmarksPage />} />
         <Route path="/mangaBookmarks" element={<MangaBookmarksPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />

@@ -26,9 +26,10 @@
   transition-timing-function: ease-in-out;
 }
 
-.anime-image {
-  height: 260px;
-  width: 210px;
+.anime-image,
+.manga-image {
+  height: 180px;
+  width: 128px;
 }
 
 .anime-title {
@@ -38,4 +39,44 @@
   text-wrap: wrap;
   text-decoration: none;
   color: black;
+}
+
+@media (width >= 576px) {
+  .anime-image,
+  .manga-image {
+    height: 190px;
+    width: 160px;
+  }
+}
+
+@media (width >= 768px) {
+  .anime-image,
+  .manga-image {
+    height: 200px;
+    width: 160px;
+  }
+}
+
+@media (width >= 992px) {
+  .anime-image,
+  .manga-image {
+    height: 210px;
+    width: 165px;
+  }
+}
+
+@media (width >= 1200px) {
+  .anime-image,
+  .manga-image {
+    height: 215px;
+    width: 185px;
+  }
+}
+
+@media (width >= 1400px) {
+  .anime-image,
+  .manga-image {
+    height: 225px;
+    width: 195px;
+  }
 }

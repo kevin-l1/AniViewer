@@ -20,6 +20,7 @@
     "prepare": "husky install"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.18",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-config-standard": "^17.0.0",
@@ -35,5 +36,9 @@
     "stylelint": "^15.4.0",
     "stylelint-config-recommended": "^11.0.0",
     "stylelint-config-standard": "^32.0.0"
+  },
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "sass": "^1.66.1"
   }
 }

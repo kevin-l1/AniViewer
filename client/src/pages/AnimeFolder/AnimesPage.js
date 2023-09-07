@@ -2,6 +2,7 @@ import './AnimesPage.css';
 import React, { useEffect, useState } from 'react';
 import Anime from './Anime';
 import { fetchAnimes2 } from '../../lib/api';
+import '../Components/Filter.css';
 import Filter from '../Components/Filter';
 
 export default function AnimesPageTest({ page, setPage, state, setState }) {
@@ -9,7 +10,7 @@ export default function AnimesPageTest({ page, setPage, state, setState }) {
   const [error, setError] = useState();
   const [animes, setAnimes] = useState();
   const [tempOrder, setTempOrder] = useState('popularity');
-  const [tempGenreId, setTempGenreId] = useState();
+  const [tempGenreId, setTempGenreId] = useState('');
   const [order, setOrder] = useState('');
   const [genreId, setGenreId] = useState('');
   const genres = [
