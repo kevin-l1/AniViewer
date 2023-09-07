@@ -1,16 +1,23 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import AlertModal from './pages/Components/AlertModal';
+import { AlertModalBS } from './pages/Components/AlertModal';
 
 export default function Account() {
   const [isLoading, setIsLoading] = useState(false);
-  const [state, setState] = useState();
+  const [showSignIn, setShowSignIn] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
+  const [showSignUpAlert, setShowSignUpAlert] = useState(false);
+  const [showSignOutAlert, setShowSignOutAlert] = useState(false);
+  const [showInvalidAccountAlert, setShowInvalidAccountAlert] = useState(false);
+  const [showUsernameTakenAlert, setShowUsernameTakenAlert] = useState(false);
 
   async function handleSignIn(event) {
     event.preventDefault();
     try {
       setIsLoading(true);
-
       const formData = new FormData(event.target);
       const userData = Object.fromEntries(formData.entries());
       const req = {
@@ -24,10 +31,8 @@ export default function Account() {
       }
       const { user, token } = await res.json();
       sessionStorage.setItem('token', token);
-      setState('signed-in');
-      // alert(`You have successffuly signed in to your account.`);
     } catch (err) {
-      alert(`Error signing in: Username or Password is incorrect`);
+      setShowInvalidAccountAlert(true);
     } finally {
       setIsLoading(false);
     }
@@ -49,168 +54,159 @@ export default function Account() {
         throw new Error(`fetch Error ${res.status}`);
       }
       const user = await res.json();
-      setState('signed-up');
-      // alert(`You have succesfully made an account! Please sign in.`);
+      setShowSignUpAlert(true);
     } catch (err) {
-      alert(`Error registering user: Username is already taken`);
+      setShowUsernameTakenAlert(true);
     } finally {
       setIsLoading(false);
     }
   }
 
+  function handleShowSignIn() {
+    setShowSignIn(true);
+  }
+
+  function handleCloseSignIn() {
+    setShowSignIn(false);
+  }
+
+  function handleShowSignUp() {
+    setShowSignUp(true);
+    setShowSignIn(false);
+  }
+
+  function handleCloseSignUp() {
+    setShowSignUp(false);
+  }
+
   function handleSignOut() {
     sessionStorage.removeItem('token');
-    setState('signed-out');
+    setShowSignOutAlert(true);
+  }
+
+  function handleCloseSignUpAlert() {
+    setShowSignUpAlert(false);
+  }
+
+  function handleCloseSignOutAlert() {
+    setShowSignOutAlert(false);
+  }
+
+  function handleShowInvalidAccountAlert() {
+    setShowInvalidAccountAlert(true);
+  }
+
+  function handleCloseInvalidAccountAlert() {
+    setShowInvalidAccountAlert(false);
+  }
+
+  function handleCloseUsernameTakenAlert() {
+    setShowUsernameTakenAlert(false);
   }
 
   return (
     <>
       {sessionStorage.getItem('token') ? null : (
         <>
-          <div
-            class="modal fade"
-            id="signInModal"
-            aria-hidden="true"
-            aria-labelledby="signInModal"
-            tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <form onSubmit={handleSignIn}>
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
-                      Account Login
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"></button>
-                  </div>
-                  <div className="modal-body">
-                    <div className="mb-3">
-                      <label for="username" className="form-label">
-                        Username
-                      </label>
-                      <input
-                        required
-                        name="username"
-                        type="text"
-                        className="form-control"
-                        id="username"></input>
-                    </div>
-                    <div className="mb-3">
-                      <label for="password" className="form-label">
-                        Password
-                      </label>
-                      <input
-                        required
-                        name="password"
-                        type="password"
-                        className="form-control"
-                        id="password"
-                        rows="3"></input>
-                    </div>
-                    <p className="sign-up">
-                      Don't have an account?
-                      <button
-                        type="button"
-                        className="sign-up-redirect-button"
-                        data-bs-target="#signUpModal"
-                        data-bs-toggle="modal">
-                        Sign Up
-                      </button>
-                    </p>
-                    <div class="modal-footer">
-                      <button
-                        type="submit"
-                        className="sign-in-button"
-                        data-bs-dismiss="modal"
-                        // data-bs-toggle="modal"
-                        // data-bs-target="#loginModal"
-                      >
-                        Sign In
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+          <Modal show={showSignIn} onHide={handleCloseSignIn}>
+            <form onSubmit={handleSignIn}>
+              <Modal.Header closeButton>
+                <Modal.Title>Account Login</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div className="mb-3">
+                  <label for="username" className="form-label">
+                    Username
+                  </label>
+                  <input
+                    required
+                    name="username"
+                    type="text"
+                    className="form-control"
+                    id="username"></input>
+                </div>
+                <div className="mb-3">
+                  <label for="password" className="form-label">
+                    Password
+                  </label>
+                  <input
+                    required
+                    name="password"
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    rows="3"></input>
+                </div>
+                <p className="sign-up">
+                  Don't have an account?
+                  <button
+                    type="button"
+                    className="sign-up-redirect-button"
+                    onClick={handleShowSignUp}>
+                    Sign Up
+                  </button>
+                </p>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  type="submit"
+                  className="sign-in-button"
+                  onClick={handleCloseSignIn}>
+                  Sign In
+                </Button>
+              </Modal.Footer>
+            </form>
+          </Modal>
 
-          {/* <AlertModal
-            id="loginModal"
-            text={
-              state === 'signed-in'
-                ? 'You have logged in'
-                : 'Username or Password is invalid'
-            }
-          /> */}
-
-          <div
-            class="modal fade"
-            id="signUpModal"
-            aria-hidden="true"
-            aria-labelledby="signUpModal"
-            tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <form onSubmit={handleSignUp}>
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
-                      Create an Account
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <div className="mb-3">
-                      <label for="username" className="form-label">
-                        Username
-                      </label>
-                      <input
-                        required
-                        name="username"
-                        type="text"
-                        className="form-control"
-                        id="username"></input>
-                    </div>
-                    <div className="mb-3">
-                      <label for="password" className="form-label">
-                        Password
-                      </label>
-                      <input
-                        required
-                        name="password"
-                        type="password"
-                        className="form-control"
-                        id="password"
-                        rows="3"></input>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="submit"
-                      data-bs-dismiss="modal"
-                      className="sign-up-button">
-                      Sign Up
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+          <Modal show={showSignUp} onHide={handleCloseSignUp}>
+            <form onSubmit={handleSignUp}>
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
+                    Create an Account
+                  </h1>
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div className="mb-3">
+                  <label for="username" className="form-label">
+                    Username
+                  </label>
+                  <input
+                    required
+                    name="username"
+                    type="text"
+                    className="form-control"
+                    id="username"></input>
+                </div>
+                <div className="mb-3">
+                  <label for="password" className="form-label">
+                    Password
+                  </label>
+                  <input
+                    required
+                    name="password"
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    rows="3"></input>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  type="submit"
+                  className="sign-up-button"
+                  variant="primary"
+                  onClick={handleCloseSignUp}>
+                  Sign Up
+                </Button>
+              </Modal.Footer>
+            </form>
+          </Modal>
         </>
       )}
       <div className="user-dropdown">
-        <i
-          className="fa-solid fa-user"
-          data-bs-toggle={!sessionStorage.getItem('token') ? 'modal' : null}
-          data-bs-target={
-            !sessionStorage.getItem('token') ? '#signInModal' : null
-          }></i>
+        <i className="fa-solid fa-user" onClick={handleShowSignIn}></i>
         {sessionStorage.getItem('token') ? (
           <div className="user-dropdown-items">
             <Link to="/bookmarks" className="bookmarks-tab">
@@ -225,17 +221,32 @@ export default function Account() {
             <Link to="/reviews" className="reviews-tab">
               Reviews
             </Link>
-            <div
-              className="sign-out-tab"
-              onClick={handleSignOut}
-              data-bs-toggle="modal"
-              data-bs-target="#signOutModal">
+            <div className="sign-out-tab" onClick={handleSignOut}>
               Sign Out
             </div>
           </div>
         ) : null}
       </div>
-      <AlertModal id="signOutModal" text="Account has been signed out." />
+      <AlertModalBS
+        text="You have successfully made an account! Please sign in."
+        show={showSignUpAlert}
+        handleClose={handleCloseSignUpAlert}
+      />
+      <AlertModalBS
+        text="Account has been signed out."
+        show={showSignOutAlert}
+        handleClose={handleCloseSignOutAlert}
+      />
+      <AlertModalBS
+        text="Username or Password is incorrect."
+        show={showInvalidAccountAlert}
+        handleClose={handleCloseInvalidAccountAlert}
+      />
+      <AlertModalBS
+        text="Username is already taken."
+        show={showUsernameTakenAlert}
+        handleClose={handleCloseUsernameTakenAlert}
+      />
     </>
   );
 }

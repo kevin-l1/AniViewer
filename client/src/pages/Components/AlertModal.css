@@ -3,3 +3,12 @@
   margin: 0;
   text-align: center;
 }
+
+.alert.modal-body > h4 {
+  margin: 0;
+}
+
+.alert.modal-footer {
+  margin: 0;
+  padding: 0;
+}

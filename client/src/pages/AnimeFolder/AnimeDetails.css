@@ -166,6 +166,7 @@
 
 .ratings-options {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   margin: 0.5rem 0 2rem;
 }
@@ -191,6 +192,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.review-textarea {
+  height: 15rem;
+  width: 95%;
 }
 
 @media (width >= 768px) {

@@ -338,9 +338,7 @@ export default function AnimeDetails({ account, state }) {
                       <h3>Review</h3>
                       <textarea
                         type="text"
-                        className="input-b-color text-padding input-b-radius purple-outline d-block width-100"
-                        cols="60"
-                        rows="10"
+                        className="review-textarea"
                         onChange={(e) => setReview(e.target.value)}
                         required
                       />
