@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom';
 import BootstrapCarousel from './Carousel';
 import './Homepage.css';

@@ -1,4 +1,3 @@
-// import './AnimesPage.css';
 import React, { useEffect, useState } from 'react';
 import Anime from './AnimeFolder/Anime';
 import { fetchSearch } from '../lib/api';

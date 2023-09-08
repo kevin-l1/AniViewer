@@ -1,5 +1,4 @@
 import Carousel from 'react-bootstrap/Carousel';
-import Anime from './AnimeFolder/Anime';
 import { Link } from 'react-router-dom';
 
 export default function BootstrapCarousel({ animes }) {
