@@ -1,3 +1,4 @@
+import '../css/AnimeMangaDetails.css';
 import { useEffect, useState } from 'react';
 import { fetchManga } from '../../lib/api';
 import {
@@ -9,7 +10,6 @@ import {
   editReview,
   deleteReview,
 } from '../../data';
-import '../AnimeFolder/AnimeDetails.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import AlertModal from '../Components/AlertModal';

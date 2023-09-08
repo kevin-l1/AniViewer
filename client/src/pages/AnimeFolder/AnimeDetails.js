@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchAnime } from '../../lib/api';
-import './AnimeDetails.css';
+import '../css/AnimeMangaDetails.css';
 import { useParams } from 'react-router-dom';
 import {
   getAnimeBookmarks,
