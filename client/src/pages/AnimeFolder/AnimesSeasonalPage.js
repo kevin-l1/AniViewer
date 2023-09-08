@@ -1,4 +1,4 @@
-import './AnimesPage.css';
+import '../css/AnimesMangasPage.css';
 import React, { useEffect, useState } from 'react';
 import Anime from './Anime';
 import { fetchSeasonalAnimes } from '../../lib/api';

@@ -64,14 +64,6 @@ export default function NavigationBar(props) {
             <Link to="/mangas" className="manga-tab">
               Manga
             </Link>
-            <div className="manga-dropdown-items">
-              <Link to="/mangasPopular" className="popular-tab">
-                Popular
-              </Link>
-              <Link to="/mangasTop" className="top-tab">
-                Top Rated
-              </Link>
-            </div>
           </div>
           <SearchBar />
           <Account />

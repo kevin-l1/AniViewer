@@ -1,21 +1,25 @@
-.animes-container {
+.animes-container,
+.mangas-container {
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
 }
 
-.anime-container {
+.anime-container,
+.manga-container {
   display: flex;
   margin: 0 1rem;
 }
 
-.anime-icon-container {
+.anime-icon-container,
+.manga-icon-container {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
 }
 
-.rowOfAnimes {
+.rowOfAnimes,
+.rowOfMangas {
   display: flex;
   justify-content: center;
   padding: 0;
@@ -43,11 +47,3 @@
 ul {
   list-style: none;
 }
-
-/* .next-button,
-.prev-button,
-.single-button {
-  width: 10rem;
-  height: 5rem;
-  margin-bottom: 2rem;
-} */

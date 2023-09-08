@@ -211,12 +211,6 @@ export default function Account() {
             <Link to="/bookmarks" className="bookmarks-tab">
               Bookmarks
             </Link>
-            <Link to="/animeBookmarks" className="bookmarks-tab">
-              Anime Bookmarks
-            </Link>
-            <Link to="/mangaBookmarks" className="bookmarks-tab">
-              Manga Bookmarks
-            </Link>
             <Link to="/reviews" className="reviews-tab">
               Reviews
             </Link>
