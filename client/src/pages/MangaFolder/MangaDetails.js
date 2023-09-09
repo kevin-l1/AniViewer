@@ -164,35 +164,6 @@ export default function MangaDetails() {
     await handleEditReview(mal_id);
   }
 
-  function handleShowReview() {
-    setShowReview(true);
-  }
-
-  function handleCloseReview() {
-    setShowReview(false);
-  }
-
-  function handleShowEditReview() {
-    setShowEditReview(true);
-  }
-
-  function handleCloseEditReview() {
-    setShowEditReview(false);
-  }
-
-  function handleCloseBookmarkAlert() {
-    setShowBookmarkAlert(false);
-  }
-  function handleCloseReviewAlert() {
-    setShowReviewAlert(false);
-  }
-  function handleCloseInfoAlert() {
-    setShowInfoAlert(false);
-  }
-  function handleCloseDeleteAlert() {
-    setShowDeleteAlert(false);
-  }
-
   if (isLoading) return <div>Loading...</div>;
   if (error) {
     return (
@@ -328,7 +299,7 @@ export default function MangaDetails() {
             </div>
           )}
 
-          <Modal show={showReview} onHide={handleCloseReview}>
+          <Modal show={showReview} onHide={() => setShowReview(false)}>
             <form onSubmit={handleSubmit}>
               <Modal.Header closeButton></Modal.Header>
               <Modal.Body>
@@ -361,14 +332,14 @@ export default function MangaDetails() {
               <Modal.Footer>
                 <Button
                   type="submit"
-                  onClick={review ? handleCloseReview : null}>
+                  onClick={review ? () => setShowReview(false) : null}>
                   Submit
                 </Button>
               </Modal.Footer>
             </form>
           </Modal>
 
-          <Modal show={showEditReview} onHide={handleCloseEditReview}>
+          <Modal show={showEditReview} onHide={() => setShowEditReview(false)}>
             <form onSubmit={handleEditSubmit}>
               <Modal.Header closeButton></Modal.Header>
               <Modal.Body>
@@ -399,7 +370,7 @@ export default function MangaDetails() {
                 </div>
               </Modal.Body>
               <Modal.Footer>
-                <Button type="submit" onClick={handleCloseEditReview}>
+                <Button type="submit" onClick={() => setShowEditReview(false)}>
                   Submit
                 </Button>
               </Modal.Footer>
@@ -409,25 +380,25 @@ export default function MangaDetails() {
           <AlertModal
             show={showBookmarkAlert}
             text="You must be logged in to add a bookmark."
-            handleClose={handleCloseBookmarkAlert}
+            handleClose={() => setShowBookmarkAlert(false)}
           />
 
           <AlertModal
             show={showReviewAlert}
             text="You must be logged in to create a review."
-            handleClose={handleCloseReviewAlert}
+            handleClose={() => setShowReviewAlert(false)}
           />
 
           <AlertModal
             show={showDeleteAlert}
             text="Review has been successfully deleted."
-            handleClose={handleCloseDeleteAlert}
+            handleClose={() => setShowDeleteAlert(false)}
           />
 
           <AlertModal
             show={showInfoAlert}
             text="Rating and review are required."
-            handleClose={handleCloseInfoAlert}
+            handleClose={() => setShowInfoAlert(false)}
           />
         </div>
       </div>
