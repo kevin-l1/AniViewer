@@ -5,7 +5,7 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 import Account from './Account';
 import { useState } from 'react';
 
-export default function NavigationBar(props) {
+export default function NavigationBar() {
   const [tempQuery, setTempQuery] = useState();
   const [state, setState] = useState('Anime');
   const navigate = useNavigate();

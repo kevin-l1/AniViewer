@@ -1,7 +1,7 @@
+import './Homepage.css';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import BootstrapCarousel from './Carousel';
-import './Homepage.css';
+import HomepageCarousel from './Components/HomepageCarousel';
 
 let requestInProcess = false;
 
@@ -92,11 +92,11 @@ export default function Homepage() {
 
       <div className="anime-carousel">
         <h2 className="popular">Most Popular</h2>
-        <BootstrapCarousel animes={popularAnimes} />
+        <HomepageCarousel animes={popularAnimes} />
       </div>
       <div className="anime-carousel">
         <h2 className="seasonal">Seasonal</h2>
-        <BootstrapCarousel animes={seasonalAnimes} />
+        <HomepageCarousel animes={seasonalAnimes} />
       </div>
     </div>
   );
