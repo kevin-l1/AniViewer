@@ -51,7 +51,10 @@ function App() {
         />
         <Route path="/mangaDetails/:mal_id" element={<MangaDetails />} />
         <Route path="/bookmarks" element={<BookmarksPage />} />
-        <Route path="/reviews" element={<ReviewsPage />} />
+        <Route
+          path="/reviews"
+          element={<ReviewsPage setState={setPageState} />}
+        />
         <Route path="/search" element={<SearchPage />} />
       </Route>
     </Routes>

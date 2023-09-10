@@ -3,7 +3,7 @@ import { getReviews } from '../data';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function ReviewsPage({ onCreate, onEdit }) {
+export default function ReviewsPage({ setState }) {
   const [isLoading, setIsLoading] = useState();
   const [reviews, setReviews] = useState();
   const [error, setError] = useState();
@@ -14,6 +14,7 @@ export default function ReviewsPage({ onCreate, onEdit }) {
       try {
         const reviews = await getReviews();
         setReviews(reviews);
+        setState('reviewPage');
       } catch (err) {
         setError(err);
       } finally {

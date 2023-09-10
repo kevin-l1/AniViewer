@@ -211,6 +211,12 @@ export default function AnimeDetails({ account, state }) {
               Return
             </button>
           </Link>
+        ) : state === 'reviewPage' ? (
+          <Link to="/reviews" className="return">
+            <button type="button" className="return">
+              Return
+            </button>
+          </Link>
         ) : (
           <Link to="/" className="return">
             <button type="button" className="return">
