@@ -24,6 +24,7 @@ export default function AnimeDetails({ account, state }) {
   const [bookmarked, setBookmarked] = useState(false);
   const [rating, setRating] = useState();
   const [review, setReview] = useState();
+  const [deleted, setDeleted] = useState(false);
   const [reviewed, setReviewed] = useState();
   const [reviewsList, setReviewsList] = useState([]);
   const [editing, setEditing] = useState();
@@ -79,7 +80,7 @@ export default function AnimeDetails({ account, state }) {
       loadBookmarks();
       loadReviews();
     }
-  }, [mal_id, bookmarked, reviewed]);
+  }, [mal_id, bookmarked, reviewed, deleted]);
 
   function handleBookmark(title, type, images) {
     const bookmark = { title, type, images, mal_id };
@@ -145,6 +146,8 @@ export default function AnimeDetails({ account, state }) {
   async function handleDeleteReview(id) {
     try {
       await deleteReview(id);
+      setDeleted(true);
+      setShowDeleteAlert(true);
     } catch (err) {
       alert(`Error deleting review: ${err}`);
     }
@@ -278,10 +281,7 @@ export default function AnimeDetails({ account, state }) {
               <button
                 type="button"
                 className="delete-review-button"
-                onClick={() => {
-                  handleDeleteReview(mal_id);
-                  setShowDeleteAlert(true);
-                }}>
+                onClick={() => handleDeleteReview(mal_id)}>
                 Delete Review
               </button>
             </div>
