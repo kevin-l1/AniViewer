@@ -1,4 +1,4 @@
-import './pages/css/  NavigationBar.css';
+import './pages/css/NavigationBar.css';
 import SearchBar from './SearchBar';
 import Account from './Account';
 import { useState } from 'react';
