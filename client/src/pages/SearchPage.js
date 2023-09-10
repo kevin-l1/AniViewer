@@ -15,7 +15,7 @@ export default function SearchPage() {
   useEffect(() => {
     async function fetchResponse() {
       try {
-        const arrayOfAnimes = await fetchSearch(query, state);
+        const arrayOfAnimes = await fetchSearch(query, state, page);
         setAnimes(arrayOfAnimes.data);
       } catch (error) {
         setError(error);
@@ -54,12 +54,20 @@ export default function SearchPage() {
             ))}
           </ul>
           {page > 1 ? (
-            <div>
-              <button onClick={handlePrev}>Previous Page</button>
-              <button onClick={handleNext}>Next Page</button>
+            <div className="next-prev-buttons">
+              <button className="prev-button" onClick={handlePrev}>
+                Previous Page
+              </button>
+              <button className="next-button" onClick={handleNext}>
+                Next Page
+              </button>
             </div>
           ) : (
-            <button onClick={handleNext}>Next Page</button>
+            <div className="single-button-row">
+              <button className="single-button" onClick={handleNext}>
+                Next Page
+              </button>
+            </div>
           )}
         </div>
       ) : null}

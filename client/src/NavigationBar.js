@@ -1,5 +1,5 @@
 import './pages/css/NavigationBar.css';
-import SearchBar from './SearchBar';
+import SearchBar from './pages/Components/SearchBar';
 import Account from './Account';
 import { useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
