@@ -63,7 +63,6 @@ export default function AnimeDetails({ account, state }) {
     async function loadReviews() {
       try {
         const allReviews = await getReviews();
-        console.log('allReviews:', allReviews);
         if (allReviews) {
           setReviewsList(allReviews);
         }
@@ -183,8 +182,6 @@ export default function AnimeDetails({ account, state }) {
     score,
     popularity,
   } = anime.data;
-
-  console.log('r', rank);
 
   let allGenres = '';
   for (let i = 0; i < genres.length; i++) {

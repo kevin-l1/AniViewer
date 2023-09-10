@@ -13,7 +13,6 @@ export default function ReviewsPage({ onCreate, onEdit }) {
       setIsLoading(true);
       try {
         const reviews = await getReviews();
-        console.log(reviews);
         setReviews(reviews);
       } catch (err) {
         setError(err);

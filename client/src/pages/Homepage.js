@@ -24,14 +24,12 @@ export default function Homepage() {
         );
         const arrayOfPopularAnimes = await response.json();
         setPopularAnimes(arrayOfPopularAnimes.data);
-        console.log(arrayOfPopularAnimes.data);
 
         const response2 = await fetch(
           'https://api.jikan.moe/v4/seasons/now?limit=24'
         );
         const arrayOfSeasonalAnimes = await response2.json();
         setSeasonalAnimes(arrayOfSeasonalAnimes.data);
-        console.log(arrayOfSeasonalAnimes.data);
       } catch (error) {
         setError(error);
       } finally {
@@ -42,7 +40,6 @@ export default function Homepage() {
     fetchResponse();
   }, []);
 
-  console.log(isLoading);
   if (
     isLoading ||
     popularAnimes === undefined ||

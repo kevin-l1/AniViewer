@@ -1,4 +1,4 @@
-import './Filter.css';
+import '../css/Filter.css';
 
 export default function Filter({
   genres,

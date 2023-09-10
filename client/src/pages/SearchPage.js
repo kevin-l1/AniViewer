@@ -11,13 +11,11 @@ export default function SearchPage() {
   const location = useLocation();
   let query = location.state.query;
   let state = location.state.buttonState;
-  console.log(query);
 
   useEffect(() => {
     async function fetchResponse() {
       try {
         const arrayOfAnimes = await fetchSearch(query, state);
-        console.log(arrayOfAnimes);
         setAnimes(arrayOfAnimes.data);
       } catch (error) {
         setError(error);

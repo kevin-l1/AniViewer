@@ -1,5 +1,4 @@
-import './AlertModal.css';
-import { useState } from 'react';
+import '../css/AlertModal.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 

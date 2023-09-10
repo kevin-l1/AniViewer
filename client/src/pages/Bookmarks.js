@@ -29,12 +29,10 @@ export default function BookmarksPage({ onCreate, onEdit }) {
 
   function handleAnime() {
     state !== 'Anime' ? setState('Anime') : setState('');
-    console.log(state);
   }
 
   function handleManga() {
     state !== 'Manga' ? setState('Manga') : setState('');
-    console.log(state);
   }
 
   if (isLoading) return <div>Loading...</div>;

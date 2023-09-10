@@ -2,7 +2,6 @@ import '../css/AnimesMangasPage.css';
 import React, { useEffect, useState } from 'react';
 import Anime from './Anime';
 import { fetchAnimes } from '../../lib/api';
-import '../Components/Filter.css';
 import Filter from '../Components/Filter';
 
 export default function AnimesPage({ page, setPage, state, setState }) {

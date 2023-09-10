@@ -66,7 +66,6 @@ export default function MangasPage({ page, setPage }) {
     setGenreId(tempGenreId);
   }
 
-  console.log(isLoading);
   if (isLoading) {
     return <p>Loading...</p>;
   }

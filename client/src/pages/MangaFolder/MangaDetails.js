@@ -63,7 +63,6 @@ export default function MangaDetails() {
     async function loadReviews() {
       try {
         const allReviews = await getReviews();
-        console.log('allReviews:', allReviews);
         if (allReviews) {
           setReviewsList(allReviews);
         }
@@ -82,8 +81,6 @@ export default function MangaDetails() {
       loadReviews();
     }
   }, [mal_id, bookmarked, reviewed]);
-
-  console.log('blList', bookmarksList);
 
   function handleBookmark(title, type, images) {
     const bookmark = { title, type, images, mal_id };
@@ -196,9 +193,6 @@ export default function MangaDetails() {
   }
 
   const ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-  console.log('bl:', bookmarksList);
-  console.log('rl:', reviewsList);
 
   return (
     <div className="container">
