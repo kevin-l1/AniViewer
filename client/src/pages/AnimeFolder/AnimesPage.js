@@ -4,7 +4,7 @@ import Filter from '../Components/Filter';
 import { fetchAnimes } from '../../lib/api';
 import React, { useEffect, useState } from 'react';
 
-export default function AnimesPage({ page, setPage, state, setState }) {
+export default function AnimesPage({ page, setPage, setState }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
   const [animes, setAnimes] = useState();

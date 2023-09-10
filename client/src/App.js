@@ -15,20 +15,19 @@ function App() {
   const [animePage, setAnimePage] = useState(1);
   const [mangaPage, setMangaPage] = useState(1);
   const [seasonalAnimePage, setSeasonalAnimePage] = useState(1);
-  const [animeState, setAnimeState] = useState('');
+  const [pageState, setPageState] = useState('');
 
   return (
     <Routes>
       <Route path="/" element={<NavigationBar />}>
-        <Route index element={<Homepage />} />
+        <Route index element={<Homepage setState={setPageState} />} />
         <Route
           path="/animes"
           element={
             <AnimesPage
               page={animePage}
               setPage={setAnimePage}
-              state={animeState}
-              setState={setAnimeState}
+              setState={setPageState}
             />
           }
         />
@@ -38,14 +37,13 @@ function App() {
             <AnimesSeasonalPage
               page={seasonalAnimePage}
               setPage={setSeasonalAnimePage}
-              state={animeState}
-              setState={setAnimeState}
+              setState={setPageState}
             />
           }
         />
         <Route
           path="/animeDetails/:mal_id"
-          element={<AnimeDetails state={animeState} />}
+          element={<AnimeDetails state={pageState} />}
         />
         <Route
           path="/mangas"

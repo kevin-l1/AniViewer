@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 let requestInProcess = false;
 
-export default function Homepage() {
+export default function Homepage({ setState }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
   const [popularAnimes, setPopularAnimes] = useState();
@@ -14,11 +14,11 @@ export default function Homepage() {
   useEffect(() => {
     async function fetchResponse() {
       try {
+        setState('Homepage');
         if (requestInProcess) {
           return;
         }
         requestInProcess = true;
-
         const response = await fetch(
           'https://api.jikan.moe/v4/top/anime?limit=24'
         );
