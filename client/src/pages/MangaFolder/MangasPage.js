@@ -1,8 +1,8 @@
-import './MangasPage.css';
-import React, { useEffect, useState } from 'react';
+import '../css/AnimeManga.css';
 import Manga from './Manga';
-import { fetchMangas } from '../../lib/api';
 import Filter from '../Components/Filter';
+import { fetchMangas } from '../../lib/api';
+import React, { useEffect, useState } from 'react';
 
 export default function MangasPage({ page, setPage }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -66,7 +66,6 @@ export default function MangasPage({ page, setPage }) {
     setGenreId(tempGenreId);
   }
 
-  console.log(isLoading);
   if (isLoading) {
     return <p>Loading...</p>;
   }

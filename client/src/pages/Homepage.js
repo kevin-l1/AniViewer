@@ -1,12 +1,11 @@
+import './css/Homepage.css';
+import HomepageCarousel from './Components/HomepageCarousel';
 import React, { useEffect, useState } from 'react';
-import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom';
-import BootstrapCarousel from './Carousel';
-import './Homepage.css';
 
 let requestInProcess = false;
 
-export default function Homepage() {
+export default function Homepage({ setState }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
   const [popularAnimes, setPopularAnimes] = useState();
@@ -15,24 +14,22 @@ export default function Homepage() {
   useEffect(() => {
     async function fetchResponse() {
       try {
+        setState('Homepage');
         if (requestInProcess) {
           return;
         }
         requestInProcess = true;
-
         const response = await fetch(
           'https://api.jikan.moe/v4/top/anime?limit=24'
         );
         const arrayOfPopularAnimes = await response.json();
         setPopularAnimes(arrayOfPopularAnimes.data);
-        console.log(arrayOfPopularAnimes.data);
 
         const response2 = await fetch(
           'https://api.jikan.moe/v4/seasons/now?limit=24'
         );
         const arrayOfSeasonalAnimes = await response2.json();
         setSeasonalAnimes(arrayOfSeasonalAnimes.data);
-        console.log(arrayOfSeasonalAnimes.data);
       } catch (error) {
         setError(error);
       } finally {
@@ -43,7 +40,6 @@ export default function Homepage() {
     fetchResponse();
   }, []);
 
-  console.log(isLoading);
   if (
     isLoading ||
     popularAnimes === undefined ||
@@ -93,11 +89,11 @@ export default function Homepage() {
 
       <div className="anime-carousel">
         <h2 className="popular">Most Popular</h2>
-        <BootstrapCarousel animes={popularAnimes} />
+        <HomepageCarousel animes={popularAnimes} />
       </div>
       <div className="anime-carousel">
         <h2 className="seasonal">Seasonal</h2>
-        <BootstrapCarousel animes={seasonalAnimes} />
+        <HomepageCarousel animes={seasonalAnimes} />
       </div>
     </div>
   );

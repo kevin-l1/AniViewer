@@ -32,7 +32,8 @@
   width: 128px;
 }
 
-.anime-title {
+.anime-title,
+.manga-title {
   margin: 0;
   padding: 0;
   text-align: center;

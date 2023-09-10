@@ -21,46 +21,15 @@ function delay(millisec) {
   });
 }
 
-export async function fetchAnimes(page, filterId) {
+export async function fetchAnimes(page, order, genreId) {
   if (Date.now() - lastRequest < 500) {
     await delay(500);
   }
   lastRequest = Date.now();
   const response = await fetch(
-    `https://api.jikan.moe/v4/anime?filter=airing&page=${page}&genres=${filterId}`
-  );
-  return await response.json();
-}
-
-export async function fetchAnimesGenres() {
-  if (Date.now() - lastRequest < 500) {
-    await delay(500);
-  }
-  lastRequest = Date.now();
-  const response = await fetch('https://api.jikan.moe/v4/genres/anime');
-  return await response.json();
-}
-
-export async function fetchAnimes2(page, order, genreId) {
-  if (Date.now() - lastRequest < 500) {
-    await delay(500);
-  }
-  lastRequest = Date.now();
-  const response = await fetch(
-    `https://api.jikan.moe/v4/anime?page=${page}&order_by=${
+    `https://api.jikan.moe/v4/anime?sfw&page=${page}&order_by=${
       order ? order : 'popularity'
     }&limit=25&genres=${genreId}`
-  );
-  return await response.json();
-}
-
-export async function fetchPopularAnimes(page, filterId) {
-  if (Date.now() - lastRequest < 500) {
-    await delay(500);
-  }
-  lastRequest = Date.now();
-  const response = await fetch(
-    `https://api.jikan.moe/v4/top/anime?filter=bypopularity&page=${page}&genres=${filterId}`
   );
   return await response.json();
 }
@@ -71,29 +40,7 @@ export async function fetchSeasonalAnimes(page, filterId) {
   }
   lastRequest = Date.now();
   const response = await fetch(
-    `https://api.jikan.moe/v4/seasons/now?page=${page}&genres=${filterId}`
-  );
-  return await response.json();
-}
-
-export async function fetchTopAnimes(page, filterId) {
-  if (Date.now() - lastRequest < 500) {
-    await delay(500);
-  }
-  lastRequest = Date.now();
-  const response = await fetch(
-    `https://api.jikan.moe/v4/top/anime?page=${page}&genres=${filterId}`
-  );
-  return await response.json();
-}
-
-export async function fetchSearch(query, state) {
-  if (Date.now() - lastRequest < 500) {
-    await delay(500);
-  }
-  lastRequest = Date.now();
-  const response = await fetch(
-    `https://api.jikan.moe/v4/${state.toLowerCase()}?q=${query}`
+    `https://api.jikan.moe/v4/seasons/now?sfw&page=${page}&genres=${filterId}`
   );
   return await response.json();
 }
@@ -104,9 +51,20 @@ export async function fetchMangas(page, order, genreId) {
   }
   lastRequest = Date.now();
   const response = await fetch(
-    `https://api.jikan.moe/v4/manga?page=${page}&order_by=${
+    `https://api.jikan.moe/v4/manga?sfw&page=${page}&order_by=${
       order ? order : 'popularity'
     }&limit=25&genres=${genreId}`
+  );
+  return await response.json();
+}
+
+export async function fetchSearch(query, state, page) {
+  if (Date.now() - lastRequest < 500) {
+    await delay(500);
+  }
+  lastRequest = Date.now();
+  const response = await fetch(
+    `https://api.jikan.moe/v4/${state.toLowerCase()}?sfw&q=${query}&page=${page}`
   );
   return await response.json();
 }

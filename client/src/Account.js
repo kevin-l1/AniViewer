@@ -1,8 +1,8 @@
+import AlertModal from './pages/Components/AlertModal';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import AlertModal from './pages/Components/AlertModal';
 
 export default function Account() {
   const [isLoading, setIsLoading] = useState(false);
@@ -61,53 +61,11 @@ export default function Account() {
     }
   }
 
-  function handleShowSignIn() {
-    setShowSignIn(true);
-  }
-
-  function handleCloseSignIn() {
-    setShowSignIn(false);
-  }
-
-  function handleShowSignUp() {
-    setShowSignUp(true);
-    setShowSignIn(false);
-  }
-
-  function handleCloseSignUp() {
-    setShowSignUp(false);
-  }
-
-  function handleSignOut() {
-    sessionStorage.removeItem('token');
-    setShowSignOutAlert(true);
-  }
-
-  function handleCloseSignUpAlert() {
-    setShowSignUpAlert(false);
-  }
-
-  function handleCloseSignOutAlert() {
-    setShowSignOutAlert(false);
-  }
-
-  function handleShowInvalidAccountAlert() {
-    setShowInvalidAccountAlert(true);
-  }
-
-  function handleCloseInvalidAccountAlert() {
-    setShowInvalidAccountAlert(false);
-  }
-
-  function handleCloseUsernameTakenAlert() {
-    setShowUsernameTakenAlert(false);
-  }
-
   return (
     <>
       {sessionStorage.getItem('token') ? null : (
         <>
-          <Modal show={showSignIn} onHide={handleCloseSignIn}>
+          <Modal show={showSignIn} onHide={() => setShowSignIn(false)}>
             <form onSubmit={handleSignIn}>
               <Modal.Header closeButton>
                 <Modal.Title>Account Login</Modal.Title>
@@ -141,7 +99,10 @@ export default function Account() {
                   <button
                     type="button"
                     className="sign-up-redirect-button"
-                    onClick={handleShowSignUp}>
+                    onClick={() => {
+                      setShowSignUp(true);
+                      setShowSignIn(false);
+                    }}>
                     Sign Up
                   </button>
                 </p>
@@ -150,14 +111,14 @@ export default function Account() {
                 <Button
                   type="submit"
                   className="sign-in-button"
-                  onClick={handleCloseSignIn}>
+                  onClick={() => setShowSignIn(false)}>
                   Sign In
                 </Button>
               </Modal.Footer>
             </form>
           </Modal>
 
-          <Modal show={showSignUp} onHide={handleCloseSignUp}>
+          <Modal show={showSignUp} onHide={() => setShowSignUp(false)}>
             <form onSubmit={handleSignUp}>
               <Modal.Header closeButton>
                 <Modal.Title>
@@ -196,7 +157,7 @@ export default function Account() {
                   type="submit"
                   className="sign-up-button"
                   variant="primary"
-                  onClick={handleCloseSignUp}>
+                  onClick={() => setShowSignUp(false)}>
                   Sign Up
                 </Button>
               </Modal.Footer>
@@ -205,22 +166,21 @@ export default function Account() {
         </>
       )}
       <div className="user-dropdown">
-        <i className="fa-solid fa-user" onClick={handleShowSignIn}></i>
+        <i className="fa-solid fa-user" onClick={() => setShowSignIn(true)}></i>
         {sessionStorage.getItem('token') ? (
           <div className="user-dropdown-items">
             <Link to="/bookmarks" className="bookmarks-tab">
               Bookmarks
             </Link>
-            <Link to="/animeBookmarks" className="bookmarks-tab">
-              Anime Bookmarks
-            </Link>
-            <Link to="/mangaBookmarks" className="bookmarks-tab">
-              Manga Bookmarks
-            </Link>
             <Link to="/reviews" className="reviews-tab">
               Reviews
             </Link>
-            <div className="sign-out-tab" onClick={handleSignOut}>
+            <div
+              className="sign-out-tab"
+              onClick={() => {
+                sessionStorage.removeItem('token');
+                setShowSignOutAlert(true);
+              }}>
               Sign Out
             </div>
           </div>
@@ -229,22 +189,22 @@ export default function Account() {
       <AlertModal
         text="You have successfully made an account! Please sign in."
         show={showSignUpAlert}
-        handleClose={handleCloseSignUpAlert}
+        handleClose={() => setShowSignUpAlert(false)}
       />
       <AlertModal
         text="Account has been signed out."
         show={showSignOutAlert}
-        handleClose={handleCloseSignOutAlert}
+        handleClose={() => setShowSignOutAlert(false)}
       />
       <AlertModal
         text="Username or Password is incorrect."
         show={showInvalidAccountAlert}
-        handleClose={handleCloseInvalidAccountAlert}
+        handleClose={() => setShowInvalidAccountAlert(false)}
       />
       <AlertModal
         text="Username is already taken."
         show={showUsernameTakenAlert}
-        handleClose={handleCloseUsernameTakenAlert}
+        handleClose={() => setShowUsernameTakenAlert(false)}
       />
     </>
   );

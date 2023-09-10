@@ -1,11 +1,10 @@
-import './AnimesPage.css';
-import React, { useEffect, useState } from 'react';
+import '../css/AnimesMangasPage.css';
 import Anime from './Anime';
-import { fetchAnimes2 } from '../../lib/api';
-import '../Components/Filter.css';
 import Filter from '../Components/Filter';
+import { fetchAnimes } from '../../lib/api';
+import React, { useEffect, useState } from 'react';
 
-export default function AnimesPageTest({ page, setPage, state, setState }) {
+export default function AnimesPage({ page, setPage, setState }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
   const [animes, setAnimes] = useState();
@@ -35,7 +34,7 @@ export default function AnimesPageTest({ page, setPage, state, setState }) {
   useEffect(() => {
     async function fetchResponse() {
       try {
-        const arrayOfAnimes = await fetchAnimes2(page, order, genreId);
+        const arrayOfAnimes = await fetchAnimes(page, order, genreId);
         setAnimes(arrayOfAnimes.data);
         setState('animePage');
       } catch (error) {

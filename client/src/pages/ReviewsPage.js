@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import './css/ReviewsPage.css';
 import { getReviews } from '../data';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './ReviewsPage.css';
 
-export default function ReviewsPage({ onCreate, onEdit }) {
+export default function ReviewsPage({ setState }) {
   const [isLoading, setIsLoading] = useState();
   const [reviews, setReviews] = useState();
   const [error, setError] = useState();
@@ -13,8 +13,8 @@ export default function ReviewsPage({ onCreate, onEdit }) {
       setIsLoading(true);
       try {
         const reviews = await getReviews();
-        console.log(reviews);
         setReviews(reviews);
+        setState('reviewPage');
       } catch (err) {
         setError(err);
       } finally {
@@ -83,7 +83,6 @@ function MobileReview({ item }) {
 function Review({ item }) {
   const { title, rating, review, imageUrl, itemId } = item;
   return (
-    // <li class="review-container" key={itemId}>
     <tr>
       <td className="image-test">
         <div className="r-image-container">
@@ -104,25 +103,5 @@ function Review({ item }) {
         <p className="r-review">{review}</p>
       </td>
     </tr>
-    // <div className="r-image-container">
-    //   <Link to={`/animeDetails/${itemId}`} className="link">
-    //     <div className="review-icon-title-container">
-    //       <img src={imageUrl} className="review-image" alt={title} />
-    //       <h5 className="review-title">
-    //         <span className="span-title">{title}</span>
-    //       </h5>
-    //     </div>
-    //   </Link>
-    // </div>
-
-    // <div className="r-rating-container">
-    //   {/* <h1 className="rating-label">Rating</h1> */}
-    //   <h1 className="review-rating">{rating}</h1>
-    // </div>
-    // <div className="r-review-container">
-    //   {/* <h1 className="review-label">Review</h1> */}
-    //   <h3 className="r-review">{review}</h3>
-    // </div>
-    // </li>
   );
 }

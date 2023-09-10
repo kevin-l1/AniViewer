@@ -1,7 +1,6 @@
-// import './AnimesPage.css';
-import React, { useEffect, useState } from 'react';
 import Anime from './AnimeFolder/Anime';
 import { fetchSearch } from '../lib/api';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export default function SearchPage() {
@@ -12,13 +11,11 @@ export default function SearchPage() {
   const location = useLocation();
   let query = location.state.query;
   let state = location.state.buttonState;
-  console.log(query);
 
   useEffect(() => {
     async function fetchResponse() {
       try {
-        const arrayOfAnimes = await fetchSearch(query, state);
-        console.log(arrayOfAnimes);
+        const arrayOfAnimes = await fetchSearch(query, state, page);
         setAnimes(arrayOfAnimes.data);
       } catch (error) {
         setError(error);
@@ -57,12 +54,20 @@ export default function SearchPage() {
             ))}
           </ul>
           {page > 1 ? (
-            <div>
-              <button onClick={handlePrev}>Previous Page</button>
-              <button onClick={handleNext}>Next Page</button>
+            <div className="next-prev-buttons">
+              <button className="prev-button" onClick={handlePrev}>
+                Previous Page
+              </button>
+              <button className="next-button" onClick={handleNext}>
+                Next Page
+              </button>
             </div>
           ) : (
-            <button onClick={handleNext}>Next Page</button>
+            <div className="single-button-row">
+              <button className="single-button" onClick={handleNext}>
+                Next Page
+              </button>
+            </div>
           )}
         </div>
       ) : null}

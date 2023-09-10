@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import '../css/AnimeMangaDetails.css';
+import AlertModal from '../Components/AlertModal';
 import { fetchManga } from '../../lib/api';
 import {
   getMangaBookmarks,
@@ -9,12 +10,10 @@ import {
   editReview,
   deleteReview,
 } from '../../data';
-import '../AnimeFolder/AnimeDetails.css';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import AlertModal from '../Components/AlertModal';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 export default function MangaDetails() {
   const { mal_id } = useParams();
@@ -25,6 +24,7 @@ export default function MangaDetails() {
   const [bookmarked, setBookmarked] = useState(false);
   const [rating, setRating] = useState();
   const [review, setReview] = useState();
+  const [deleted, setDeleted] = useState(false);
   const [reviewed, setReviewed] = useState();
   const [reviewsList, setReviewsList] = useState([]);
   const [editing, setEditing] = useState();
@@ -63,7 +63,6 @@ export default function MangaDetails() {
     async function loadReviews() {
       try {
         const allReviews = await getReviews();
-        console.log('allReviews:', allReviews);
         if (allReviews) {
           setReviewsList(allReviews);
         }
@@ -81,9 +80,7 @@ export default function MangaDetails() {
       loadBookmarks();
       loadReviews();
     }
-  }, [mal_id, bookmarked, reviewed]);
-
-  console.log('blList', bookmarksList);
+  }, [mal_id, bookmarked, reviewed, deleted]);
 
   function handleBookmark(title, type, images) {
     const bookmark = { title, type, images, mal_id };
@@ -149,6 +146,8 @@ export default function MangaDetails() {
   async function handleDeleteReview(id) {
     try {
       await deleteReview(id);
+      setDeleted(true);
+      setShowDeleteAlert(true);
     } catch (err) {
       alert(`Error deleting review: ${err}`);
     }
@@ -162,35 +161,6 @@ export default function MangaDetails() {
   async function handleEditSubmit(event) {
     event.preventDefault();
     await handleEditReview(mal_id);
-  }
-
-  function handleShowReview() {
-    setShowReview(true);
-  }
-
-  function handleCloseReview() {
-    setShowReview(false);
-  }
-
-  function handleShowEditReview() {
-    setShowEditReview(true);
-  }
-
-  function handleCloseEditReview() {
-    setShowEditReview(false);
-  }
-
-  function handleCloseBookmarkAlert() {
-    setShowBookmarkAlert(false);
-  }
-  function handleCloseReviewAlert() {
-    setShowReviewAlert(false);
-  }
-  function handleCloseInfoAlert() {
-    setShowInfoAlert(false);
-  }
-  function handleCloseDeleteAlert() {
-    setShowDeleteAlert(false);
   }
 
   if (isLoading) return <div>Loading...</div>;
@@ -225,9 +195,6 @@ export default function MangaDetails() {
   }
 
   const ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-  console.log('bl:', bookmarksList);
-  console.log('rl:', reviewsList);
 
   return (
     <div className="container">
@@ -306,10 +273,7 @@ export default function MangaDetails() {
               <button
                 type="button"
                 className="delete-review-button"
-                onClick={() => {
-                  handleDeleteReview(mal_id);
-                  setShowDeleteAlert(true);
-                }}>
+                onClick={() => handleDeleteReview(mal_id)}>
                 Delete Review
               </button>
             </div>
@@ -328,7 +292,7 @@ export default function MangaDetails() {
             </div>
           )}
 
-          <Modal show={showReview} onHide={handleCloseReview}>
+          <Modal show={showReview} onHide={() => setShowReview(false)}>
             <form onSubmit={handleSubmit}>
               <Modal.Header closeButton></Modal.Header>
               <Modal.Body>
@@ -361,14 +325,14 @@ export default function MangaDetails() {
               <Modal.Footer>
                 <Button
                   type="submit"
-                  onClick={review ? handleCloseReview : null}>
+                  onClick={review ? () => setShowReview(false) : null}>
                   Submit
                 </Button>
               </Modal.Footer>
             </form>
           </Modal>
 
-          <Modal show={showEditReview} onHide={handleCloseEditReview}>
+          <Modal show={showEditReview} onHide={() => setShowEditReview(false)}>
             <form onSubmit={handleEditSubmit}>
               <Modal.Header closeButton></Modal.Header>
               <Modal.Body>
@@ -399,7 +363,7 @@ export default function MangaDetails() {
                 </div>
               </Modal.Body>
               <Modal.Footer>
-                <Button type="submit" onClick={handleCloseEditReview}>
+                <Button type="submit" onClick={() => setShowEditReview(false)}>
                   Submit
                 </Button>
               </Modal.Footer>
@@ -409,25 +373,25 @@ export default function MangaDetails() {
           <AlertModal
             show={showBookmarkAlert}
             text="You must be logged in to add a bookmark."
-            handleClose={handleCloseBookmarkAlert}
+            handleClose={() => setShowBookmarkAlert(false)}
           />
 
           <AlertModal
             show={showReviewAlert}
             text="You must be logged in to create a review."
-            handleClose={handleCloseReviewAlert}
+            handleClose={() => setShowReviewAlert(false)}
           />
 
           <AlertModal
             show={showDeleteAlert}
             text="Review has been successfully deleted."
-            handleClose={handleCloseDeleteAlert}
+            handleClose={() => setShowDeleteAlert(false)}
           />
 
           <AlertModal
             show={showInfoAlert}
             text="Rating and review are required."
-            handleClose={handleCloseInfoAlert}
+            handleClose={() => setShowInfoAlert(false)}
           />
         </div>
       </div>
