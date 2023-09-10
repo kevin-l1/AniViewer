@@ -8,9 +8,6 @@ import {
   errorMiddleware,
   authorizationMiddleware,
 } from './lib/index.js';
-// import ClientError from './lib/client-error.js';
-// import authorizationMiddleware from './lib/authorization-middleware.js';
-// import errorMiddleware from './lib/error-middleware.js';
 
 // eslint-disable-next-line no-unused-vars -- Remove when used
 const db = new pg.Pool({
@@ -30,10 +27,6 @@ app.use(express.static(reactStaticDir));
 // Static directory for file uploads server/public/
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
-
-app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Hello, World!' });
-});
 
 app.post('/api/auth/sign-up', async (req, res, next) => {
   try {
