@@ -1,8 +1,8 @@
+import AlertModal from './pages/Components/AlertModal';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import AlertModal from './pages/Components/AlertModal';
 
 export default function Account() {
   const [isLoading, setIsLoading] = useState(false);

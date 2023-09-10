@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
-import { fetchAnime } from '../../lib/api';
 import '../css/AnimeMangaDetails.css';
-import { useParams } from 'react-router-dom';
+import { fetchAnime } from '../../lib/api';
 import {
   getAnimeBookmarks,
   addAnimeBookmark,
@@ -11,10 +9,11 @@ import {
   editReview,
   deleteReview,
 } from '../../data';
+import AlertModal from '../Components/AlertModal';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import AlertModal from '../Components/AlertModal';
-import { Link } from 'react-router-dom';
 
 export default function AnimeDetails({ account, state }) {
   const { mal_id } = useParams();

@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import NavigationBar from './NavigationBar';
-import AnimeDetails from './pages/AnimeFolder/AnimeDetails';
 import AnimesPage from './pages/AnimeFolder/AnimesPage';
 import AnimesSeasonalPage from './pages/AnimeFolder/AnimesSeasonalPage';
+import AnimeDetails from './pages/AnimeFolder/AnimeDetails';
 import MangasPage from './pages/MangaFolder/MangasPage';
 import MangaDetails from './pages/MangaFolder/MangaDetails';
-import ReviewsPage from './pages/ReviewsPage';
 import SearchPage from './pages/SearchPage';
 import BookmarksPage from './pages/Bookmarks';
+import ReviewsPage from './pages/ReviewsPage';
+import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   const [animePage, setAnimePage] = useState(1);

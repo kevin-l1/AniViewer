@@ -1,5 +1,5 @@
 import '../css/AnimeMangaDetails.css';
-import { useEffect, useState } from 'react';
+import AlertModal from '../Components/AlertModal';
 import { fetchManga } from '../../lib/api';
 import {
   getMangaBookmarks,
@@ -10,11 +10,10 @@ import {
   editReview,
   deleteReview,
 } from '../../data';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import AlertModal from '../Components/AlertModal';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 export default function MangaDetails() {
   const { mal_id } = useParams();

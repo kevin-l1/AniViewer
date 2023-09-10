@@ -1,7 +1,7 @@
-import './Homepage.css';
+import './css/Homepage.css';
+import HomepageCarousel from './Components/HomepageCarousel';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import HomepageCarousel from './Components/HomepageCarousel';
 
 let requestInProcess = false;
 

@@ -1,7 +1,7 @@
 import '../css/AnimesMangasPage.css';
-import React, { useEffect, useState } from 'react';
 import Anime from './Anime';
 import { fetchSeasonalAnimes } from '../../lib/api';
+import React, { useEffect, useState } from 'react';
 
 export default function AnimesSeasonalPage({ page, setPage, state, setState }) {
   const [isLoading, setIsLoading] = useState(true);

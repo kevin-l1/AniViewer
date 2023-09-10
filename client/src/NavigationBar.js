@@ -1,9 +1,8 @@
-// import './css/NavigationBar.css';
-import './NavigationBar.css';
+import './pages/css/  NavigationBar.css';
 import SearchBar from './SearchBar';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
 import Account from './Account';
 import { useState } from 'react';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 export default function NavigationBar() {
   const [tempQuery, setTempQuery] = useState();

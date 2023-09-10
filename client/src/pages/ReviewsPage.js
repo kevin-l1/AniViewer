@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import './css/ReviewsPage.css';
 import { getReviews } from '../data';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './ReviewsPage.css';
 
 export default function ReviewsPage({ onCreate, onEdit }) {
   const [isLoading, setIsLoading] = useState();

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
 import Anime from './AnimeFolder/Anime';
 import { fetchSearch } from '../lib/api';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export default function SearchPage() {
