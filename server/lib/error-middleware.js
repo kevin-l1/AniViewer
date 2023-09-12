@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import {ClientError} from './client-error.js';
+import { ClientError } from './client-error.js';
 
 export default function errorMiddleware(err, req, res, next) {
   if (err instanceof ClientError) {
@@ -8,6 +8,8 @@ export default function errorMiddleware(err, req, res, next) {
     res.status(401).json({ error: 'invalid access token' });
   } else {
     console.error(err);
-    res.status(500).json({ error: 'an unexpected error occurred' });
+    res
+      .status(500)
+      .json({ error: 'an unexpected error occurred', message: err.message });
   }
 }
