@@ -42,15 +42,27 @@ export default function BookmarksPage({ onCreate, onEdit }) {
 
   return (
     <div className="animes-container">
-      <h1 className="anime-bookmarks-title">Bookmarks</h1>
-      <div className="filter-states">
-        <button type="button" className="filter-anime" onClick={handleAnime}>
-          Anime
-        </button>
-        <button type="button" className="filter-manga" onClick={handleManga}>
-          Manga
-        </button>
-      </div>
+      {animeBookmarks.length > 0 || mangaBookmarks.length > 0 ? (
+        <>
+          <h1 className="anime-bookmarks-title">Bookmarks</h1>
+          <div className="filter-states">
+            <button
+              type="button"
+              className="filter-anime"
+              onClick={handleAnime}>
+              Anime
+            </button>
+            <button
+              type="button"
+              className="filter-manga"
+              onClick={handleManga}>
+              Manga
+            </button>
+          </div>
+        </>
+      ) : (
+        <h1 className="no-bookmarks">You currently have no bookmarks</h1>
+      )}
       <ul className="rowOfAnimes">
         {state === 'Manga'
           ? null

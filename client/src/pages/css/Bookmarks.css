@@ -3,6 +3,11 @@
   margin-bottom: 0.7rem;
 }
 
+.no-bookmarks {
+  text-align: center;
+  margin-top: 1rem;
+}
+
 .filter-states {
   display: flex;
   justify-content: center;
