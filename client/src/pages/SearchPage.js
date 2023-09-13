@@ -3,7 +3,7 @@ import { fetchSearch } from '../lib/api';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export default function SearchPage() {
+export default function SearchPage({ setState }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
   const [animes, setAnimes] = useState([]);
@@ -17,6 +17,7 @@ export default function SearchPage() {
       try {
         const arrayOfAnimes = await fetchSearch(query, state, page);
         setAnimes(arrayOfAnimes.data);
+        setState('searchPage');
       } catch (error) {
         setError(error);
       } finally {

@@ -48,18 +48,30 @@ function App() {
         />
         <Route
           path="/mangas"
-          element={<MangasPage page={mangaPage} setPage={setMangaPage} />}
+          element={
+            <MangasPage
+              page={mangaPage}
+              setPage={setMangaPage}
+              setState={setPageState}
+            />
+          }
         />
         <Route
           path="/mangaDetails/:mal_id"
-          element={<MangaDetails signedIn={signedIn} />}
+          element={<MangaDetails state={pageState} signedIn={signedIn} />}
         />
-        <Route path="/bookmarks" element={<BookmarksPage />} />
+        <Route
+          path="/bookmarks"
+          element={<BookmarksPage setState={setPageState} />}
+        />
         <Route
           path="/reviews"
           element={<ReviewsPage setState={setPageState} />}
         />
-        <Route path="/search" element={<SearchPage />} />
+        <Route
+          path="/search"
+          element={<SearchPage setState={setPageState} />}
+        />
       </Route>
     </Routes>
   );

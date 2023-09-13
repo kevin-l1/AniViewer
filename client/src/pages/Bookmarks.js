@@ -3,11 +3,11 @@ import { getAnimeBookmarks, getMangaBookmarks } from '../data';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function BookmarksPage({ onCreate, onEdit }) {
+export default function BookmarksPage({ setState }) {
   const [isLoading, setIsLoading] = useState();
   const [animeBookmarks, setAnimeBookmarks] = useState();
   const [mangaBookmarks, setMangaBookmarks] = useState();
-  const [state, setState] = useState();
+  const [itemState, setItemState] = useState();
   const [error, setError] = useState();
 
   useEffect(() => {
@@ -18,6 +18,7 @@ export default function BookmarksPage({ onCreate, onEdit }) {
         const mangaBookmarks = await getMangaBookmarks();
         setAnimeBookmarks(animeBookmarks);
         setMangaBookmarks(mangaBookmarks);
+        setState('bookmarksPage');
       } catch (err) {
         setError(err);
       } finally {
@@ -25,14 +26,14 @@ export default function BookmarksPage({ onCreate, onEdit }) {
       }
     }
     if (isLoading === undefined) load();
-  }, [isLoading, state]);
+  }, [isLoading, itemState]);
 
   function handleAnime() {
-    state !== 'Anime' ? setState('Anime') : setState('');
+    itemState !== 'Anime' ? setItemState('Anime') : setItemState('');
   }
 
   function handleManga() {
-    state !== 'Manga' ? setState('Manga') : setState('');
+    itemState !== 'Manga' ? setItemState('Manga') : setItemState('');
   }
 
   if (isLoading) return <div>Loading...</div>;
@@ -64,14 +65,14 @@ export default function BookmarksPage({ onCreate, onEdit }) {
         <h1 className="no-bookmarks">You currently have no bookmarks</h1>
       )}
       <ul className="rowOfAnimes">
-        {state === 'Manga'
+        {itemState === 'Manga'
           ? null
           : animeBookmarks.map((bookmark) => (
               <div key={bookmark.mal_id} className="anime-container">
                 <AnimeBookmark anime={bookmark} />
               </div>
             ))}
-        {state === 'Anime'
+        {itemState === 'Anime'
           ? null
           : mangaBookmarks.map((bookmark) => (
               <div key={bookmark.mal_id} className="anime-container">

@@ -78,14 +78,26 @@ export async function deleteMangaBookmark(animeId) {
 
 //Reviews
 
-export async function getReviews() {
+export async function getAnimeReviews() {
   const req = {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem('token')}`,
     },
   };
-  const res = await fetch('/api/reviews', req);
+  const res = await fetch('/api/animeReviews', req);
+  if (!res.ok) throw new Error(`fetch Error ${res.status}`);
+  return await res.json();
+}
+
+export async function getMangaReviews() {
+  const req = {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+    },
+  };
+  const res = await fetch('/api/mangaReviews', req);
   if (!res.ok) throw new Error(`fetch Error ${res.status}`);
   return await res.json();
 }

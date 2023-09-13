@@ -5,7 +5,7 @@ import {
   getMangaBookmarks,
   addMangaBookmark,
   deleteMangaBookmark,
-  getReviews,
+  getMangaReviews,
   addReview,
   editReview,
   deleteReview,
@@ -15,7 +15,7 @@ import { Link, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-export default function MangaDetails({ signedIn }) {
+export default function MangaDetails({ state, signedIn }) {
   const { mal_id } = useParams();
   const [manga, setManga] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -62,7 +62,7 @@ export default function MangaDetails({ signedIn }) {
 
     async function loadReviews() {
       try {
-        const allReviews = await getReviews();
+        const allReviews = await getMangaReviews();
         if (allReviews) {
           setReviewsList(allReviews);
         }
@@ -107,8 +107,8 @@ export default function MangaDetails({ signedIn }) {
     }
   }
 
-  async function handleReview(title, id, imageUrl) {
-    const reviewItem = { title, rating, review, imageUrl, id };
+  async function handleReview(title, id, imageUrl, type) {
+    const reviewItem = { title, rating, review, imageUrl, type, id };
     setReviewed(!reviewed);
     try {
       if (!sessionStorage.getItem('token')) {
@@ -155,7 +155,7 @@ export default function MangaDetails({ signedIn }) {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    await handleReview(title, mal_id, images.jpg.image_url);
+    await handleReview(title, mal_id, images.jpg.image_url, type);
   }
 
   async function handleEditSubmit(event) {
@@ -199,11 +199,31 @@ export default function MangaDetails({ signedIn }) {
   return (
     <div className="container">
       <div className="return-bookmark-row">
-        <Link to="/mangas" className="return">
-          <button type="button" className="return">
-            Return
-          </button>
-        </Link>
+        {state === 'mangaPage' ? (
+          <Link to="/mangas" className="return">
+            <button type="button" className="return">
+              Return
+            </button>
+          </Link>
+        ) : state === 'bookmarksPage' ? (
+          <Link to="/bookmarks" className="return">
+            <button type="button" className="return">
+              Return
+            </button>
+          </Link>
+        ) : state === 'reviewPage' ? (
+          <Link to="/reviews" className="return">
+            <button type="button" className="return">
+              Return
+            </button>
+          </Link>
+        ) : (
+          <Link to="/" className="return">
+            <button type="button" className="return">
+              Return
+            </button>
+          </Link>
+        )}
         <i
           class={
             bookmarksList.find((manga) => manga.itemId === JSON.parse(mal_id))
