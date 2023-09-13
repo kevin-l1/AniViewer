@@ -30,26 +30,33 @@ export default function ReviewsPage({ setState }) {
 
   return (
     <div className="reviews-container">
-      <div className="mobile-reviews-container">
-        {reviews.map((review) => (
-          <MobileReview item={review} />
-        ))}
-      </div>
-
-      <table className="reviews-table">
-        <tr>
-          <th scope="col"></th>
-          <th scope="col">
-            <h1>Rating</h1>
-          </th>
-          <th scope="col">
-            <h1>Review</h1>
-          </th>
-        </tr>
-        {reviews.map((review) => (
-          <Review item={review} />
-        ))}
-      </table>
+      {reviews.length > 0 ? (
+        <>
+          <div className="mobile-reviews-container">
+            {reviews.map((review) => (
+              <MobileReview item={review} />
+            ))}
+          </div>
+          <table className="reviews-table">
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">
+                <h1>Rating</h1>
+              </th>
+              <th scope="col">
+                <h1>Review</h1>
+              </th>
+            </tr>
+            {reviews.map((review) => (
+              <Review item={review} />
+            ))}
+          </table>
+        </>
+      ) : (
+        <h1 className="no-reviews">
+          You have currently not created any reviews
+        </h1>
+      )}
     </div>
   );
 }

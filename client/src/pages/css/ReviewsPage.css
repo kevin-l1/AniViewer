@@ -3,6 +3,11 @@
   justify-content: center;
 }
 
+.no-reviews {
+  text-align: center;
+  margin-top: 1rem;
+}
+
 .mobile-reviews-container {
   display: column;
   text-align: center;
