@@ -4,7 +4,7 @@ import Account from './Account';
 import { useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
-export default function NavigationBar() {
+export default function NavigationBar({ setSignedIn }) {
   const [tempQuery, setTempQuery] = useState();
   const [state, setState] = useState('Anime');
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ export default function NavigationBar() {
             </Link>
           </div>
           <SearchBar />
-          <Account />
+          <Account setSignedIn={setSignedIn} />
         </nav>
         <Outlet />
       </div>

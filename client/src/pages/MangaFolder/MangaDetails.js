@@ -15,7 +15,7 @@ import { Link, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-export default function MangaDetails() {
+export default function MangaDetails({ signedIn }) {
   const { mal_id } = useParams();
   const [manga, setManga] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -80,7 +80,7 @@ export default function MangaDetails() {
       loadBookmarks();
       loadReviews();
     }
-  }, [mal_id, bookmarked, reviewed, deleted]);
+  }, [mal_id, bookmarked, reviewed, deleted, signedIn]);
 
   function handleBookmark(title, type, images) {
     const bookmark = { title, type, images, mal_id };

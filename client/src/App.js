@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
+  const [signedIn, setSignedIn] = useState(false);
   const [animePage, setAnimePage] = useState(1);
   const [mangaPage, setMangaPage] = useState(1);
   const [seasonalAnimePage, setSeasonalAnimePage] = useState(1);
@@ -19,7 +20,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<NavigationBar />}>
+      <Route path="/" element={<NavigationBar setSignedIn={setSignedIn} />}>
         <Route index element={<Homepage setState={setPageState} />} />
         <Route
           path="/animes"
@@ -43,13 +44,16 @@ function App() {
         />
         <Route
           path="/animeDetails/:mal_id"
-          element={<AnimeDetails state={pageState} />}
+          element={<AnimeDetails state={pageState} signedIn={signedIn} />}
         />
         <Route
           path="/mangas"
           element={<MangasPage page={mangaPage} setPage={setMangaPage} />}
         />
-        <Route path="/mangaDetails/:mal_id" element={<MangaDetails />} />
+        <Route
+          path="/mangaDetails/:mal_id"
+          element={<MangaDetails signedIn={signedIn} />}
+        />
         <Route path="/bookmarks" element={<BookmarksPage />} />
         <Route
           path="/reviews"
