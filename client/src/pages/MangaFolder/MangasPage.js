@@ -4,7 +4,7 @@ import Filter from '../Components/Filter';
 import { fetchMangas } from '../../lib/api';
 import React, { useEffect, useState } from 'react';
 
-export default function MangasPage({ page, setPage }) {
+export default function MangasPage({ page, setPage, setState }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
   const [mangas, setMangas] = useState();
@@ -36,6 +36,7 @@ export default function MangasPage({ page, setPage }) {
       try {
         const arrayOfMangas = await fetchMangas(page, order, genreId);
         setMangas(arrayOfMangas.data);
+        setState('mangaPage');
       } catch (error) {
         setError(error);
       } finally {

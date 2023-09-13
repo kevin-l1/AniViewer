@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-export default function Account() {
+export default function Account({ setSignedIn }) {
   const [isLoading, setIsLoading] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
@@ -30,6 +30,7 @@ export default function Account() {
       }
       const { user, token } = await res.json();
       sessionStorage.setItem('token', token);
+      setSignedIn(true);
     } catch (err) {
       setShowInvalidAccountAlert(true);
     } finally {
@@ -179,6 +180,7 @@ export default function Account() {
               className="sign-out-tab"
               onClick={() => {
                 sessionStorage.removeItem('token');
+                setShowSignIn(false);
                 setShowSignOutAlert(true);
               }}>
               Sign Out

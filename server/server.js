@@ -238,32 +238,54 @@ app.delete(
 
 // Reviews
 
-app.get('/api/reviews', authorizationMiddleware, async (req, res, next) => {
-  try {
-    const sql = `
+app.get(
+  '/api/animeReviews',
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const sql = `
       select * from "reviews"
-        where "userId" = $1
+        where "userId" = $1 and "type" != 'Manga'
         order by "title" desc;
     `;
-    const result = await db.query(sql, [req.user.userId]);
-    res.status(201).json(result.rows);
-  } catch (err) {
-    next(err);
+      const result = await db.query(sql, [req.user.userId]);
+      res.status(201).json(result.rows);
+    } catch (err) {
+      next(err);
+    }
   }
-});
+);
+
+app.get(
+  '/api/mangaReviews',
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const sql = `
+      select * from "reviews"
+        where "userId" = $1 and "type" = 'Manga'
+        order by "title" desc;
+    `;
+      const result = await db.query(sql, [req.user.userId]);
+      res.status(201).json(result.rows);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
 app.post('/api/reviews', authorizationMiddleware, async (req, res, next) => {
   try {
-    const { title, rating, review, imageUrl, id } = req.body;
+    const { title, rating, review, imageUrl, type, id } = req.body;
     if (!rating || !review) {
       throw new ClientError(400, 'Rating and review and are required fields');
     }
     const sql = `
-      insert into "reviews" ("userId", "title", "rating", "review", "imageUrl", "itemId")
-        values ($1, $2, $3, $4, $5, $6)
+      insert into "reviews" ("userId", "title", "rating", "review", "imageUrl", "type", "itemId")
+        values ($1, $2, $3, $4, $5, $6, $7)
         returning *;
     `;
-    const params = [req.user.userId, title, rating, review, imageUrl, id];
+    const params = [req.user.userId, title, rating, review, imageUrl, type, id];
     const result = await db.query(sql, params);
     const [newReview] = result.rows;
     res.status(201).json(newReview);

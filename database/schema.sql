@@ -10,8 +10,8 @@ CREATE TABLE "public"."bookmarks" (
 	"bookmarkId" serial NOT NULL,
 	"userId" integer NOT NULL,
 	"title" TEXT NOT NULL,
-  "type" TEXT NOT NULL,
 	"imageUrl" TEXT NOT NULL,
+  "type" TEXT NOT NULL,
 	"itemId" integer NOT NULL,
 	CONSTRAINT "bookmarks_pk" PRIMARY KEY ("bookmarkId")
 ) WITH (
@@ -27,6 +27,7 @@ CREATE TABLE "public"."reviews" (
 	"rating" integer NOT NULL,
 	"review" TEXT NOT NULL,
 	"imageUrl" TEXT NOT NULL,
+  "type" TEXT NOT NULL,
 	"itemId" integer NOT NULL,
 	CONSTRAINT "reviews_pk" PRIMARY KEY ("reviewId")
 ) WITH (

@@ -5,7 +5,7 @@ import {
   addAnimeBookmark,
   deleteAnimeBookmark,
   addReview,
-  getReviews,
+  getAnimeReviews,
   editReview,
   deleteReview,
 } from '../../data';
@@ -15,7 +15,7 @@ import { Link, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-export default function AnimeDetails({ account, state }) {
+export default function AnimeDetails({ state, signedIn }) {
   const { mal_id } = useParams();
   const [anime, setAnime] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -62,7 +62,7 @@ export default function AnimeDetails({ account, state }) {
 
     async function loadReviews() {
       try {
-        const allReviews = await getReviews();
+        const allReviews = await getAnimeReviews();
         if (allReviews) {
           setReviewsList(allReviews);
         }
@@ -80,7 +80,7 @@ export default function AnimeDetails({ account, state }) {
       loadBookmarks();
       loadReviews();
     }
-  }, [mal_id, bookmarked, reviewed, deleted]);
+  }, [mal_id, bookmarked, reviewed, deleted, signedIn]);
 
   function handleBookmark(title, type, images) {
     const bookmark = { title, type, images, mal_id };
@@ -107,8 +107,8 @@ export default function AnimeDetails({ account, state }) {
     }
   }
 
-  async function handleReview(title, id, imageUrl) {
-    const reviewItem = { title, rating, review, imageUrl, id };
+  async function handleReview(title, id, imageUrl, type) {
+    const reviewItem = { title, rating, review, imageUrl, type, id };
     setReviewed(!reviewed);
     try {
       if (!sessionStorage.getItem('token')) {
@@ -155,7 +155,7 @@ export default function AnimeDetails({ account, state }) {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    await handleReview(title, mal_id, images.jpg.image_url);
+    await handleReview(title, mal_id, images.jpg.image_url, type);
   }
 
   async function handleEditSubmit(event) {
@@ -207,6 +207,12 @@ export default function AnimeDetails({ account, state }) {
           </Link>
         ) : state === 'seasonalAnimePage' ? (
           <Link to="/animesSeasonal" className="return">
+            <button type="button" className="return">
+              Return
+            </button>
+          </Link>
+        ) : state === 'bookmarksPage' ? (
+          <Link to="/bookmarks" className="return">
             <button type="button" className="return">
               Return
             </button>

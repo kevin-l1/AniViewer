@@ -1,5 +1,5 @@
 import './css/ReviewsPage.css';
-import { getReviews } from '../data';
+import { getAnimeReviews, getMangaReviews } from '../data';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -12,8 +12,9 @@ export default function ReviewsPage({ setState }) {
     async function load() {
       setIsLoading(true);
       try {
-        const reviews = await getReviews();
-        setReviews(reviews);
+        const animeReviews = await getAnimeReviews();
+        const mangaReviews = await getMangaReviews();
+        setReviews(animeReviews.concat(mangaReviews));
         setState('reviewPage');
       } catch (err) {
         setError(err);
@@ -30,26 +31,33 @@ export default function ReviewsPage({ setState }) {
 
   return (
     <div className="reviews-container">
-      <div className="mobile-reviews-container">
-        {reviews.map((review) => (
-          <MobileReview item={review} />
-        ))}
-      </div>
-
-      <table className="reviews-table">
-        <tr>
-          <th scope="col"></th>
-          <th scope="col">
-            <h1>Rating</h1>
-          </th>
-          <th scope="col">
-            <h1>Review</h1>
-          </th>
-        </tr>
-        {reviews.map((review) => (
-          <Review item={review} />
-        ))}
-      </table>
+      {reviews.length > 0 ? (
+        <>
+          <div className="mobile-reviews-container">
+            {reviews.map((review) => (
+              <MobileReview item={review} />
+            ))}
+          </div>
+          <table className="reviews-table">
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">
+                <h1>Rating</h1>
+              </th>
+              <th scope="col">
+                <h1>Review</h1>
+              </th>
+            </tr>
+            {reviews.map((review) => (
+              <Review item={review} />
+            ))}
+          </table>
+        </>
+      ) : (
+        <h1 className="no-reviews">
+          You have currently not created any reviews
+        </h1>
+      )}
     </div>
   );
 }
@@ -81,19 +89,30 @@ function MobileReview({ item }) {
 }
 
 function Review({ item }) {
-  const { title, rating, review, imageUrl, itemId } = item;
+  const { title, rating, review, imageUrl, itemId, type } = item;
   return (
     <tr>
       <td className="image-test">
         <div className="r-image-container">
-          <Link to={`/animeDetails/${itemId}`} className="link">
-            <div className="review-icon-title-container">
-              <img src={imageUrl} className="review-image" alt={title} />
-              <h5 className="review-title">
-                <span className="span-title">{title}</span>
-              </h5>
-            </div>
-          </Link>
+          {type !== 'Manga' ? (
+            <Link to={`/animeDetails/${itemId}`} className="link">
+              <div className="review-icon-title-container">
+                <img src={imageUrl} className="review-image" alt={title} />
+                <h5 className="review-title">
+                  <span className="span-title">{title}</span>
+                </h5>
+              </div>
+            </Link>
+          ) : (
+            <Link to={`/mangaDetails/${itemId}`} className="link">
+              <div className="review-icon-title-container">
+                <img src={imageUrl} className="review-image" alt={title} />
+                <h5 className="review-title">
+                  <span className="span-title">{title}</span>
+                </h5>
+              </div>
+            </Link>
+          )}
         </div>
       </td>
       <td className="rating-test">
