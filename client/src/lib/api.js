@@ -20,8 +20,8 @@ function delay(millisec) {
 }
 
 export async function fetchAnimes(page, order, genreId) {
-  if (Date.now() - lastRequest < 500) {
-    await delay(500);
+  if (Date.now() - lastRequest < 600) {
+    await delay(600);
   }
   lastRequest = Date.now();
   const response = await fetch(
@@ -33,8 +33,8 @@ export async function fetchAnimes(page, order, genreId) {
 }
 
 export async function fetchSeasonalAnimes(page, filterId) {
-  if (Date.now() - lastRequest < 500) {
-    await delay(500);
+  if (Date.now() - lastRequest < 600) {
+    await delay(600);
   }
   lastRequest = Date.now();
   const response = await fetch(
@@ -44,8 +44,8 @@ export async function fetchSeasonalAnimes(page, filterId) {
 }
 
 export async function fetchMangas(page, order, genreId) {
-  if (Date.now() - lastRequest < 500) {
-    await delay(500);
+  if (Date.now() - lastRequest < 600) {
+    await delay(600);
   }
   lastRequest = Date.now();
   const response = await fetch(
@@ -57,8 +57,8 @@ export async function fetchMangas(page, order, genreId) {
 }
 
 export async function fetchSearch(query, state, page) {
-  if (Date.now() - lastRequest < 500) {
-    await delay(500);
+  if (Date.now() - lastRequest < 600) {
+    await delay(600);
   }
   lastRequest = Date.now();
   const response = await fetch(
